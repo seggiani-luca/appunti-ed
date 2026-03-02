@@ -195,6 +195,106 @@
 \pagestyle{fancy}
 
 % testo
+\subsection{Introduzione}
+Lo scopo del corso è quello di fornire gli elementi base per la comprensione e l'analisi dei circuiti elettronici sia analogici sia digitali.
 
+In particolare, gli argomenti saranno:
+\begin{itemize}
+	\item I \textbf{dispositivi a semiconduttore}, fra cui in particolare i \textit{diodi}, i transistori bipolari (\textit{BJT}), e i transistori ad effetto di campo (\textit{MOSFET}). 
+Vedremo come questi, ed in particolare i primi  2, sono alla base dell'elettronica digitale (quindi lo sviluppo di elementi di elaborazione, memoria, ecc...);
+	\item Lo studio dei \textbf{circuiti e sistemi analogici}, e quindi in particolare gli amplificatori a transistori, gli amplificatori operazionali, i regolatori di tensione, e i convertitori \textit{A/D} e \textit{D/A}; 
+	\item Lo studio dei \textbf{circuiti e sistemi digitali}, e quindi le porte logiche \textit{CMOS} e bipolari, i flip-flop, e le memorie a semiconduttore. Qui riprenderemo gli argomenti visti ad esempio in reti logiche (le porte logiche), soffermandoci sull'implementazione effettiva di queste attraverso componenti elettronici.	
+\end{itemize}
+
+Parte del corso consisterà nell'uso dello strumento \textbf{LTSPICE} per la simulazione dei circuiti studiati.
+
+\subsubsection{Note storiche}
+\textit{"L'elettronica è la scienza e la tecnologia del movimento delle cariche in un gas, nel vuoto o in un semiconduttore"}.
+
+Riportiamo questa frase in quanto tutti i dispositivi che studieremo non si occupano di altro che influire sullo spostamento di cariche libere.
+Implementiamo diverse funzioni decidendo se determinate cariche devono essere bloccate, lasciate passare, ecc...
+
+Quindi, l'elettronica è la disciplina che si occupa dello sviluppo di sistemi che sono capaci di gestire il movimento di cariche mobili.
+
+\begin{enumerate}
+	\item L'elettronica inizia nel '900 attraverso componenti \textit{a vuoto}, al tempo detti \textit{valvole}.
+In particolare, nel 1904 Fleming inventa il \textbf{diodo a vuoto}, un componente capace di far passare o meno corrente fra 2 contatti.
+Nel 1906 De Forest inventa il \textbf{triodo a vuoto}, dove il terzo contatto serve a modulare la corrente che passa fra i primi 2.
+	\item Nel 1947, nei laboratori Bell viene inventato il \textbf{transistore bipolare} (\textit{BJT}), mentre nel 1958 Kilby concepisce il \textbf{circuito integrato} (entrambe le scoperte vinceranno il Nobel per la fisica).
+		
+		Agli anni immediatamente successivi risale la \textit{legge di Moore}, che afferma che il numero di componenti sui chip raddoppia ogni anno (corretto a 2 anni nel 1975).
+	\item Lo sviluppo dei chip negli ultimi anni si è concentrato nelle mani di un numero ristretto di multinazionali (Intel, TSMC, ecc...). Questo deriva dal fatto che la \textbf{fabbricazione} dei chip richiede risorse via via più costose nel tempo.
+
+		Diversi \textit{trend} sono stati inviduati negli anni:
+		\begin{itemize}
+			\item Le dimensioni dei circuiti stampati sui chip si sono ridotte: storicamente il metro di riferimento era la larghezza dei canali dei transistor MOSFET, che generalmente corrispondeva alla minore traccia che si poteva avere. Ad esempio, nel 2025 i moderni processi stanno intorno ai 2 nm;
+			\item Il costo per transistor dei circuiti stampati si è ridotto di molto negli anni, portando ad avere circuiti con molti più transistor allo stesso costo (o a costi minori). Da qui si rimanda alla sopra riportata \textit{legge di Moore}. Ad esempio, negli ultimi anni i chip che vengono fabbricati hanno un numero che sta intorno alle centinaia di miliardi di transistor.
+		\end{itemize}
+
+		I chip vengono realizzati attraverso il classico processo, a partire da \texbf{wafer} di silicio, che vanno a formare il \textit{substrato} di semiconduttore sui quali i componenti elettronici vengono realizzati.
+
+	\item Oggi lo sviluppo della microelettronica si basa su due approcci:
+		\begin{itemize}
+			\item Approccio \textbf{System-on-Chip} (\textit{SoC}): adottato per lo sviluppo dei componenti a contenuto digitali. Rispecchia la cosiddetta legge del \textit{"more Moore"}, quindi si basa sull'evoluzione quantitativa di tecnologie già provate (più transistor, ecc...);
+			\item Approccio \textbf{System-in-Package} (\textit{Sip}): adottato per lo sviluppo dei componenti a contenuto analogico, o in generale che si interfacciano col mondo esterno. Rispecchia la cosiddetta legge del \textit{"more than Moore"}, quindi mira alla diversificazione delle tecnologie e allo sviluppo di soluzioni alternative rispetto a quelle già provate.
+		\end{itemize}
+\end{enumerate}
+
+\subsection{Richiami di chimica}
+Alle basi dell'elettronica sta la chimica. Richiamiamo quindi alcuni concetti fondamentali.
+
+\subsubsection{Atomo}
+La visione dell'atomo passa attraverso più modelli:
+\begin{itemize}
+	\item Modello di \textbf{Rutherford}: vede l'atomo come un nucleo carico positivamente molto piccolo, il cui volume circostante è occupato da elettroni carichi negativamente;
+	\item Modello di \textbf{Bohr} dell'atomo di idrogeno: all'elettrone vengono permessi solo certi stati di moto stazionario dove questo si trova ad un dato livello di energia. Quando un elettrone si trova in un dato stato, l'atomo non irradia energia.
+
+		Secondo Bohr le orbite degli elettroni erano circolari (sappiamo che questo è falso, in quanto conosciamo che la posizione degli atomi non è immediatamente conoscibile e si può descrivere con particolari funzioni d'onda dette \textit{orbitali}).
+
+		Nel modello di Bohr si prevedeva già che ogni atomo ha momento angolare dipendente dalla costante di Planck  # riporta
+\end{itemize}
+
+Nel modello di \textit{Bohr} ogni atomo è individuato da 4 numeri:
+\begin{itemize}
+	\item Il \textbf{numero quantico principale};
+	\item Il \textbf{numero quantico secondario};
+	\item Il # continua
+\end{itemize}
+
+# principio di esclusione di pauli
+
+# modello onda/particella
+
+# orbitali
+
+\subsubsection{Conduttori, semiconduttori e isolanti}
+La conoscenza della distribuzione degli elettroni sui possibili orbitali nello stato di minima energia è importante per conoscere le proprietà degli elementi.
+
+In particolare, si possono distinguere 3 categorie principali di elementi riguardo alla conduzione di corrente elettrica:
+\begin{itemize}
+	\item \textbf{Conduttori}: che offrono elettroni liberi e quindi conducono corrente;
+	\item \textbf{Isolanti}: che non offrono elettroni liberi e quindi non conducono corrente;
+	\item \textbf{Semiconduttori}: che presentano caratteristiche intermedie fra conduttori e isolanti.
+\end{itemize}
+
+Gli elementi vengono categorizzati sulla base della configurazione dei loro orbitali nella \textbf{tavola periodica}.
+
+# tavola periodica, ci interessa la zona del silicio
+
+# drogaggio silicio con boro (???)
+
+\subsubsection{Legami chimici}
+In natura, in condizioni ottimali, solo i gas nobili si trovano allo stato atomico mentre tutti gli altri elementi si presentano legati ad altri in svariate modalità.
+
+Dal punto di vista chimico, i legami interatomici consistono nella formazione di una configurazione ad energia minima che di solito richiede la presenza nel guscio elettronico di 8 elettroni (regola dell'\textit{ottetto}).
+
+Esistono 3 tipi di legami chimici:
+\begin{itemize}
+	\item Legame \textbf{ionico}: dove c'è un effettivo trasferimento di elettroni, solitamente finalizzato al completamento dell'ottetto. Per questo motivo accade quando un atomo ha il guscio quasi pieno e l'altro ha il guscio quasi voto. A questo punto l'attrazione fra gli atomi accade per la differenza di carica fra i 2 atomi;
+	\item Legame \textbf{covalente}: ha luogo quando vengono messi a comune degli elettroni. Per questo accade quando 2 atomi hanno il guscio quasi pieno. Ci è di particolare interesse in quanto è il legame che forma il silicio;
+	\item Legame \textbf{metallico}: è il legame tipico dei metalli, dove tutti gli elettroni vengono messi a comune e possono circolare liberamente. Questo rende i metalli dei conduttori particolarmente efficaci.
+\end{itemize}
+
+# dettaglio sul legame del silicio
 
 \end{document}
