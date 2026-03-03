@@ -201,7 +201,7 @@ Lo scopo del corso è quello di fornire gli elementi base per la comprensione e 
 In particolare, gli argomenti saranno:
 \begin{itemize}
 	\item I \textbf{dispositivi a semiconduttore}, fra cui in particolare i \textit{diodi}, i transistori bipolari (\textit{BJT}), e i transistori ad effetto di campo (\textit{MOSFET}). 
-Vedremo come questi, ed in particolare i primi  2, sono alla base dell'elettronica digitale (quindi lo sviluppo di elementi di elaborazione, memoria, ecc...);
+		Vedremo come questi, ed in particolare l'ultimo (in particolare nella tecnologia \textit{CMOS}), sono alla base dell'elettronica digitale (quindi lo sviluppo di elementi di elaborazione, memoria, ecc...);
 	\item Lo studio dei \textbf{circuiti e sistemi analogici}, e quindi in particolare gli amplificatori a transistori, gli amplificatori operazionali, i regolatori di tensione, e i convertitori \textit{A/D} e \textit{D/A}; 
 	\item Lo studio dei \textbf{circuiti e sistemi digitali}, e quindi le porte logiche \textit{CMOS} e bipolari, i flip-flop, e le memorie a semiconduttore. Qui riprenderemo gli argomenti visti ad esempio in reti logiche (le porte logiche), soffermandoci sull'implementazione effettiva di queste attraverso componenti elettronici.	
 \end{itemize}
@@ -223,20 +223,31 @@ Nel 1906 De Forest inventa il \textbf{triodo a vuoto}, dove il terzo contatto se
 	\item Nel 1947, nei laboratori Bell viene inventato il \textbf{transistore bipolare} (\textit{BJT}), mentre nel 1958 Kilby concepisce il \textbf{circuito integrato} (entrambe le scoperte vinceranno il Nobel per la fisica).
 		
 		Agli anni immediatamente successivi risale la \textit{legge di Moore}, che afferma che il numero di componenti sui chip raddoppia ogni anno (corretto a 2 anni nel 1975).
-	\item Lo sviluppo dei chip negli ultimi anni si è concentrato nelle mani di un numero ristretto di multinazionali (Intel, TSMC, ecc...). Questo deriva dal fatto che la \textbf{fabbricazione} dei chip richiede risorse via via più costose nel tempo.
+	\item Lo sviluppo dei chip negli ultimi anni si è concentrato nelle mani di un numero ristretto di multinazionali (Intel, TSMC, ecc...). Questo deriva dal fatto che la \textbf{fabbricazione} dei chip richiede risorse che sono diventate via via più costose nel tempo.
 
 		Diversi \textit{trend} sono stati inviduati negli anni:
 		\begin{itemize}
-			\item Le dimensioni dei circuiti stampati sui chip si sono ridotte: storicamente il metro di riferimento era la larghezza dei canali dei transistor MOSFET, che generalmente corrispondeva alla minore traccia che si poteva avere. Ad esempio, nel 2025 i moderni processi stanno intorno ai 2 nm;
-			\item Il costo per transistor dei circuiti stampati si è ridotto di molto negli anni, portando ad avere circuiti con molti più transistor allo stesso costo (o a costi minori). Da qui si rimanda alla sopra riportata \textit{legge di Moore}. Ad esempio, negli ultimi anni i chip che vengono fabbricati hanno un numero che sta intorno alle centinaia di miliardi di transistor.
+			\item Le dimensioni dei circuiti stampati sui chip si sono ridotte: storicamente il metro di riferimento era la larghezza dei canali dei transistor MOSFET, che generalmente corrispondeva alla minore traccia che si poteva avere.
+
+				Ad esempio, nel 2025 i moderni processi stanno intorno ai 2 nm;
+			\item Il costo per transistor dei circuiti stampati si è ridotto di molto negli anni, portando ad avere circuiti con molti più transistor allo stesso costo (o a costi minori). Da qui si rimanda alla sopra riportata \textit{legge di Moore}. 
+
+				Ad esempio, negli ultimi anni i chip che vengono fabbricati hanno un numero che sta intorno alle centinaia di miliardi di transistor.
 		\end{itemize}
 
-		I chip vengono realizzati attraverso il classico processo, a partire da \texbf{wafer} di silicio, che vanno a formare il \textit{substrato} di semiconduttore sui quali i componenti elettronici vengono realizzati.
-
-	\item Oggi lo sviluppo della microelettronica si basa su due approcci:
+		I chip vengono realizzati attraverso il classico processo, a partire da \textbf{wafer} di silicio, che vanno a formare il \textit{substrato} di semiconduttore sui quali i componenti elettronici vengono realizzati. In particolare:
 		\begin{itemize}
-			\item Approccio \textbf{System-on-Chip} (\textit{SoC}): adottato per lo sviluppo dei componenti a contenuto digitali. Rispecchia la cosiddetta legge del \textit{"more Moore"}, quindi si basa sull'evoluzione quantitativa di tecnologie già provate (più transistor, ecc...);
-			\item Approccio \textbf{System-in-Package} (\textit{Sip}): adottato per lo sviluppo dei componenti a contenuto analogico, o in generale che si interfacciano col mondo esterno. Rispecchia la cosiddetta legge del \textit{"more than Moore"}, quindi mira alla diversificazione delle tecnologie e allo sviluppo di soluzioni alternative rispetto a quelle già provate.
+			\item I wafer vengono formati attraverso un dato processo chimico, e sono formati da silicio purissimo;
+			\item Sui wafer viene formato uno strato di diossido di silicio, un isolante;
+			\item Attraverso la \textit{fotolitografia}, lo strato di diossido di silicio viene tagliato in modo da esporre zone di silicio;
+			\item Le zone esposte subiscono un processo di \textit{doping} di Boro o altri elementi come il fosforo, che crea zone con diverse caratteristiche di conduttività (questo, come vedremo, è reso possibile dal fatto che il silicio è un \textit{semiconduttore});
+			\item Il processo può quindi essere ripetuto per generare più strati, il wafer può essere \textit{passivato} (ricoperto da uno strato protettivo), tagliato e messo in un \textit{package}. 
+		\end{itemize}
+
+		Oggi lo sviluppo della microelettronica si basa su due approcci:
+		\begin{itemize}
+			\item Approccio \textbf{System-on-Chip} (\textit{SoC}): adottato per lo sviluppo dei componenti a contenuto digitale. Rispecchia la cosiddetta legge del \textit{"more Moore"}, quindi si basa sull'evoluzione quantitativa di tecnologie già provate (più transistor, ecc...);
+			\item Approccio \textbf{System-in-Package} (\textit{SiP}): adottato per lo sviluppo dei componenti a contenuto analogico, o in generale che si interfacciano col mondo esterno. Rispecchia la cosiddetta legge del \textit{"more than Moore"}, quindi mira alla diversificazione delle tecnologie e allo sviluppo di soluzioni alternative rispetto a quelle già provate.
 		\end{itemize}
 \end{enumerate}
 
@@ -246,26 +257,142 @@ Alle basi dell'elettronica sta la chimica. Richiamiamo quindi alcuni concetti fo
 \subsubsection{Atomo}
 La visione dell'atomo passa attraverso più modelli:
 \begin{itemize}
-	\item Modello di \textbf{Rutherford}: vede l'atomo come un nucleo carico positivamente molto piccolo, il cui volume circostante è occupato da elettroni carichi negativamente;
-	\item Modello di \textbf{Bohr} dell'atomo di idrogeno: all'elettrone vengono permessi solo certi stati di moto stazionario dove questo si trova ad un dato livello di energia. Quando un elettrone si trova in un dato stato, l'atomo non irradia energia.
+	\item Modello di \textbf{Thomson}: si basa sull'osservazione delle particelle fondamentali e della loro carica ($+1 \, e$ per il protone e $-1 \, e$ per l'elettrone), e sul fatto che la carica complessivo dell'atomo risultava neutra.
+		\begin{definition}{Modello di Thomson}
+			Vede l'atomo come un insieme di elettroni carichi negativamente immersi in una "nube" carica positivamente (\textit{plum pudding model})
+		\end{definition}
+
+	\item Modello di \textbf{Rutherford}: si basa sull'osservazione che la carica positiva dell'atomo si trova concentrata al centro di esso.
+		\begin{definition}{Modello di Rutherford}
+			Vede l'atomo come un nucleo carico positivamente molto piccolo, il cui volume circostante è occupato da elettroni;
+		\end{definition}
+	\item Modello di \textbf{Bohr} dell'atomo di idrogeno. Prendendo questo semplice elemento come riferimento, si può effettuare la semplificazione di avere un singolo elettrone (con carica $-1 \, e$) un un nucleo formato da un singolo protone ($+1 \, e$). 
+
+		\begin{definition}{Modello di Bohr}
+			All'elettrone vengono permessi solo certi stati di moto stazionario dove questo si trova ad un dato livello di energia. Quando un elettrone si trova in un dato stato, l'atomo non irradia energia.
+		\end{definition}
 
 		Secondo Bohr le orbite degli elettroni erano circolari (sappiamo che questo è falso, in quanto conosciamo che la posizione degli atomi non è immediatamente conoscibile e si può descrivere con particolari funzioni d'onda dette \textit{orbitali}).
 
-		Nel modello di Bohr si prevedeva già che ogni atomo ha momento angolare dipendente dalla costante di Planck  # riporta
+		\par\smallskip
+		
+		\noindent
+		\textbf{\textsf{Orbite di Bohr}}
+
+		\noindent
+		Possiamo comunque sfruttare la meccanica classica per spingere avanti il modello di Bohr ed ottenere informazioni concrete sull'atomo, nel caso semplice dell'idrogeno.
+		
+		\begin{enumerate}
+			\item Partiamo dalla meccanica classica. Assumiamo orbite circolari, e quindi la presenza di una certa forza $F$ che mantenga l'elettrone di massa $m$ su un orbita a distanza $r$ e velocità $v$ del nucleo:
+			$$
+				F = ma = -\frac{m v^2}{r} 
+			$$
+
+			Questa forza $F$ non potrà essere che la forza di attrazione elettrostatica definita dalla \textit{legge di Coulomb}, cioè:
+			$$
+				F = k \frac{q_1 q_2}{r^2} \implies -\frac{m v^2}{r} = k \frac{q_1 q_2}{r^2}
+			$$
+
+			Ora, $q_1$ e $q_2$ sono le cariche del nucleo ($+1 \, e$) e dell'elettrone in orbita ($-1 \, e$), per cui si ha l'espressione finale:
+			$$
+				\frac{m v^2}{r} = \frac{k e^2}{r^2}
+			$$
+		\item Abbiamo detto che secondo il modello di Bohr gli stati di energia sono \textit{quantizzati}. Scegliamo quindi una costante $\hbar$ (che chiameremo \textit{costante di Planck}), e un interno $n$, e quantizziamo il momento angolare $L$:
+			$$
+				L = mvr = n \hbar
+			$$
+		\end{enumerate}
+
+	Abbiamo quindi ottenuto il sistema di equazioni non lineari:
+	\[
+		\begin{cases}
+			\frac{m v^2}{r} = \frac{k e^2}{r^2} \\
+			mvr = n \hbar
+		\end{cases}
+	\]
+
+	Possiamo risolvere tale sistema per ricavare $v$ ed $r$, cioè velocità a raggio dell'orbita:
+	$$
+		v = \frac{k e^2}{n \hbar} , \quad r = \frac{n^2 \hbar^2}{k m e^2}
+	$$
+
+	Note queste grandezze, si può ad esempio calcolare l'energia ad ogni livello semplicemente come l'energia cinetica:
+	$$
+	E = \frac{1}{2} m v^2 = \frac{1}{2} m \frac{k^2 e^4}{n^2 \hbar^2}
+	$$
+
+	Questo tipo di calcoli smette di essere accurato appena si introduce un nuovo elettrone (e quindi un nuovo protone per rendere stabile l'atomo), in quanto si vanno a introdurre, oltre alla forza di attrazione verso il nucleo, forse di interazione fra gli elettroni stessi.
+
+		\noindent
+		\textbf{\textsf{Irradiazione}}
+
+		\noindent
+		Abbiamo nominato il concetto di \textit{irradiazione}. Quello che i primi studiosi dell'atomo notavano (e su cui basavano le loro ipotesi) è che quando si esponevano gli atomi ad energia, questi irradiavano, ovvero emettevano \textit{onde elettromagnetiche}. Il modello di Bohr spiega il fenomeno dell'irradiazione facendolo corrispondere con un cambio di livello di quantizzazione di un elettrone.
+
+		Facciamo alcune considerazioni preliminari sulle onde elettromagnetiche. Queste sono formate da perturbazioni ortogonali del campo elettrico ($\vec{E}$) e magnetico ($\vec{B}$). Si propagano nello spazio con velocità della luce $c$, per cui date frequenza $f$, periodo $T$ e lunghezza d'onda $\lambda$ si ha:
+		$$
+			c = \lambda f = \frac{\lambda}{T}
+		$$
+
+		Attraverso risultati sperimentali si ha che l'energia associata ad un onda'elettromagnetica (e quindi quella liberata con un salto quantico) è direttamente proporzionale alla sua frequenza, cioè:
+		$$
+			\Delta E = \hbar f = \hbar \frac{c}{\lambda} = E_1 - E_2
+		$$
+		dove $E_1$ e $E_2$ sono i livelli di energia nell'atomo rispettivamente prima e dopo del salto.
+
+		Possiamo quindi usare la formula per $E$ trovata prima, prendendo i numeri di quantizzazione $n_1$ e $n_2$ corrispondenti ai 2 stati nominati prima:
+		$$
+			E_1 = \frac{1}{2} m \frac{k^2 e^4}{n_1^2 \hbar^2}, \quad E_2 = \frac{1}{2} m \frac{k^2 e^4}{n_2^2 \hbar^2}
+		$$
+
+		Sostituendo, si può quindi ricavare la relazione:
+		$$
+		\hbar \frac{c}{\lambda} = \frac{1}{2} m \frac{k^2 e^4}{n_1^2 \hbar^2} - \frac{1}{2} m \frac{k^2 e^4}{n_2^2 \hbar^2} \implies \frac{1}{\lambda} = \frac{1}{2} \frac{m k^2 e^4}{c \hbar^3} \left( \frac{1}{n_1^2} - \frac{1}{n_2^2} \right) = R_H \left( \frac{1}{n_1^2} - \frac{1}{n_2^2} \right)
+		$$
+		dove la costante $R_H = \frac{1}{2} \frac{m k^2 e^4}{c \hbar^3}$ viene detta \textit{costante di Rydberg}.
+	
+		A partire da questa formula (accurata) si possono ricavare le lunghezze d'onda delle bande di emissione caratteristiche di elementi come l'idrogeno.
+
 \end{itemize}
 
-Nel modello di \textit{Bohr} ogni atomo è individuato da 4 numeri:
+Abbiamo quindi che il modello di \textit{Bohr}, tralasciando la semplificazione delle orbite circolari, è il più accurato che abbiamo visto finora.
+In questo, ogni atomo individua 4 numeri:
 \begin{itemize}
-	\item Il \textbf{numero quantico principale};
-	\item Il \textbf{numero quantico secondario};
-	\item Il # continua
+	\item Il \textbf{numero quantico principale} $n$, che va da $1$ al livello energetico che contiene l'elettrone di valenza più esterno dell'atomo (visto che raggio ed energia sono direttamente proporzionali, anche quello ad energia più alta);
+	\item Il \textbf{numero quantico secondario}, che va da $0$ a $n - 1$, legato al momento angolare dell'atomo;
+	\item Il \textbf{numero quantico magnetico}, che va da $-l$ a $l$, specifica l'orbitale di appartenenza dell'elettrone;
+	\item Il \textbf{numero quantico di spin magnetico}, che può essere $-\frac{1}{2}$ e $\frac{1}{2}$.
 \end{itemize}
 
-# principio di esclusione di pauli
+Questi 4 numeri da soli specificano un qualsiasi elettrone appartenente all'atomo.
+Vale il \textbf{principio di esclusione} di Pauli, cioè:
+\begin{definition}{Principio di esclusione di Pauli}
+	Ogni stato elettronico deve avere numeri quantici diversi, o in altre parole più elettroni non possono occupare lo stesso stato.
+\end{definition}
 
-# modello onda/particella
+\noindent
+\textbf{\textsf{Orbitale}}
 
-# orbitali
+\noindent
+Vale alla pena notare a questo punto che, come avevamo accennato, il modello basato sulle orbite di Bohr è inaccurato. In verità, vale il \textbf{principio di indeterminazione} di Heisenberg:
+
+\begin{definition}{}
+	Non si può conoscere contemporaneamente sia la posizione che la quantità di moto di un elettrone.
+\end{definition}
+
+Questo significa che non si può mai effettivamente parlare di \textit{posizioni} di elettroni, ma di \textit{distribuzioni di probabilità} nello spazio.
+
+In particolare, determiniamo \textit{funzioni d'onda} a valore $\in \mathbb{C}$ definite come:
+$$
+\psi(\vec{r}), \quad \vec{r} = (x, y, z, t)
+$$
+dove $r$ indica una posizione nello spazio-tempo a cui si valuta la funzione d'onda $\psi$.
+La probabilità di trovare un elettrone ad un dato punto $\vec{r}$ sarà quindi:
+$$
+| \psi(\vec{r}) |^2
+$$
+
+Il quadato e il fatto che $\psi(\vec{r}) \in \mathbb{C}$ derivano dalla \textit{dualità onda-particella} degli elettroni: in particolare sono legate al fenomeno dell'\textit{interferenza}.
 
 \subsubsection{Conduttori, semiconduttori e isolanti}
 La conoscenza della distribuzione degli elettroni sui possibili orbitali nello stato di minima energia è importante per conoscere le proprietà degli elementi.
@@ -278,10 +405,17 @@ In particolare, si possono distinguere 3 categorie principali di elementi riguar
 \end{itemize}
 
 Gli elementi vengono categorizzati sulla base della configurazione dei loro orbitali nella \textbf{tavola periodica}.
+In questo, gli elementi vengono disposti man mano riempiendo i loro oritali esterni. Essendo questi quelli che determinano le loro proprietà riguardo all'interazione con gli altri elementi, si ha che l'andamento degli elementi è periodico lungo la tavola (da cui il nome).
 
-# tavola periodica, ci interessa la zona del silicio
+\par\smallskip
 
-# drogaggio silicio con boro (???)
+\noindent
+\textbf{\textsf{Drogaggio del silicio}}
+
+\noindent
+Questo può essere un buon momento per accennare al drogaggio del silicio. Abbiamo che questo è di norma un cattivo semiconduttore (quindi ha poca capacità di condurre corrente, o più precisamente di fornire elettroni liberi).
+
+Si procede quindi a introdurre impurità controllate per modificare le proprietà elettriche del materiale. Il boro viene utilizzato per il drogaggio di tipo \textit{p}, creando lacune positive, mentre il fosforo o l’arsenico vengono usati per il drogaggio di tipo \textit{n}, aumentando il numero di elettroni liberi. 
 
 \subsubsection{Legami chimici}
 In natura, in condizioni ottimali, solo i gas nobili si trovano allo stato atomico mentre tutti gli altri elementi si presentano legati ad altri in svariate modalità.
@@ -295,6 +429,17 @@ Esistono 3 tipi di legami chimici:
 	\item Legame \textbf{metallico}: è il legame tipico dei metalli, dove tutti gli elettroni vengono messi a comune e possono circolare liberamente. Questo rende i metalli dei conduttori particolarmente efficaci.
 \end{itemize}
 
-# dettaglio sul legame del silicio
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Legame del silicio}}
+
+\noindent
+
+Possiamo usare quanto studiato finora per definire la struttura dei legami formati dal silicio. Abbiamo che nello stato base ci sono 4 elettroni di valenza (configurazione elettronica $[\mathrm{Ne}]3s^23p^2$), per cui si possono formare legami covalenti fra un atomo di silicio e i 4 atomi adiacenti.
+
+Questa configurazione porta alla formazione di una struttura cristallina tetraedrica, dove appunto ogni atomo lega con 4 atomi adiacenti. 
+
+% figure: modello thomson, rutherford, bohr, forze studio mec. classica orbite bohr, orbitali, legame silicio
 
 \end{document}
