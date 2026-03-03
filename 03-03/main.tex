@@ -1,0 +1,428 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper, margin=8em]{geometry}
+
+% usa i pacchetti per la scrittura in italiano
+\usepackage[french,italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\frenchspacing 
+
+% usa i pacchetti per la formattazione matematica
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+
+% usa altri pacchetti
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{standalone}
+
+% imposta il titolo
+\title{Appunti Elettronica Digitale}
+\author{Luca Seggiani}
+\date{2026}
+
+% imposta lo stile
+% usa helvetica
+\usepackage[scaled]{helvet}
+% usa palatino
+\usepackage{palatino}
+% usa un font monospazio guardabile
+\usepackage{lmodern}
+
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\ttdefault}{lmtt}
+
+% disponi il titolo
+\makeatletter
+\renewcommand{\maketitle} {
+	\begin{center} 
+		\begin{minipage}[t]{.8\textwidth}
+			\textsf{\huge\bfseries \@title} 
+		\end{minipage}%
+		\begin{minipage}[t]{.2\textwidth}
+			\raggedleft \vspace{-1.65em}
+			\textsf{\small \@author} \vfill
+			\textsf{\small \@date}
+		\end{minipage}
+		\par
+	\end{center}
+
+	\thispagestyle{empty}
+	\pagestyle{fancy}
+}
+\makeatother
+
+% disponi teoremi
+\usepackage{tcolorbox}
+\newtcolorbox[auto counter, number within=section]{theorem}[2][]{%
+	colback=blue!10, 
+	colframe=blue!40!black, 
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries, 
+	title=~\thetcbcounter: #2, 
+	#1
+}
+
+% disponi definizioni
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{%
+	colback=red!10,
+	colframe=red!40!black,
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries,
+	title=~\thetcbcounter: #2,
+	#1
+}
+
+% U.D.M
+\newcommand{\amp}{\ensuremath{\mathrm{A}}}
+\newcommand{\volt}{\ensuremath{\mathrm{V}}}
+\newcommand{\meter}{\ensuremath{\mathrm{m}}}
+\newcommand{\second}{\ensuremath{\mathrm{s}}}
+\newcommand{\farad}{\ensuremath{\mathrm{F}}}
+\newcommand{\henry}{\ensuremath{\mathrm{H}}}
+\newcommand{\siemens}{\ensuremath{\mathrm{S}}}
+
+% circuiti
+\usepackage{circuitikz}
+\usetikzlibrary{babel}
+
+% disegni
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+% disponi codice
+\usepackage{listings}
+\usepackage[table]{xcolor}
+
+\lstdefinestyle{codestyle}{
+		backgroundcolor=\color{black!5}, 
+		commentstyle=\color{codegreen},
+		keywordstyle=\bfseries\color{magenta},
+		numberstyle=\sffamily\tiny\color{black!60},
+		stringstyle=\color{green!50!black},
+		basicstyle=\ttfamily\footnotesize,
+		breakatwhitespace=false,         
+		breaklines=true,                 
+		captionpos=b,                    
+		keepspaces=true,                 
+		numbers=left,                    
+		numbersep=5pt,                  
+		showspaces=false,                
+		showstringspaces=false,
+		showtabs=false,                  
+		tabsize=2
+}
+
+\lstdefinestyle{shellstyle}{
+		backgroundcolor=\color{black!5}, 
+		basicstyle=\ttfamily\footnotesize\color{black}, 
+		commentstyle=\color{black}, 
+		keywordstyle=\color{black},
+		numberstyle=\color{black!5},
+		stringstyle=\color{black}, 
+		showspaces=false,
+		showstringspaces=false, 
+		showtabs=false, 
+		tabsize=2, 
+		numbers=none, 
+		breaklines=true
+}
+
+\lstdefinelanguage{javascript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% disponi sezioni
+\usepackage{titlesec}
+
+\titleformat{\section}
+	{\sffamily\Large\bfseries} 
+	{\thesection}{1em}{} 
+\titleformat{\subsection}
+	{\sffamily\large\bfseries}   
+	{\thesubsection}{1em}{} 
+\titleformat{\subsubsection}
+	{\sffamily\normalsize\bfseries} 
+	{\thesubsubsection}{1em}{}
+
+% disponi alberi
+\usepackage{forest}
+
+\forestset{
+	rectstyle/.style={
+		for tree={rectangle,draw,font=\large\sffamily}
+	},
+	roundstyle/.style={
+		for tree={circle,draw,font=\large}
+	}
+}
+
+% disponi algoritmi
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmo}
+\makeatother
+
+% disponi numeri di pagina
+\uR= sepackage{fancyhdr}
+\fancyhf{} 
+\fancyfoot[L]{\sffamily{\thepage}}
+
+\makeatletter
+\fancyhead[L]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@title \ \@date}}} 
+\fancyhead[R]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@author}}}
+\makeatother
+
+\begin{document}
+% sezione (data)
+\section{Lezione del 03-03-26}
+
+% stili pagina
+\thispagestyle{empty}
+\pagestyle{fancy}
+
+% testo
+\subsection{Conduzione}
+Iniziamo a dettagliare il fenomeno della conduzione attraverso un materiale.
+Supponiamo di avere un parallelepipedo di sezione $S$ e lunghezza $L$.
+
+\begin{theorem}{Seconda legge di Ohm}
+Dalla seconda legge di \textit{Ohm}, la sua abilità di condurre cariche di un corpo è inversamente proporzionale alla \textbf{resistenza}:
+$$
+R = \rho \frac{L}{S}
+$$
+\end{theorem}
+dove $\rho$ è una costante specifica al materiale detta \textit{resistività}.
+Ricordiamo che questo deriva dalla formulazione propria della legge di Ohm:
+$$
+J = \sigma E
+$$
+dove $J$ è la \textit{densità di corrente} e $\sigma$ è la \textit{conducibilità} di un materiale, per cui:
+$$
+I = JS = \sigma E S = \frac{1}{\rho} \frac{V}{L} S = \frac{V}{R}
+$$
+dove si è usato la definizione di \textit{potenziale elettrico} $V = EL$ sulla distanza $L$.
+
+Abbbiamo quindi ricavato la legge:
+\begin{theorem}{Prima legge di Ohm}
+Differenza di potenziale, corrente e resistenza sono legate dalla relazione:
+$$
+V = IR
+$$
+\end{theorem}
+
+Riguardo a resistività e conducibilità, le cui unità di misura sono rispettivamente $\Omega \cdot \mathrm{cm}$ e $\Omega \cdot \mathrm{cm}^-1$, vale la relazione:
+$$
+\rho = \frac{1}{\sigma}
+$$
+immediata dalla definizione a partire dalla legge di Ohm.
+
+\subsubsection{Conduttori, semiconduttori e isolanti con Ohm}
+Sulla base della resistività si possono classificare i materiali in \textit{conduttori}, \textit{semiconduttori} e \textit{isolanti} come accennato in 1.2.2.
+
+In particolare, si riporta la tabella che individua i valori di resistività per diversi tipi di materiale:
+\begin{table}[h!]
+	\center \rowcolors{2}{white}{black!10}
+	\begin{tabular} { c | c }
+		\bfseries Tipo & \bfseries Resistività \\
+		\hline
+		Conduttore & $\rho < 10^{-2} \, \Omega \cdot \mathrm{cm}$ \\
+		Isolante & $\rho > 10^5 \, \Omega \cdot \mathrm{cm}$ \\
+		Semiconduttore & $10^{-2} \Omega \cdot \mathrm{cm}< \rho < 10^5 \, \Omega \cdot \mathrm{cm}$ \\
+	\end{tabular}
+\end{table}
+
+Il vantaggio dei materiali semiconduttori, su cui noi ci concentriamo (in particolare noi assumiamo di usare il \textit{silicio}, simbolo atomico \textit{Si} e numero atomico 14) è che la loro resistività può essere controllata in maniera tale da decidere se in una data occasione un semiconduttore deve comportarsi come un isolante o come un conduttore (come abbiamo accennato, il processo di \textit{drogaggio} di 1.2.2).
+
+\subsubsection{Corrente di deriva in un conduttore}
+La \textbf{corrente di deriva} è quella che otteniamo applicando un campo elettrico $\vec{E}$ ad un materiale.
+
+Riprendiamo il parallelepipedo di 2.1, e assumiamo che sia composto da un materiale conduttore ($\rho < 10^{-2} \, \Omega \cdot \mathrm{cm}$).
+
+Prendiamo la definizione di corrente come quantità di carica che si sposta in una superficie nell'istante di tempo, cioè:
+$$
+I = \frac{\Delta Q}{\Delta T}
+$$
+Questo per noi significherà prendere una sezione del parallelepipedo e "contare" il numero di cariche che vi passano attraverso.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Modello di Drude-Lorentz}}
+
+\noindent
+Il modello di \textit{Drude-Lorentz} si pone di studiare il fenomeno della conduzione considerando quindi queste cariche libere all'interno di un metallo (prendiamo ad esempio il rame, che con configurazione elettronica $[\mathrm{Ar}]3d^{10}4s^1$ offre un elettrone libero per atomo) come particelle di un gas perfetto.
+
+\begin{itemize}
+	\item 
+Se non si applica nessun campo $\vec{E}$, la corrente di deriva che passa attraverso il parallelepipedo sarà chiaramente 0. Notiamo che questo non deriva dal fatto che le cariche sono ferme, ma che si stanno muovendo in direzione casuale (e quindi statisticamente attraverso la nostra superficie entrano tante cariche quante ne escono).
+	\item
+Procediamo quindi ad applicare un certo campo $\vec{E}$.
+Dalla definizione di campo elettrico, si ha che le cariche vengono sottoposte ad una forza (e rispettiva accelerazione) data da:
+$$
+\vec{F} = - e \vec{E}, \quad \vec{a} = - \frac{e \vec{E}}{m}
+$$
+
+Le traiettorie descritte dagli elettroni sono casuali, localmente in moto rettilineo uniforme finché questi non urtano altri elettroni. All'istante dell'urto modellizziamo la variazione di velocità (trascurando la forza relativa all'urto stesso) come:
+$$
+\vec{v}_{i + 1} = \vec{v}_i - \frac{e \vec{E}}{m} \tau
+$$
+dove $\tau$ è il tempo necessario ad effettuare un \textit{cammino libero medio} all'interno del conduttore.
+
+Si ha quindi che la \textbf{velocità di deriva} media sarà data da:
+$$
+\vec{v}_d = < \vec{v}_{i + 1} > = - \frac{e \vec{E}}{m} \tau
+$$
+\end{itemize}
+
+Dal punto di vista macroscopico, quello che avremo è che la velocità media è legata ad un parametro $\mu_m$ detto \textit{mobilità}, e direttamente proporzionale al campo:
+$$
+\vec{v}_d = -\mu_m \vec{E}
+$$
+dove ricordiamo il segno negativo, in quanto gli elettroni si muovono nella direzione opposta al campo (sono cariche negative $-1 \, e$).
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Da Drude-Lorentz a Ohm}}
+
+\noindent
+Vediamo come riagganciarci alle leggi di Ohm a partire dal modello di Drude-Lorentz appena visto.
+
+Osserviamo il percorso di una singola carica nel nostro materiale conduttivo, e prendiamo il tempo che impiega a passare da un capo all'altro del materiale come:
+$$
+\Delta T = \frac{L}{\vec{v}_d}
+$$
+detto \textit{tempo di osservazione}. Riprendendo la definizione di corrente, e supponendo che nel materiale siano presenti $N$ cariche elettroniche, potremo quindi dire:
+$$
+I = \frac{\Delta Q}{\Delta T} = \frac{e N}{\Delta T} = \frac{e N}{L} v_d
+$$
+
+Ci possiamo riportare anche alla densità di corrente $J$ ponendo:
+$$
+J = \frac{I}{S} = \frac{e N v_d}{LS} = \frac{e N v_d}{V_{ol}} 
+$$
+dove $V_{ol} = LS$ è il \textit{volume} del parallelepipedo.
+Chiamiamo quindi $n$ la \textit{concentrazione} di carica all'interno del volume:
+$$
+n = \frac{N}{V_{ol}}
+$$
+in modo da poter dire:
+\begin{theorem}{Legge microscopica di Ohm}
+La densità di carica in un materiale sottoposto ad un campo elettrico di modulo $E$ è:	
+$$
+J = \frac{N}{V_{ol}} e v_d = n e v_d = n e \mu_n E
+$$
+\end{theorem}
+\noindent
+trascurando i segni.
+
+Dal punto di vista vettoriale, riprendiamo la definizione della legge di Ohm, stavolta contando i segni:
+$$
+\vec{J} = \sigma \vec{E}, \quad \sigma = n (- e) \cdot (- \mu_n) = n e \mu_n 
+$$
+dove si applica sempre la relazione con la resistività:
+$$
+\rho = \frac{1}{\sigma} = \frac{1}{n e \mu_n}
+$$
+
+\par\smallskip
+
+Notiamo che appunti più accurati e tratti da un corso di fisica su questo argomento si possono trovare a \url{https://raw.githubusercontent.com/seggiani-luca/appunti-fis/68a83a26dacd1f545dcf697da0daabf257413325/master/master.pdf}. In particolare, negli appunti riportati si derivano completamente resistività e conduttività nel contesto del modello di Drude-Lorentz, oltre alla legge microscopica di Ohm (pagina 149).
+
+% rifai questi conti
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Esempio numerico col rame}}
+
+\noindent
+% fallo
+
+\subsubsection{Corrente di deriva in un semiconduttore}
+Negli scorsi esempi riguardo alla corrente di deriva abbiamo fatto uso di un materiale conduttore (in particolare del rame). In un semiconduttore, la situazione cambia in quanto i legami che si formano fra gli atomi non sono più metallici.
+
+\begin{center}
+	\includegraphics[scale=0.15]{../figures/silicon_2d.png}
+\end{center}
+
+Prendiamo ad esempio il silicio, che forma legami di tipo covalenti. Abbiamo detto in 1.2.3 che il silicio presenta 4 elettroni nello strato di valenza, per cui è capace di formare legami covalenti con altri 4 atomi di silicio in una struttura cristallina tidimensionale.
+Gli elettroni nel reticolo cristallino del silicio saranno quindi costretti a trovarsi nella zona del legame fra gli atomi, e non potremo usare l'approssimazione a gas perfetto valida per i metalli. La chiave sarà quindi data dalla \textbf{temperatura}.
+
+\begin{itemize}
+	\item 
+Di base, in una situazione dove la temperatura è $T = 0 \, \mathrm{K}$ gradi Kelvin, gli elettroni non sono liberi di muoversi nel reticolo e non si ha conduzione;
+	\item 
+Se invece si pone $T \neq 0 \, \mathrm{K}$, si può avere conduzione attraverso elettroni liberi che vengono "portati" via dal legame. Questo è reso possibile dal fatto che l'energia fornita come aumento di temperatura all'atomo è tale da superare l'energia di legame, e quindi liberare un elettrone coinvolto nel legame.
+\end{itemize}
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Elettroni liberi in un semiconduttore}}
+
+\noindent
+Avremo quindi bisogno di un modello per il numero di elettroni liberi in funzione della temperatura.
+
+Questo si ricava sperimentalmente come:
+$$
+n_i = B T^\frac{3}{2} e^{-\frac{E_G}{2 k_B T}}
+$$
+dove $n_i$ è la densità di elettroni liberi (analoga alla $n$ dei conduttori).
+
+Ad esempio, abbiamo che a $300 \, \mathrm{K}$ gradi Kelvin, il numero di elettroni liberi nel silicio è circa $10^{10} \, \mathrm{cm}^{-3}$.
+
+Diciamo che il silicio è un semiconduttore \textbf{intrinsico} in quanto ha naturalmente bassa conduttività. Di un semiconduttore drogato per ottenere maggiore conduttività si dice che è invece \textbf{estrinseco}.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Generazione e ricombinazione termica}}
+
+\noindent
+Il fenomeno visto finora prende il nome di \textbf{generazione termica} di elettroni liberi, in quanto chiaramente richiede di fornire calore al materiale semiconduttore le cui proprietà di conduzione vogliamo variare.
+
+Si può osservare anche il fenomeno opposto, detto di \textbf{ricombinazione termica}, quando un elettrone perde energia e decade nuovamente in un legame covalente.
+
+Si ha che la quantità effettiva di elettroni liberi deriva da entrambi i fenomeni (che ricordiamo essere entrambi dipendenti esclusivamente dalla temperatura), per cui a grandi linee:
+$$
+n_i = \text{generazione termica} + \text{ricombinazione termica}
+$$
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Lacune elettroniche}}
+
+\noindent
+Un fenomeno che non abbiamo visto è quello comportato dal fatto che un elettrone che viene liberato da un legame forma una \textbf{lacuna} o \textit{vacuità} nel reticolo crristallino, cioè una regione di "vuoto" della carica.
+Le lacune possono spostarsi come gli elettroni, in quanto semplicemente può cambiare il legame su cui la lacuna si trova. 
+In questo modo può essere più semplice considerare le lacune come cariche positive ($+1 \, e$) che si spostano all'interno del reticolo cristallino al pari degli elettroni.
+
+In verità, le lacune elettroniche nei semiconduttori sono importanti quanto gli elettroni, e abbiamo quindi 2 possibili trasportatori di carica:
+\begin{itemize}
+	\item Gli \textbf{elettroni}, che hanno carica $-1 \, e$;
+	\item Le \textbf{lacune}, che hanno carica $+1 \, e$.
+\end{itemize}
+
+Possiamo quindi riportarci alla legge di Ohm, dando una definizione della conduttività di un elemento semiconduttore basata su elettroni e lacune:
+$$
+\sigma = n_i \mu_n e + \rho \mu_p e
+$$
+dove $\mu_p$ è la \textit{mobilità delle lacune}, che notiamo differisce da quella degli elettroni (già introdotta come $\mu_n$).
+
+\end{document}
