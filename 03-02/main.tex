@@ -368,13 +368,31 @@ La visione dell'atomo passa attraverso più modelli:
 			E_1 = \frac{1}{2} m \frac{k^2 e^4}{n_1^2 \hbar^2}, \quad E_2 = \frac{1}{2} m \frac{k^2 e^4}{n_2^2 \hbar^2}
 		$$
 
-		Sostituendo, si può quindi ricavare la relazione:
+		Sostituendo, si può quindi ricavare la relazione (detta equazione di \textit{Rydberg}):
 		$$
 		\hbar \frac{c}{\lambda} = \frac{1}{2} m \frac{k^2 e^4}{n_1^2 \hbar^2} - \frac{1}{2} m \frac{k^2 e^4}{n_2^2 \hbar^2} \implies \frac{1}{\lambda} = \frac{1}{2} \frac{m k^2 e^4}{c \hbar^3} \left( \frac{1}{n_1^2} - \frac{1}{n_2^2} \right) = R_H \left( \frac{1}{n_1^2} - \frac{1}{n_2^2} \right)
 		$$
 		dove la costante $R_H = \frac{1}{2} \frac{m k^2 e^4}{c \hbar^3}$ viene detta \textit{costante di Rydberg}.
 	
 		A partire da questa formula (accurata) si possono ricavare le lunghezze d'onda delle bande di emissione caratteristiche di elementi come l'idrogeno.
+		In particolare, mantenendo $n_1$ costante e facendo scorrere $n_2$ da $n_1 + 1$ fino ad infinito, si ottiene uno spettro di emissione associato alla transizione di stato energetico da $n_2$ a $n_1$ dell'elettrone dell'idrogeno.
+
+		Vediamo queste serie tracciate su un grafico:
+		\begin{center}
+			\includegraphics[scale=0.2]{../figures/hydr_spectra.png}		
+		\end{center}
+
+		Notiamo come le prime serie ricavate dall'equazione di Rydberg hanno dei nomi sulla base del valore di $n_1$:
+		\begin{table}[h!]
+			\center \rowcolors{2}{white}{black!10}
+			\begin{tabular} { c | c | c | c }
+				$n_1$ & $n_2$ & \bfseries Serie & \bfseries Convergenza \\
+				\hline 
+				$1$ & $[2, \infty)$ & Serie di \textit{Lyman} & $91.13 \, \mathrm{nm}$ \\  
+				$2$ & $[3, \infty)$ & Serie di \textit{Balmer} & $364.51 \, \mathrm{nm}$ \\  
+				$3$ & $[4, \infty)$ & Serie di \textit{Paschen} & $820.14 \, \mathrm{nm}$ \\  
+			\end{tabular}
+		\end{table}
 
 \end{itemize}
 
@@ -382,9 +400,9 @@ Abbiamo quindi che il modello di \textit{Bohr}, tralasciando la semplificazione 
 In questo, ogni atomo individua 4 numeri:
 \begin{itemize}
 	\item Il \textbf{numero quantico principale} $n$, che va da $1$ al livello energetico che contiene l'elettrone di valenza più esterno dell'atomo (visto che raggio ed energia sono direttamente proporzionali, anche quello ad energia più alta);
-	\item Il \textbf{numero quantico secondario}, che va da $0$ a $n - 1$, legato al momento angolare dell'atomo;
-	\item Il \textbf{numero quantico magnetico}, che va da $-l$ a $l$, specifica l'orbitale di appartenenza dell'elettrone;
-	\item Il \textbf{numero quantico di spin magnetico}, che può essere $-\frac{1}{2}$ e $\frac{1}{2}$.
+	\item Il \textbf{numero quantico secondario} $l$, che va da $0$ a $n - 1$, legato al momento angolare dell'atomo;
+	\item Il \textbf{numero quantico magnetico} $m_l$, che va da $-l$ a $l$, specifica l'orbitale di appartenenza dell'elettrone;
+	\item Il \textbf{numero quantico di spin magnetico} $m_s$, che può essere $-\frac{1}{2}$ e $\frac{1}{2}$.
 \end{itemize}
 
 Questi 4 numeri da soli specificano un qualsiasi elettrone appartenente all'atomo.
@@ -401,7 +419,7 @@ Vale il \textbf{principio di esclusione} di Pauli, cioè:
 \noindent
 Vale alla pena notare a questo punto che, come avevamo accennato, il modello basato sulle orbite di Bohr è inaccurato. In verità, vale il \textbf{principio di indeterminazione} di Heisenberg:
 
-\begin{definition}{}
+\begin{definition}{Principio di indeterminazione di Heisenberg}
 	Non si può conoscere contemporaneamente sia la posizione che la quantità di moto di un elettrone.
 \end{definition}
 
@@ -409,7 +427,7 @@ Questo significa che non si può mai effettivamente parlare di \textit{posizioni
 
 In particolare, determiniamo \textit{funzioni d'onda} a valore $\in \mathbb{C}$ definite come:
 $$
-\psi(\vec{r}), \quad \vec{r} = (x, y, z, t)
+\psi(\vec{r}) \in \mathbb{C}, \quad \vec{r} = (x, y, z, t) \in \mathbb{R}^4
 $$
 dove $r$ indica una posizione nello spazio-tempo a cui si valuta la funzione d'onda $\psi$.
 La probabilità di trovare un elettrone ad un dato punto $\vec{r}$ sarà quindi:
@@ -417,7 +435,62 @@ $$
 | \psi(\vec{r}) |^2
 $$
 
-Il quadato e il fatto che $\psi(\vec{r}) \in \mathbb{C}$ derivano dalla \textit{dualità onda-particella} degli elettroni: in particolare sono legate al fenomeno dell'\textit{interferenza}.
+\par\smallskip
+
+Rifacendoci ai numeri quantici nominati nello scorso paragrafo, abbiamo che:
+\begin{itemize}
+	\item $n$, $l$ e $m_l$, cioè rispettivamente i numeri quantici \textit{principale}, \textit{secondario} e \textit{magnetico} individuano un orbitale. 
+
+		In particolare, i primi 4 stati del numero $l$ individuano quella che è la \textit{forma} della distribuzione che l'orbitale individua nello spazio, ovvero:
+		\begin{table}[h!]
+			\center \rowcolors{2}{white}{black!10}
+			\begin{tabular} { c | c | c }
+				\bfseries $l$ & \bfseries Lettera & \bfseries Forma dell'orbitale \\
+				\hline 
+				$0$ & $s$ & \textit{Sharp} \\
+				$1$ & $p$ & \textit{Principal} \\
+				$2$ & $d$ & \textit{Diffuse} \\
+				$3$ & $f$ & \textit{Fundamental} \\
+			\end{tabular}
+		\end{table}
+	\item $m_s$, cioè il numero quantico di \textit{spin magnetico}, individua uno stato elettronico all'interno di un dato orbitale. In particolare, riguardo a quanto abbiamo detto prima ($m_s$ può essere $\pm \frac{1}{2}$), si ha che ogni orbitale può essere occupato da al massimo 2 elettroni.
+\end{itemize}
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Dualità onda-particella}}
+
+\noindent
+Abbiamo notato che:
+\begin{itemize}
+	\item 
+C'è un quadato nella formula della probabilità di trovare un dato elettrone alla posizione $\vec{r}$, cioè $|\psi(\vec{r})|^2$;
+	\item Questo è dato dal fatto che che $\psi(\vec{r}) \in \mathbb{C}$, cioè la funzione d'onda, è una funzione complessa. Il quadrato:
+		$$
+		|\psi(\vec{r})|^2 = \psi(\vec{r}) \psi(\vec{r})^*
+		$$
+		è quindi usato come una sorta di "norma" della funzione d'onda.
+\end{itemize}
+
+Queste considerazioni derivano dalla \textit{dualità onda-particella} degli elettroni: in particolare sono legate al fenomeno dell'\textit{interferenza}.
+Abbiamo finora trattato gli elettroni come particelle dotate di massa che occupavano un certo spazio. In particolare, dal principio di indeterminazione di Heisenberg (definizione 1.5), avevamo detto che era impossibile conoscere simultaneamente posizione e velocità di un elettrone, e dovevamo affidarci a distribuzioni di probabilità.
+
+In realtà la situazione è più complicata. Si ha infatti che gli elettroni esibiscono un comportamento intermedio fra quello di un'onda e quello di una particella:
+\begin{itemize}
+	\item Proprietà simili a un \textbf{onda}:
+	\begin{itemize}
+		\item Gli elettroni non orbitano un nucleo come pianeti attorno ad una stella, ma invece esistono come \textit{onde stazionarie} sul nucleo. Gli stati energetici minimi sono quindi equivalenti alla frequenza \textit{fondamentale} di una corda, e gli stati energetici superiori alle varie frequenze \textit{armoniche} date dai multipli della fondamentale;
+		\item Gli elettroni non sono mai in un singolo punto $(x, y, z)$ dello spazio ad un dato istante temporale $t$, ma la probabilità di \textit{interagire} con un elettrone ad un dato punto può essere ricavata dalla funzione d'onda (orbitale) $\psi(\vec{r})$ con $\vec{r} = (x, y, z, t)$. Come abbiamo visto, la probabilità si ricava prendendo il quadrato della funzione d'onda $|\psi(\vec{r})|^2$. 
+	\end{itemize}
+	\item Proprietà simili a una \textbf{particella}:
+	\begin{itemize}
+		\item Il numero di elettroni che orbitano un atomo è sempre un intero;
+		\item Gli elettroni saltano fra gli orbitali come particelle: ad esempio, se un fotone colpisce un atomo, solo un corrispondente elettrone effettua un salto di energia.
+	\end{itemize}
+\end{itemize}
+
+La definizione della funzione d'onda come $\psi(\vec{r}) \in \mathbb{C}$ permette quindi di descrivere il comportamento \textit{ondulatorio} degli elettroni, codificando in un unico numero informazione sia di frequenza che di fase.
 
 \subsubsection{Conduttori, semiconduttori e isolanti}
 La conoscenza della distribuzione degli elettroni sui possibili orbitali nello stato di minima energia è importante per conoscere le proprietà degli elementi.
@@ -430,7 +503,63 @@ In particolare, si possono distinguere 3 categorie principali di elementi riguar
 \end{itemize}
 
 Gli elementi vengono categorizzati sulla base della configurazione dei loro orbitali nella \textbf{tavola periodica}.
-In questo, gli elementi vengono disposti man mano riempiendo i loro oritali esterni. Essendo questi quelli che determinano le loro proprietà riguardo all'interazione con gli altri elementi, si ha che l'andamento degli elementi è periodico lungo la tavola (da cui il nome).
+In questo, gli elementi vengono disposti man mano riempiendo i loro orbitali esterni. Essendo questi quelli che determinano le loro proprietà riguardo all'interazione con gli altri elementi, si ha che l'andamento degli elementi è periodico lungo la tavola (da cui il nome).
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Riempimento degli orbitali}}
+
+\noindent
+Prima di riportare il dettaglio della tavola periodica, dettagliamo il principio alla base del riempimento degli orbitali. Di base, vogliamo capire dove si va a disporre ogni nuovo elettrone (con esattezza, in quale orbitale) che introduciamo in un atomo (cioè che incrementiamo il numero atomico $Z$, che in realtà conterebbe i protoni nel nucleo).
+
+Abbiamo visto nella sezione 1.2.1 cos'è un orbitale e quali sono i numeri che lo individuano ($n$, $l$ e $m_l$), e il fatto che un orbitale può essere occupato al massimo da due elettroni con numero magnetico di spin opposto ($m_s = \pm \frac{1}{2}$).
+
+Inoltre, avevamo visto le regole che definivano i range accettabili di $n$, $l$, e $m_l$, che riportiamo in breve:
+\begin{itemize}
+	\item $n$ determina i limiti degli altri valori, appartiene a $[1, +\infty)$;
+	\item $l$ appartiene a $[0, n + 1]$;
+	\item $m_l$ appartiene a $[-l, l]$.
+\end{itemize}
+Questo significa che per un dato $n$ esiste un numero massimo di stati elettronici dato da:
+$$
+2 \sum_{l = 0}^{n - 1} (2l + 1) = 2 \sum_{l = 0}^{n - 1} 2l + n = 4 \sum_{l = 0}^{n - 1} l + n = 4 \frac{n(n - 1)}{2} + n = 2 n^2 - n + n = 2 n^2
+$$
+dove il 2 deriva dal numero di spin $m_s$ (2 elettroni per orbitale al massimo), la sommatoria da $0$ a $n - 1$ scandaglia tutti i valori possibili di $l$ fissato $n$, e $2l + 1$ scandaglia tutti possibili valori di $m$ fissato $n$ ed $l$.
+
+Resta da capire come questi orbitali vengono riempiti. In questo ci aiuta il principio di \textit{Aufbau}:
+\begin{theorem}{Principio di Aufbau}
+	Per riempire gli orbitali atomici si procede come segue:
+	\begin{itemize}
+		\item Si calcola $n + l$, e si comincia da $n + l$ minimo. In caso di $n + l$ uguali, si sceglie prima l'$n$ minore;
+		\item Si riempiono gli $m$ in ordine e in 2 passate, prima riempiendo con un elettrone di spin negativo $-\frac{1}{2}$ e poi con quello di spin positivo $+\frac{1}{2}$.
+	\end{itemize}
+\end{theorem}
+
+Il principio di Aufbau da vità alla comune notazione della configurazione atomica, dove insieme di orbitali con $n$ e $l$ comune viene indicato come:
+$$
+<n> <\text{$l$ in forma simbolica}> \, ^{<\text{indice dell'elettrone}>}
+$$
+dove l'indice rispetta la formula vista prima riguardo al numero massimo di stati elettronici, e parte da 1.
+Per rappresentare un atomo si indica quindi la lista dei suoi insiemi di orbitali con $n$ e $l$ comune che hanno almeno un elettrone, rappresentato ad apice. Per sintesi, a volte si omettono le configurazioni di orbitali piene anteponendo il simbolo del primo gas nobile che si trova prima dell'elemento (che sappiamo avere gli orbitali pieni).
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Tavola periodica}}
+
+\noindent
+Abbiamo quindi introdotto come la tavola periodica presenta caratteristiche che cambiano in maniera, appunto, periodica, sulla base del riempimento dello strato di valenza (per quanto ci riguarda l'orbitale più esterno).
+
+Adesso abbiamo visto come questi strati (orbitali) vengono effettivamente riempiti, e possiamo quindi vedere come spostandoci da sinistra verso destra, e dall'alto verso il basso, il numero atomico $Z$ sale.
+
+Riportiamo quindi una versione della tavola periodica che mette in evidenza la configurazione elettronica degli elementi:
+
+\begin{center}
+	\includegraphics[scale=0.21]{../figures/tav_periodic.png}
+\end{center}
+
+Con i colori sono stati indicati gli orbitali che particolari elementi stanno riempendo. Notiamo che i "salti" che incontriamo spostandoci verso destra sono dati dal principio di Aufbau, e in particolare dal fatto che scegliamo sempre l'$n$ minore (a volte ci troviamo a fare dei "salti" all'indietro per riempire un orbitale più interno lasciato vuoto).
 
 \par\smallskip
 
@@ -462,7 +591,7 @@ Esistono 3 tipi di legami chimici:
 \noindent
 Possiamo usare quanto studiato finora per definire la struttura dei legami formati dal silicio. Abbiamo che nello stato base ci sono 4 elettroni di valenza (configurazione elettronica $[\mathrm{Ne}]3s^23p^2$), per cui si possono formare legami covalenti fra un atomo di silicio e i 4 atomi adiacenti.
 
-Questa configurazione porta alla formazione di una struttura cristallina tetraedrica, dove appunto ogni atomo lega con 4 atomi adiacenti:
+Questa configurazione porta alla formazione di una struttura cristallina tetraedrica, dove ogni atomo lega con 4 atomi adiacenti:
 
 \begin{center}
 	\includegraphics[scale=0.15]{../figures/silicon_3d.png}
