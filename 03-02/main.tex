@@ -563,13 +563,86 @@ Con i colori sono stati indicati gli orbitali che particolari elementi stanno ri
 
 \par\smallskip
 
+Possiamo implementare uno script in Python per applicare il principio di Aufbau (1.1) e ricavare le configurazioni elettroniche di ogni elemento dato il numero atomico $Z$:
+\begin{lstlisting}[language=python, style=codestyle]
+# trova la configurazione elettronica dell'elemento di numero atomico z
+def aufbau(z):
+    # genera tutte le combinazioni (n, l)
+    nls = [
+        (n, l)
+        for n in range(1, MAX_N + 1)
+        for l in range(0, n)
+    ]
+    
+    # ordina le combinazioni secondo il principio di Aufbau
+    nls.sort(key=lambda x: (x[0] + x[1], x[0]))
+
+    # calcola gli stati elettronici per ogni combinazione 
+    states = [
+        (n, l, m_l, m_s)
+        for n, l in nls
+        for m_l in range(-l, l + 1)
+        for m_s in [-0.5, 0.5]
+    ]
+
+    # restituisci i primi z stati elettronici 
+    for i, elec in enumerate(states):
+        if i >= z:
+            break
+
+        yield elec
+\end{lstlisting}
+
+Uno script che usa questa funzione si può trovare negli appunti a \texttt{code/python/orbital.py}. Un esempio di esecuzione con $z = 14$ (numero atomico del silicio) dà il seguente risultato:
+\begin{table}[h!]
+\centering
+\begin{tabular}{c|c|c|c}
+$n$ & $l$ & $m_l$ & $m_e$ \\ 
+\hline
+1 & 0 & 0  & -0.5 \\ 
+1 & 0 & 0  & 0.5 \\ 
+2 & 0 & 0  & -0.5 \\ 
+2 & 0 & 0  & 0.5 \\ 
+2 & 1 & -1 & -0.5 \\ 
+2 & 1 & -1 & 0.5 \\ 
+2 & 1 & 0  & -0.5 \\ 
+2 & 1 & 0  & 0.5 \\ 
+2 & 1 & 1  & -0.5 \\ 
+2 & 1 & 1  & 0.5 \\ 
+3 & 0 & 0  & -0.5 \\ 
+3 & 0 & 0  & 0.5 \\ 
+3 & 1 & -1 & -0.5 \\ 
+3 & 1 & -1 & 0.5 \\ 
+\end{tabular}
+\end{table}
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Regola dell'ottetto}}
+
+\noindent
+Una volta chiara la struttura della tavola periodica, possiamo interrogarci riguardo a regole empiriche come la regola dell'\textit{ottetto} riguardo agli \textit{elettroni di valenza}.
+
+Di base, abbiamo che i primi 2 elementi (idrogeno ed elio, $1s^1$ e $1s^2$) riempiono il loro stato di valenza riempiendo l'orbitale $s$ (con $n = 1$, $l$ è fisso a $0$).
+Passando ai prossimi 2 periodi, abbiamo che si passa a riempire anche l'orbitale $p$, per cui si hanno:
+$$
+2 \cdot 2^2 - 2 = 8,\quad 2 \cdot 3^2 - 2 - 8 = 8
+$$
+cioè $8$ elettroni di valenza, da cui la regola dell'ottetto per il riempimento dello strato di valenza.
+
+Proseguendo ai prossimi periodi si entra nel cosiddetto blocco $d$, contente i \textit{metalli di transizione}. Questi sono elementi che stanno riempendo il loro orbitali $d$, e di cui quindi anche gli elettroni degli orbitali $d$ partecipano allo strato di valenza.
+Per questi notiamo che la lunghezza dei periodi è $18$ (non facciamo calcoli ma lo ricaviamo dalla tavola periodica e generalmente dal principio di Aufbau, 1.1). Questo si allinea col fatto che alcuni elementi (come ad esempio il ferro, $[\mathrm{Ar}] 4s^2 3d^6$) non obbediscono più alla regola dell'\textit{ottetto} ma alla regola dei \textit{18 elettroni}. 
+
+\par\smallskip
+
 \noindent
 \textbf{\textsf{Drogaggio del silicio}}
 
 \noindent
 Questo può essere un buon momento per accennare al drogaggio del silicio. Abbiamo che questo è di norma un cattivo semiconduttore (quindi ha poca capacità di condurre corrente, o più precisamente di fornire elettroni liberi).
 
-Si procede quindi a introdurre impurità controllate per modificare le proprietà elettriche del materiale. Il boro viene utilizzato per il drogaggio di tipo \textit{p}, creando lacune positive, mentre il fosforo o l’arsenico vengono usati per il drogaggio di tipo \textit{n}, aumentando il numero di elettroni liberi. 
+Si procede quindi a introdurre impurità controllate per modificare le proprietà elettriche del materiale. Il boro viene utilizzato per il drogaggio di tipo \textit{p}, creando lacune positive, mentre il fosforo o l’arsenico vengono usati per il drogaggio di tipo \textit{n}, aumentando il numero di elettroni liberi.
 
 \subsubsection{Legami chimici}
 In natura, in condizioni ottimali, solo i gas nobili si trovano allo stato atomico mentre tutti gli altri elementi si presentano legati ad altri in svariate modalità.
