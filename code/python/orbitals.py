@@ -96,8 +96,8 @@ def aufbau(z):
     states = [
         (n, l, m_l, m_s)
         for n, l in nls
-        for m_l in range(-l, l + 1)
         for m_s in [-0.5, 0.5]
+        for m_l in range(-l, l + 1)
     ]
 
     # get if element has exception
