@@ -150,7 +150,7 @@ def subshells(z):
 
 def get_noble(z):
     def block(n):
-        return 2 * n ** 2
+        return 2 * (n ** 2)
 
     noble = 0 # z number of noble gas
     row = 1   # distinguishes between the two rows periodic table blocks 
@@ -159,14 +159,18 @@ def get_noble(z):
 
     # go through each row finding the biggest noble gas
     while noble + block(n) < z:
+        # go thorugh the next period
+        noble += block(n) 
+        row += 1
+        
         # clamp row and increase n if needed
         if row >= 2:
             row = 0
             n += 1
 
-        # go thorugh the next period
-        noble += block(n) 
-        row += 1
+    ## correct n
+    if row == 0:
+        n -= 1
 
     return noble, n
 
@@ -204,6 +208,8 @@ for n, l, c in subshells(z):
     in_noble = False
     print(f"{n}{LABELS.get(l)}^{c} ", end=' ')
 print()
+
+print(f"Got noble: {noble}, {noble_n}")
 
 # print expanded electron configuration
 print("\n# EXPANDED CONFIGURATION")

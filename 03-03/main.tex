@@ -206,7 +206,7 @@ R = \rho \frac{L}{S}
 $$
 \end{theorem}
 dove $\rho$ è una costante specifica al materiale detta \textit{resistività}.
-Ricordiamo che questo deriva dalla formulazione propria della legge di Ohm:
+Ricordiamo che questo deriva dalla formulazione propria di quella che chiameremo legge di \textit{Ohm microscopica}:
 $$
 J = \sigma E
 $$
@@ -321,12 +321,12 @@ $$
 n = \frac{N}{V_{ol}}
 $$
 in modo da poter dare quello che sarà il nostro nodo chiave tra il modello di Ohm e quello di Drude-Lorentz:
-\begin{theorem}{Legge microscopica di Ohm}
+\begin{definition}{Legge microscopica di Ohm}
 La densità di carica in un materiale sottoposto ad un campo elettrico di modulo $E$ è:	
 $$
 J = \frac{N}{V_{ol}} e v_d = n e v_d = n e \mu_n E
 $$
-\end{theorem}
+\end{definition}
 \noindent
 trascurando i segni (cioè assumendo che il campo sia perpendicolare al parallelepiedo conduttore considerato da principio).
 
@@ -401,7 +401,7 @@ Gli elettroni nel reticolo cristallino del silicio saranno quindi costretti a tr
 	\item 
 Di base, in una situazione dove la temperatura è $T = 0 \, \mathrm{K}$ gradi Kelvin, gli elettroni non sono liberi di muoversi nel reticolo e non si ha conduzione;
 	\item 
-Se invece si pone $T \neq 0 \, \mathrm{K}$, si può avere conduzione attraverso elettroni liberi che vengono "portati" via dal legame. Questo è reso possibile dal fatto che l'energia fornita come aumento di temperatura all'atomo è tale da superare l'energia di legame, e quindi liberare un elettrone coinvolto nel legame.
+Se invece si pone $T \neq 0 \, \mathrm{K}$, si può avere conduzione attraverso gli elettroni liberi che vengono "portati" via dal legame. Questo è reso possibile dal fatto che l'energia fornita come aumento di temperatura all'atomo è tale da superare l'energia di legame, e quindi liberare un elettrone coinvolto nel legame.
 \end{itemize}
 
 \par\smallskip
@@ -412,12 +412,12 @@ Se invece si pone $T \neq 0 \, \mathrm{K}$, si può avere conduzione attraverso 
 \noindent
 Avremo quindi bisogno di un modello per il numero di elettroni liberi in funzione della temperatura.
 
-\begin{theorem}{Densità di elettroni liberi in un semiconduttore intrinseco}
+\begin{definition}{Densità di elettroni liberi in un semiconduttore intrinseco}
 La densità di elettroni liberi in un semiconduttore intrinseco in funzione della temperatura $T$ è data da:
 $$
 n_i = B T^\frac{3}{2} e^{-\frac{E_G}{2 k_B T}}
 $$
-\end{theorem}
+\end{definition}
 Ad esempio, abbiamo che a $300 \, \mathrm{K}$ gradi Kelvin, il numero di elettroni liberi nel silicio è circa $10^{10} \, \mathrm{cm}^{-3}$.
 
 Nella legge riportata $n_i$ è la densità di elettroni liberi (analoga alla $n$ dei conduttori), $B$ è una costante dipendente dai materiali, $E_G$ è l'\textit{intervallo di banda} fra le cosiddette bande di \textit{valenza} e \textit{conduzione}, e $k_B$ è una costante detta costante di \textit{Boltzmann}.
@@ -433,7 +433,9 @@ Riguardo all'intervallo di banda, abbiamo che tutti gli elementi presentano un l
 	\item Nei \textbf{semiconduttori} l'intervallo di anda $E_G$ è intermedio fra conduttore e isolante: come abbiamo visto, compare nella formula per la densità di elettroni liberi $n_i$, dove crescendo diminuisce $n_i$ in maniera esponenziale.
 \end{itemize}
 
-Diciamo quindi che il silicio è un semiconduttore \textbf{intrinseco} in quanto ha naturalmente bassa conduttività. Di un semiconduttore drogato per ottenere maggiore conduttività si dice che è invece \textbf{estrinseco}.
+Diciamo quindi che il silicio è un semiconduttore \textbf{intrinseco} in quanto ha naturalmente bassa conduttività. Di un semiconduttore drogato per ottenere maggiore conduttività si dice che è invece \textbf{estrinseco}. 
+
+Vedremo che in diversi casi, trattando di conduttori estrinseci (per noi principalmente il silicio drogato) stabiliremo relazioni matematiche che faranno riferimento al comporamento di tali semiconduttori in condizioni intrinseche. In questo, $n_i$ si riferisce alla densità di elettroni liberi (come vedremo fra poco, di \textit{coppie lacuna-elettrone}) nel silicio intrinseco (che obbedisce a $n = p = n_i$ e vale circa $10^{10} \, \mathrm{cm}^{-3}$ a 300 Kelvin). 
 
 \par\smallskip
 
@@ -441,14 +443,26 @@ Diciamo quindi che il silicio è un semiconduttore \textbf{intrinseco} in quanto
 \textbf{\textsf{Generazione e ricombinazione termica}}
 
 \noindent
-Il fenomeno visto finora prende il nome di \textbf{generazione termica} di elettroni liberi, in quanto chiaramente richiede di fornire calore al materiale semiconduttore le cui proprietà di conduzione vogliamo variare.
+Vediamo le condizioni di equilibrio del numero di elettroni liberi in un semiconduttore.
 
-Si può osservare anche il fenomeno opposto, detto di \textbf{ricombinazione termica}, quando un elettrone perde energia e decade nuovamente in un legame covalente.
+\begin{itemize}
+	\item 
+Il fenomeno visto finora prende il nome di \textbf{generazione termica} di elettroni liberi, in quanto chiaramente richiede di fornire calore al materiale semiconduttore le cui proprietà di conduzione vogliamo variare, in modo che questi si spostino nella fascia di conduzione;
+	\item
+Si può osservare anche il fenomeno opposto, detto di \textbf{ricombinazione termica}, quando un elettrone perde energia e decade nuovamente, dalla fascia di conduzione, in un legame covalente.
+\end{itemize}
 
 Si ha che la quantità effettiva di elettroni liberi deriva da entrambi i fenomeni (che ricordiamo essere entrambi dipendenti esclusivamente dalla temperatura), per cui a grandi linee:
 $$
 n_i = \text{generazione termica} + \text{ricombinazione termica}
 $$
+cioè due processi attivi, uno di generazione, e uno di ricombinazione, sono in corso in un semiconduttore. Chiaramente, il primo porta alla formazione di più elettroni liberi, mentre il secondo annichilisce quelli già formati. Se il nostro obiettivo è quello di migliorare le proprietà di conduzione di un semiconduttore, preferiremo il primo. 
+
+In particolare, se chiamiamo $G$ la frequenza di generazione termica, e $R$ la frequenza di ricombinazione termica, si trova una condizione di equilibrio a:
+$$
+G = R
+$$
+che per il silicio ci da il valore di $10^{10} \, \mathrm{cm}^{-3}$ a 300 Kelvin.
 
 \par\smallskip
 
@@ -456,20 +470,33 @@ $$
 \textbf{\textsf{Lacune elettroniche}}
 
 \noindent
-Un fenomeno che non abbiamo visto è quello comportato dal fatto che un elettrone che viene liberato da un legame forma una \textbf{lacuna} o \textit{vacuità} nel reticolo crristallino, cioè una regione di "vuoto" della carica.
+Un fenomeno che non abbiamo visto è quello comportato dal fatto che un elettrone che viene liberato da un legame forma una \textbf{lacuna} o \textit{vacuità} nel reticolo cristallino, cioè una regione di "vuoto" della carica.
 Le lacune possono spostarsi come gli elettroni, in quanto semplicemente può cambiare il legame su cui la lacuna si trova. 
 In questo modo può essere più semplice considerare le lacune come cariche positive ($+1 \, e$) che si spostano all'interno del reticolo cristallino al pari degli elettroni.
 
 In verità, le lacune elettroniche nei semiconduttori sono importanti quanto gli elettroni, e abbiamo quindi 2 possibili trasportatori di carica:
 \begin{itemize}
-	\item Gli \textbf{elettroni}, che hanno carica $-1 \, e$;
-	\item Le \textbf{lacune}, che hanno carica $+1 \, e$.
+	\item Gli \textbf{elettroni}, che hanno carica $-1 \, e$. Ne indichiamo la densità con $n$;
+	\item Le \textbf{lacune}, che hanno carica $+1 \, e$. Ne indichiamo la densità con $p$.
 \end{itemize}
+
+Abbiamo quindi l'immagine completa del fenomeno:
+\begin{itemize}
+	\item 
+La \textit{generazione termica} dirà che, fornito calore ad un atomo di silicio, elettroni possono liberarsi dai loro legami covalenti spostandosi nella fascia di conduzione, e formando allo stesso tempo una lacuna elettronica. In un conduttore intrinseco, quindi, le coppie $(-1 e, +1 e)$ di elettroni e lacune vanno di paripasso;
+	\item 
+Allo stesso modo, la \textit{ricombinazione termica} sarà il fenomeno di ricadimento degli elettroni dalla fascia di conduzione ad uno dei legami covalenti della struttura cristallina del silicio. Si ha quindi che la coppia $(-1 e, +1 e)$ di elettrone e lacuna viene annichilita.
+\end{itemize}
+
+Notiamo quindi che, secondo quanto detto sull'equilibrio di formazione di coppie elettrone/lacuna, e il fatto che queste in tale equlibrio sono sempre in coppia, riguardo alle densità di elettroni liberi e lacune elettroniche in un semiconduttore intrinseco vale:
+$$
+n = p = n_i
+$$
 
 Possiamo quindi riportarci alla legge di Ohm, dando una definizione della conduttività di un elemento semiconduttore basata su elettroni e lacune:
 $$
-\sigma = n_i \mu_n e + \rho \mu_p e
+\sigma = n \mu_n e + p \mu_p e
 $$
-dove $\mu_p$ è la \textit{mobilità delle lacune}, che notiamo differisce da quella degli elettroni (già introdotta come $\mu_n$).
+dove $\mu_p$ è la \textit{mobilità delle lacune}, che notiamo differisce da quella degli elettroni (già introdotta come $\mu_n$). In generale, la differenza fra la mobilità dell'elettrone e quella delle lacune sarà quella che ci permettera di variare la conduttività agendo sull'equilibrio stesso di elettroni e lacune, secondo il processo già accennato di cosiddetto \textit{drogaggio}.
 
 \end{document}
