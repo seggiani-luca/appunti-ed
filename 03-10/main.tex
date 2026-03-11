@@ -330,7 +330,36 @@ Una volta nota la carica $Q(x)$, possiamo calcolare il campo $E(x)$ applicando l
 $$
 \frac{d E(x)}{dx} = -\frac{Q(x)}{S \epsilon_0}
 $$
-dove $S$ è la sezione della giunzione e $\epsilon_0$ è la permittività dello spazio. Come vediamo, questo significherà che abbiamo un picco di campo elettrico $\vec{E}$ (negativo, dalla zona N alla zona P) nel punto $\phi$. Ai limiti della zona di svuotamento andranno considerati gli opportuni effetti di bordo.
+dove $S$ è la sezione della giunzione e $\epsilon_0$ è la permittività dello spazio. Come vediamo, questo significherà che abbiamo un picco di campo elettrico $\vec{E}$ (negativo, dalla zona N alla zona P) nel punto $\phi$ (abbiamo che in verità ). Ai limiti della zona di svuotamento andranno considerati gli opportuni effetti di bordo.
+
+Per curiosità, un modello matematico di questa situazione (basato anche sui calcoli della sezione che segue) è stato sviluppato a \url{https://www.desmos.com/calculator/hhrxntwkbl}.
+\begin{center}
+	\includegraphics[scale=0.26]{../figures/pn_junct_model.png}
+\end{center}
+Nella figura abbiamo il risultato del modello per la regione di svuotamento $w$, dove $w_1$ è l'inizio della regione, $w_2$ la fine, e $w_0$ è la barriera all'interno della zona $w$ fra regione P e regione N (sostanzialmente la nostra $\phi$). Abbiamo:
+\begin{itemize}
+	\item In \textit{rosso} la carica $Q(x)$ all'interno della giunzione, da cui si nota che si hanno quantità uguali di carica a sinistra e a destra di $w_0$, in quanto:
+\[
+	\begin{cases}
+		q_{P}=-q w_P N_{D}A = -q (w_0 - w_1) N_{D}A \\
+		q_{N}= q w_N N_{A}A = q (w_2 - w_0) N_{A}A 
+	\end{cases}
+\]
+e quindi valgono le relazioni:
+$$
+\frac{w_P}{N_A} = \frac{w_D}{N_D}, \quad w_P + w_D = (w_0 - w_1) + (w_2 - w_0) = w_2 - w_1 = w
+$$
+cioè le lunghezze delle regioni sono tali per cui viene occupata l'intera larghezza $w$, con bias verso la regione a densità maggiore, e le quantità di carica sull'unità di lunghezza rispondono in maniera da mantenere la carica da entrambi i lati uguale;
+	\item In \textit{verde} il campo $E(X)$ all'interno della giunzione, calcolato direttamente dall'integrale:
+$$
+E\left(x\right)=\int_0^x\frac{Q\left(r\right)}{A\varepsilon_{0}}dr
+$$
+\item Infine, in \textit{blu} il potenziale "built-in" $V_b(x)$, calcolato direttamente dall'integrale:
+$$
+V\left(x\right)=-\int_0^x E\left(r\right)dr
+$$
+da dove notiamo che questo corrisponde (senza imporre nessun valore) al valore della barriera di potenziale che calcoleremo nella prossima sezione.
+\end{itemize}
 
 \par\smallskip
 
@@ -342,6 +371,9 @@ Infine, possiamo interrogarci riguardo al potenziale $V(x)$. In generale, vale:
 $$
 E(x) = -\frac{d V(x)}{dx}
 $$
+
+\newpage
+
 Questo, nella giunzione appena vista, implica la seguente legge:
 \begin{theorem}{Barriera di potenziale}
 In una giunzione P/N, per via del campo $E$ che si forma nella zona di svuotamento, si avrà la formazione di un campo $V_0$.
@@ -429,7 +461,7 @@ Notiamo quindi che nel complesso:
 
 Si ha quindi che il potenziale "built-in" funge in qualche modo da \textit{barriera di potenziale} per la corrente che viaggia da sinistra verso destra lungo la giunzione.
 
-\par\smallskip
+\newpage
 
 \noindent
 \textbf{\textsf{Bias in avanti}}
@@ -462,7 +494,7 @@ $$
 \vec{J} \neq 0
 $$
 
-\par\smallskip
+\newpage
 
 \noindent
 \textbf{\textsf{Bias all'indietro}}
