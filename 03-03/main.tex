@@ -412,16 +412,17 @@ Se invece si pone $T \neq 0 \, \mathrm{K}$, si può avere conduzione attraverso 
 \noindent
 Avremo quindi bisogno di un modello per il numero di elettroni liberi in funzione della temperatura.
 
-\begin{definition}{Densità di elettroni liberi in un semiconduttore intrinseco}
+\begin{theorem}{Statistica degli elettroni liberi in un semiconduttore intrinseco}
 La densità di elettroni liberi in un semiconduttore intrinseco in funzione della temperatura $T$ è data da:
 $$
 n_i = B T^\frac{3}{2} e^{-\frac{E_G}{2 k_B T}}
 $$
-\end{definition}
+\end{theorem}
 Ad esempio, abbiamo che a $300 \, \mathrm{K}$ gradi Kelvin, il numero di elettroni liberi nel silicio è circa $10^{10} \, \mathrm{cm}^{-3}$.
 
 Nella legge riportata $n_i$ è la densità di elettroni liberi (analoga alla $n$ dei conduttori), $B$ è una costante dipendente dai materiali, $E_G$ è l'\textit{intervallo di banda} fra le cosiddette bande di \textit{valenza} e \textit{conduzione}, e $k_B$ è una costante detta costante di \textit{Boltzmann}.
-Riguardo all'intervallo di banda, abbiamo che tutti gli elementi presentano un livello di energia detto \textit{livello di Fermi} necessario a fornire o sottrarre elettroni. Due bande, dette appunto banda di valenza e banda di conduzione, si trovano rispettivamente sotto e sopra tale livello.
+
+Il modello che adottiamo per la statistica deriva dalla \textit{teoria delle bande}, dove si ipotizza che in un sistema di particelle come quello del silicio intrinseco ad ognuna può essere associato un livello energetico (non necessariamente corrispondente ai livelli energetici degli elettroni negli orbitali). Questo livello energetico non può essere conosciuto per ogni particella, ma si possono fare delle \textit{statisitche}. Riguardo all'intervallo di banda, abbiamo che tutti gli elementi presentano un livello energetico detto \textit{livello di Fermi} necessario a fornire o sottrarre elettroni. Due bande, dette appunto banda di valenza e banda di conduzione, si trovano rispettivamente sotto e sopra tale livello.
 
 \begin{center}
 	\includegraphics[scale=0.575]{../figures/proib.png}
@@ -432,6 +433,33 @@ Riguardo all'intervallo di banda, abbiamo che tutti gli elementi presentano un l
 	\item Negli \textbf{isolanti}, le bande di valenze e la banda di conduzione sono molto distanti (l'intervallo di banda $E_G$ è consistente);
 	\item Nei \textbf{semiconduttori} l'intervallo di anda $E_G$ è intermedio fra conduttore e isolante: come abbiamo visto, compare nella formula per la densità di elettroni liberi $n_i$, dove crescendo diminuisce $n_i$ in maniera esponenziale.
 \end{itemize}
+
+Capire il numero di portatori liberi equivale quindi a determinare una statistica per i livelli energetici e capire la probabilità che questi vadano a trovarsi nella zona di conduzione.
+\begin{itemize}
+	\item La statistica applicabile in questo caso sarebbe quella di \textit{Fermi-Dirac}, che in breve è:
+$$
+f_\text{Fermi-Dirac} \left(E\right)=\frac{1}{e^{\frac{\left(E-E_{F}\right)}{k_BT}}+1}
+$$
+	Questa restituisce la probabilità che una particella si trovi allo stato energetico $E$ (abbia energia $E$) rispetto al livello di Fermi $E_F$;
+\item Nel caso $E - E_F >> k_B T$ si può semplificare adottando la statistica di \textit{Maxwell-Boltzmann}. Questa è una statistica adatta a particelle a temperatura più alta, basata sulla meccanica classica:
+$$
+f_\text{Maxwell-Boltzmann} \left(E\right)=e^{-\frac{\left(E-E_{F}\right)}{k_BT}}
+$$
+\end{itemize}
+
+Vediamo su un grafico la differenza fra le statistiche $f_\text{Fermi-Dirac} \left(E\right)$ e $f_\text{Fermi-Dirac} \left(E\right)$, mettendo in evidenza la similarità per grandi valori di $E$:
+\begin{center}
+	\includegraphics[scale=0.25]{../figures/statistics.png}
+\end{center}
+
+Per ricavare la formula in 2.2, quindi, prendiamo come livello $E = E_C$ alla base della banda di conduttività (questo è valido in quanto la maggior parte dei conduttori si concentra a tale livello). Se si ha che l'intervallo $E_G$ è più o meno centrato sul livello di Fermi, seguirà che:
+$$
+E_C - E_F = \frac{E_G}{2}
+$$
+che è ciò che troviamo nella formula. 
+Infine, per il termine $B T^\frac{3}{2}$, abbiamo che questo deriva sempre dalla statistica di Maxwell-Boltzmann. In particolare, abbiamo che il termine $f_\text{Maxwell-Boltzmann} \left(E\right)$ indica la \textit{probabilità} di stati, mentre si dimostra che la \textit{densità} effettiva di stati va esponenzialmente (di fattore $\frac{3}{2}$) con la temperatura. Il prodotto fra questi darà la densità di particelle nel livello energetico di conduzione. 
+
+\par\smallskip
 
 Diciamo quindi che il silicio è un semiconduttore \textbf{intrinseco} in quanto ha naturalmente bassa conduttività. Di un semiconduttore drogato per ottenere maggiore conduttività si dice che è invece \textbf{estrinseco}. 
 
@@ -458,13 +486,14 @@ n_i = \text{generazione termica} + \text{ricombinazione termica}
 $$
 cioè due processi attivi, uno di generazione, e uno di ricombinazione, sono in corso in un semiconduttore. Chiaramente, il primo porta alla formazione di più elettroni liberi, mentre il secondo annichilisce quelli già formati. Se il nostro obiettivo è quello di migliorare le proprietà di conduzione di un semiconduttore, preferiremo il primo. 
 
+Quanto abbiamo detto prima riguardo alle statistiche sui livelli energetiche vale quando ci si trova in condizioni di equilibrio dei processi di generazione e ricombinazione termiche. Questi sono infatti sempre in corso, e quando si stabilizzano le statistiche (e il numero di portatori liberi) diventa costante.
 In particolare, se chiamiamo $G$ la frequenza di generazione termica, e $R$ la frequenza di ricombinazione termica, si trova una condizione di equilibrio a:
 $$
 G = R
 $$
-che per il silicio ci da il valore di $10^{10} \, \mathrm{cm}^{-3}$ a 300 Kelvin.
+che per il silicio ci dà il valore di $10^{10} \, \mathrm{cm}^{-3}$ a 300 Kelvin.
 
-\par\smallskip
+\newpage
 
 \noindent
 \textbf{\textsf{Lacune elettroniche}}

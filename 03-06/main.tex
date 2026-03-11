@@ -210,6 +210,10 @@ A conti fatti si aveva che il numero di portatori di carica (elettroni o lacune)
 $$
 n = p = n_i = \text{generazione termica} + \text{ricombinazione termica}
 $$
+in condizioni di equilibrio con le frequenze di generazione termica $G$ e di ricombinazione termica $R$:
+$$
+G = R
+$$
 e la conduttività era quindi:
 $$
 \sigma = n \mu_n e + p \mu_p e
@@ -334,7 +338,7 @@ p \approx N_A \implies n \approx \frac{n_i^2}{p} = \frac{n_i^2}{N_A}
 $$
 data dal fatto che quasi ogni atomo di boro introdotto ionizza.
 
-Cioe ripetiamo che stavolta gli $p$ sono conduttori \textbf{maggioritari} (le lacune, crescono all'aumentare del drogaggio), mentre gli $n$ sono conduttori \textbf{minoritari} (gli elettroni, diminuiscono all'aumentare del drogaggio).
+Notiamo che stavolta gli $p$ sono conduttori \textbf{maggioritari} (le lacune, crescono all'aumentare del drogaggio), mentre gli $n$ sono conduttori \textbf{minoritari} (gli elettroni, diminuiscono all'aumentare del drogaggio).
 
 \par\smallskip
 
@@ -370,6 +374,26 @@ ovvero variando un atomo di silicio su $10^{7}$ con un atomo del terzo gruppo, s
 
 \par\smallskip
 
+\noindent
+\textbf{\textsf{Legami alla teoria delle bande}}
+
+\noindent
+In 2.1.3, parlando della corrente di deriva nei semiconduttori (intrinseci, prima del drogaggio, che abbiamo introdotto adesso) avevamo accennato alla \textit{teoria delle bande}. L'idea fondamentale di questa era di considerare il reticolo cristallino di un semiconduttore, con elettroni e lacune libere, come un sistema di particelle dotate di stati energetici $N$. In particolare avevamo detto che il numero di portatori liberi in un semiconduttore era legato alla statistica di Maxwell-Boltzmann, usata per stimare la densità di conduttori sulla banda di conduzione (legge 2.2). Abbiamo che variando la composizione del reticolo (attraverso il drogaggio), si vanno a variare le caratteristiche di tali particelle e quindi le statistiche (seppur leggermente).
+\begin{center}
+	\includegraphics[scale=0.08]{../figures/band_doping.png}
+\end{center}
+Vediamo adesso che l'effetto del drogaggio a livello di teoria delle bande è che il livello di Fermi (che avevamo visto nei semiconduttori si andava a trovare all'interno dell'intervallo energetico $E_G$ fra la banda di valenza e la banda di conduzione) si sposta verso l'alto o verso il basso:
+\begin{itemize}
+	\item Nel caso di drogaggio di tipo \textbf{p}, il livello di Fermi si sposta in basso: questo significa che gli elettroni diventano più "difficili" da eccitare, e si ha maggioranza di lacune;
+	\item Nel caso di drogaggio di tipo \textbf{n}, il livello di Fermi si sposta in alto. Questo significa che si gli elettroni diventano più "facili" da eccitare, e si ha maggioranza elettronica.
+\end{itemize}
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Drogaggi multipli}}
+
+\noindent
 Notiamo che si può effettuare un processo di drogaggio di tipo sia N che P. In particolare, se su un substrato di tipo N si fa un forte drogaggio di tipo P, effettivamente il tipo di drogaggio viene invertito. Viceversa, se su un substrato di tipo P si fa un forte drogaggio di tipo N, nuovamente il drogaggio viene invertito.
 
 Cioè, in sostanza, si può ottenere silicio estrinseco di tipo P, N, o silicio intrinseco, sulla base del tipo di drogaggio che viene fatto anche in più passate sul substrato.
@@ -383,7 +407,7 @@ $$
 Qui ricordiamo che compaiono:
 \begin{itemize}
 	\item La \textit{mobilità elettronica} dei portatori di carica negativi, cioè gli elettroni;
-	\item La \textit{mobilità di lacuna} dei portatori di carica positivi, cioè le lacune. Queste sarebbero legami che \textit{"saltano"} da un atomo all'altro, che però possiamo semplicemente considerare come elettroni \textit{"positivi"} che si spostano nel reticolo del semicnoduttore.
+	\item La \textit{mobilità di lacuna} dei portatori di carica positivi, cioè le lacune. Queste sarebbero legami che \textit{"saltano"} da un atomo all'altro, che però possiamo semplicemente considerare come elettroni \textit{"positivi"} che si spostano nel reticolo del semiconduttore.
 \end{itemize}
 
 Abbiamo che $\sigma$ stessa è dipendente dalla temperatura $T$ sulla base della variazione delle concentrazioni $n$ e $p$. Si scopre che anche $\mu_n$ e $\mu_p$ sono dipendenti da $T$, e in particolare:
@@ -409,11 +433,13 @@ Abbiamo che $\sigma$ stessa è dipendente dalla temperatura $T$ sulla base della
 		\end{itemize}
 \end{itemize}
 
+Notiamo che quanto detto sul silicio drogato vale per temperature alte \textit{moderate}: a temperature $T$ abbastanza alte si ha che il processo di generazione e ricombinazione termica (che ricordiamo era governato dalla statistica Maxwelliana a 2.3, esponenziale alla temperatura) supera la riduzione di mobilità. In questo nuovo regime, che diciamo regime \textit{intrinseco} del silicio drogato, si ha che la conduttività ricomincia a salire. 
+
 \subsection{Corrente di diffusione}
 Abbiamo quindi concluso la trattazione delle correnti di \textit{deriva} nei conduttori e nei semiconduttori. Esiste un altro fenomeno di conduzione, particolarmente osservabile nei semiconduttori, detto \textbf{diffusione}. Il fenomeno della diffusione porta alla formazione della \textit{corrente di diffusione}.
 
 In generale, la diffusione è un meccanismo che avviene ogni volta che si ha un \textit{gradiente di concentrazione} di un dato portatore (di carica, un gas, ecc...). Per via dell'\textit{agitazione termica}, il sistema tende naturalmente ad uno stato di equilibrio dove la concentrazione è uguale in ogni punto dello spazio. Dinamicamente, questo significa che le zone di \textit{alta} concentrazione diffondono verso le zone di \textit{bassa} concentrazione.
-Le leggi che descrivono questi fenomeni sono le leggi di \textit{Fick} sulle diffusioni di concentrazioni. Semplificando un po':
+Le leggi che descrivono questi fenomeni sono le leggi di \textit{Fick} sulle diffusioni di concentrazioni. Semplificando un po' si ha in sostanza:
 \begin{definition}{Legge di Fick}
 	Il flusso di una concentrazione $\phi$ è legato al suo gradiente come:
 	$$
@@ -460,10 +486,14 @@ Potremmo voler stimolare le costanti di diffusione, o almeno legarle a costanti 
 \begin{definition}{Legge di Einstein delle costanti di diffusione}
 	Riguardo alle costanti di \textit{diffusione} e le \textit{mobilità} di semiconduttori, possiamo applicare la stima:
 	$$
-		\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{K_B T}{e} = V_T 
+		\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{k_B T}{e} = V_T 
 	$$
 \end{definition}
-dove $K_B$ è la costante di \textit{Boltzmann} già vista nella legge 2.1, e $V_T$ è la cosiddetta \textit{tensione termica}, che a $300 K$ vale circa $V_T = 26 \, m V$.
+dove $K_B$ è la costante di \textit{Boltzmann} già vista nella legge 2.1, e $V_T$ è la cosiddetta \textit{tensione termica}, che a $300 K$ vale circa $V_T = 26 \, m V$. Non diamo l'origine di questa formula (deriva dagli studi di Einstein sul \textit{moto browniano}), ma vediamo che la proporzione:
+$$
+D_n : \mu_n = D_p : \mu_p
+$$
+sembra ragionevole, in quanto particelle più mobili saranno più disposte a diffondere.
 
 \subsubsection{Combinazione di correnti di drift e di diffusione}
 Completiamo quindi il nostro modello combinando le densità di corrente di \textit{drift} e di \textit{diffusione}, che chiamiamo rispettivamente $\vec{J}_{\text{Drift}}$ e $\vec{J}_{\text{Diffusione}}$.
@@ -478,7 +508,7 @@ ricavato dalla legge microscopica di Ohm al primo termine (legge 2.3), e la legg
 $$
 \vec{J}_P = \vec{J}_{P, \text{Drift}} + \vec{J}_{P, \text{Diffusione}} = p e \mu_p \vec{E} - e D_P \frac{\partial n}{\partial x} \hat{i}_x
 $$
-n maniera totalmente analoga alla scorsa derivazione.
+in maniera totalmente analoga alla scorsa derivazione.
 \end{itemize}
 
 La densità di corrente complessiva sarà quindi quella ottenuta combinando i nostri modelli:

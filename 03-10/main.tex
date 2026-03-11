@@ -234,11 +234,11 @@ Ciò che accadrà in una configurazione di questo tipo è però che le lacune si
 \begin{itemize}
 	\item Avevamo da 4.2 la legge di Fick della diffusione, per cui la densità di corrente di diffusione delle lacune sarà:
 $$
-\vec{J}_{P, \text{Diffusione}} = - q D_P \frac{\partial p}{\partial x} \hat{i}_x 
+\vec{J}_{P, \text{Diffusione}} = - e D_P \frac{\partial p}{\partial x} \hat{i}_x 
 $$
 	\item Allo stesso modo, la corrente di diffusione degli elettroni liberi sarà:
 $$
-\vec{J}_{N, \text{Diffusione}} = + q D_N \frac{\partial n}{\partial x} \hat{i}_x 
+\vec{J}_{N, \text{Diffusione}} = + e D_N \frac{\partial n}{\partial x} \hat{i}_x 
 $$
 \end{itemize}
 
@@ -249,6 +249,8 @@ $$
 
 Questo è apprentemente assurdo, in quanto avevamo imposto $\vec{J} = 0$. Dovrà quindi esistere una corrente di deriva che va a bilanciare le correnti di diffusione.
 
+\par\smallskip
+
 \noindent
 \textbf{\textsf{Corrente di deriva}}
 
@@ -258,7 +260,7 @@ Perchè esista una corrente di deriva deve esistere un campo elettrico. Ciò che
 Ingrandiamo quindi la zona della giunzione fra P ed N.
 \begin{itemize}
 	\item Nella regione P avremo una serie di ioni \textit{accettori} fissi. In condizioni di equilibrio (quindi prima di collegare la regione N), ad ognuno di questi sarà associata una lacuna libera di drogaggio, per cui la carica complessiva sarà neutra;
-	\item Allo stesso modo nella regione N avremo una serie di ioni \textit{donatori} fissi. In condizioni di equilibrio (quindi prima di collegare la regione P), ad ognuno di questi sarà associati un elettrone libero di drogaggio, per cui la carica complessiva sarà anche qui neutra.
+	\item Allo stesso modo nella regione N avremo una serie di ioni \textit{donatori} fissi. In condizioni di equilibrio (quindi prima di collegare la regione P), ad ognuno di questi sarà associato un elettrone libero di drogaggio, per cui la carica complessiva sarà anche qui neutra.
 \end{itemize}
 
 Nel momento in cui si va a formare la giunzione, avremo che le lacune nella regione P vengono a spostarsi nella regione N ed a ricombinarsi con gli elettroni liberi (in verità sono gli ioni di silicio negativi che forniscono elettroni agli ioni di silicio positivi della regione P, ma continuiamo a considerare le lacune come particelle). Allo stesso modo, gli elettroni liberi nella regione N a spostarsi nella regione P ed a ricombinarsi con le lacune libere. 
@@ -288,13 +290,36 @@ Questo in quanto non si può avere accumulazione di lacune nella regione $N$ (ch
 Possiamo quindi porre separatamente:
 $$
 \begin{cases}
-	\vec{J}_N = + q D_N \frac{\partial n}{\partial x} \hat{i}_x + n q \mu_N \vec{E} = 0 \\
-	\vec{J}_P = - q D_P \frac{\partial p}{\partial x} \hat{i}_x + p q \mu_P \vec{E} = 0
+	\vec{J}_N = + e D_N \frac{\partial n}{\partial x} \hat{i}_x + n e \mu_N \vec{E} = 0 \\
+	\vec{J}_P = - e D_P \frac{\partial p}{\partial x} \hat{i}_x + p e \mu_P \vec{E} = 0
 \end{cases}
 $$
+e quindi risolvere le 2 equazioni ottenute per ottenere 2 equazioni (entrambe valide) per il campo che si va a formare nella zona di svuotamento:
+$$
+\begin{cases}
+	E = -\frac{D_n}{n \mu_n} \frac{dn}{dx} \\ 
+	E = +\frac{D_è}{n \mu_p} \frac{dp}{dx}
+\end{cases}
+$$
+dove ci siamo riportati a scalari prendendo tutti i vettori paralleli. Possiamo quindi prendere la legge di Einstein delle costanti di diffusione vista a 4.3, che in particolare diceva:
+$$
+\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{k_B T}{e}
+$$
+Usiamo tale stima per esprimere diversamente i rapporti costante di diffusione / mobilità:
+$$
+\begin{cases}
+	E = -\frac{k_B T}{e} \frac{1}{n} \frac{dn}{dx} \\ 
+	E = +\frac{k_B T}{e} \frac{1}{p} \frac{dp}{dx} 
+\end{cases}
+$$
+che è la formula del campo all'interno della zona di svuotamento. Vedremo come queste definizioni ci torneranno utili a breve, nel calcolo della \textit{barriera di tensione}.
 
-Si può dare un risultato analitico per $\vec{E}$ risolvendo le equazioni ed applicando il teorema di Gauss. In questi appunti, però, si sceglie di proseguire in maniera \textit{qualitativa}. 
+\par\smallskip
 
+\noindent
+\textbf{\textsf{Descrizione qualitativa del campo}}
+
+\noindent
 \begin{center}
 	\includegraphics[scale=0.26]{../figures/pn_junct_field.png}
 \end{center}
@@ -315,9 +340,73 @@ dove $S$ è la sezione della giunzione e $\epsilon_0$ è la permittività dello 
 \noindent
 Infine, possiamo interrogarci riguardo al potenziale $V(x)$. In generale, vale:
 $$
-E(x) = -\frac{d V(x)}{dx} \implies \Delta V = V_0 = \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+E(x) = -\frac{d V(x)}{dx}
 $$
+Questo, nella giunzione appena vista, implica la seguente legge:
+\begin{theorem}{Barriera di potenziale}
+In una giunzione P/N, per via del campo $E$ che si forma nella zona di svuotamento, si avrà la formazione di un campo $V_0$.
+$$
+\Delta V = V_0 = \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+$$
+\end{theorem}
+
 Chiamiamo questa differenza di potenziale $\Delta V$ che si misura fra la regione prossima all'anodo e la regione prossima al catodo della giunzione \textbf{potenziale "built-in"} interno alla giunzione.
+
+Il calcolo di $\Delta V$ è banale note le espressioni del campo $E$ viste 2 sezioni fa. Possiamo procedere usando l'espressione sia in funzione dei portatori negativi $n$ che in funzione dei portatori positivi $p$.
+
+\begin{itemize}
+	\item Se si sceglie di preseguire con i portatori $n$, si ha l'espressione del campo:
+$$
+E = -\frac{k_B T}{e} \frac{1}{n} \frac{dn}{dx} 
+$$
+dalla definizione del potenziale si ottiene di dover integrare:
+$$
+E = -\frac{dV}{dx} \implies V = - \int^{N_D}_\frac{n_i^2}{N_A} E \, dx =  \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \frac{dn}{\not{dx}} \, \not{dx}
+$$
+Soffermiamoci un istante sugli estremi di integrazione. Abbiamo che finiamo per integrare su $dn$, per cui dobbiamo prendere la variazione di $n$ sul percorso dove calcoliamo il potenziale, cioè dall'estremo $N$ all'estremo $P$ della giunzione.
+\begin{itemize}
+	\item All'estremo $N$ della giunzione si ha che, per il doping di tipo N, la densità elettronica è semplicemente:
+		$$
+		n = N_D
+		$$
+	\item All'estremo $P$ della giunzione si ha che, per il doping di tipo P e la legge massa-azione (4.1), la densità elettronica è:
+		$$
+		n = \frac{n_i^2}{N_A}
+		$$
+\end{itemize}
+da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
+$$
+V = \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \, dn = \frac{k_B T}{e} \ln(n) \Big|^{N_D}_\frac{n_i^2}{N_A} =  \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+$$
+che è quanto stavamo cercando.
+
+\item Il processo con i portatori $p$ è analogo, si ha l'espressione del campo:
+$$
+E = +\frac{k_B T}{e} \frac{1}{p} \frac{dp}{dx} 
+$$
+e l'integrale è:
+$$
+V = - \int^\frac{n_i^2}{N_D}_{N_A} E \, dx = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \frac{dp}{\not{dx}} \, \not{dx}
+$$
+Gli estremi di integrazione sono scelti come prima. Abbiamo che finiamo per integrare su $dp$, per cui dobbiamo prendere la variazione di $p$ sul percorso dove calcoliamo il potenziale, cioè dall'estremo $N$ all'estremo $P$ della giunzione.
+\begin{itemize}
+	\item All'estremo $N$ della giunzione si ha che, per il doping di tipo N e la legge massa-azione, la densità di lacuna è:
+		$$
+		n = \frac{n_i^2}{N_D}
+		$$
+	\item All'estremo $P$ della giunzione si ha che, per il doping di tipo P, la densità di lacuna è semplicemente:
+		$$
+		p = N_A
+		$$
+\end{itemize}
+da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
+$$
+V = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \, dp = \frac{k_B T}{e} \ln(p) \Big|^\frac{n_i^2}{N_D}_{N_A} =  \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+$$
+che è nuovamente quanto stavamo cercando.
+
+\end{itemize}
+
 In verità, fra l'anodo e la giunzione con la regione P si viene a formare un \textbf{potenziale di contatto} $V_1$, e allo stesso modo fra il catodo e la giunzione con la regione N si viene a formare un'altro potenziale di contatto $V_2$. Si dimostra che:
 $$
 V_1 + V_2 + V_0 = 0
@@ -348,6 +437,10 @@ Si ha quindi che il potenziale "built-in" funge in qualche modo da \textit{barri
 \noindent
 Vediamo cosa accade quando si collega la giunzione P/N ad un generatore di potenziale $V$ che ponga l'anodo a tensione positiva e il catodo a tensione negativa. Si dice in questo caso che si dà un \textbf{bias in avanti} alla giunzione.
 
+\begin{center}
+	\includegraphics[scale=0.2]{../figures/forward_bias.png}
+\end{center}
+
 Il primo effetto che osserviamo è che la barriera di potenziale diminuisce, in quanto introduciamo un nuovo potenziale $V$ che va a diminuire $\Delta V$:
 $$
 \Delta V = V_0 - V
@@ -356,7 +449,11 @@ $$
 Questo avrà un effetto sulle correnti di diffusione e di deriva che hanno luogo all'interno della zona di svuotamento della giunzione. In particolare:
 \begin{itemize}
 	\item Le densità di corrente di \textit{diffusione} $\vec{J}_{N, \text{Diffusione}}$ e $\vec{J}_{P, \text{Diffusione}}$ aumenteranno in quanto sarà ridotta la barriera di potenziale che gli elettroni e le lacune rispettivamente dovranno vincere;
-	\item Per quanto riguarda le densità di corrente di \textit{deriva} $\vec{J}_{N, \text{Drift}}$ e $\vec{J}_{P, \text{Drift}}$, invece si avrà che queste sono piccole e restano costanti. 
+	\item Per quanto riguarda le densità di corrente di \textit{deriva} $\vec{J}_{N, \text{Drift}}$ e $\vec{J}_{P, \text{Drift}}$, invece si avrà che queste sono piccole e restano costanti. Questè perchè le cariche che si spostano nella zona di svuotamento per effetto del campo che vi si forma sono le cariche minoritarie di ciascuna regione:
+		\begin{itemize}
+			\item Per effetto del campo elettrico $E$ formato, le lacune della regione N (portatrici minoritarie) derivano verso la regione P di minore potenziale;
+			\item Allo stesso modo, gli elettroni della regione P (portatori minoritari) derivano verso la regione N di maggiore potenziale.
+		\end{itemize}
 \end{itemize}
 
 Visto che la corrente di diffusione aumenta esponenzialmente, si ha che la conduzione può effettivamente accadere nella regione di svuotamento, e avviene con maggioranza di corrente di diffusione (piuttosto che di drift).
@@ -373,6 +470,10 @@ $$
 \noindent
 Vediamo la situazione opposta, cioè quella dove si collega la giunzione P/N ad un generatore di potenziale $V$ che ponga l'anodo a tensione negativa e il catodo a tensione positiva. Si dice in questo caso che si dà un \textbf{bias all'indietro} alla giunzione.
 
+\begin{center}
+	\includegraphics[scale=0.2]{../figures/reverse_bias.png}
+\end{center}
+
 Il primo effetto che osserviamo è che in questo  la barriera di potenziale aumenta, in quanto introduciamo un nuovo potenziale $V$ che va ad aumentare $\Delta V$:
 $$
 \Delta V = V_0 + V
@@ -381,7 +482,7 @@ $$
 Come nella situazione di bias in avanti, si avrà un effetto sulle correnti di diffusione e di deriva che hanno luogo all'interno della zona di svuotamento della giunzione. In particolare:
 \begin{itemize}
 	\item Le densità di corrente di \textit{diffusione} $\vec{J}_{N, \text{Diffusione}}$ e $\vec{J}_{P, \text{Diffusione}}$ diminuiranno in quanto sarà aumentata la barriera di potenziale che gli elettroni e le lacune rispettivamente dovranno vincere;
-	\item Per quanto riguarda le densità di corrente di \textit{deriva} $\vec{J}_{N, \text{Drift}}$ e $\vec{J}_{P, \text{Drift}}$, invece si avrà che queste sono piccole e restano costanti. 
+	\item Per quanto riguarda le densità di corrente di \textit{deriva} $\vec{J}_{N, \text{Drift}}$ e $\vec{J}_{P, \text{Drift}}$, invece si avrà che queste sono piccole e restano costanti secondo le stesse motivazioni della scorsa sezione.
 \end{itemize}
 
 Visto che la corrente di diffusione dimunisce esponenzialmente, si ha che la conduzione può effettivamente accadere nella regione di svuotamento, e avviene con maggioranza di corrente di drift, cioè questa riesce a vincere la corrente di diffusione. 
@@ -426,5 +527,6 @@ dove $I_S$ è la \textit{corrente inversa di saturazione}, $\eta$ è il \textit{
 $$
 V_T = \frac{k_B T}{q}
 $$
+già vista nella legge di Einstein a 4.3, già usata per il calcolo del potenziale "built-in" della giunzione P/N in 5.1.
 
 \end{document}
