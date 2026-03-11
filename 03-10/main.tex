@@ -346,7 +346,7 @@ Questo, nella giunzione appena vista, implica la seguente legge:
 \begin{theorem}{Barriera di potenziale}
 In una giunzione P/N, per via del campo $E$ che si forma nella zona di svuotamento, si avrà la formazione di un campo $V_0$.
 $$
-\Delta V = V_0 = \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+\Delta V = V_0 = \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
 $$
 \end{theorem}
 
@@ -376,7 +376,7 @@ Soffermiamoci un istante sugli estremi di integrazione. Abbiamo che finiamo per 
 \end{itemize}
 da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
 $$
-V = \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \, dn = \frac{k_B T}{e} \ln(n) \Big|^{N_D}_\frac{n_i^2}{N_A} =  \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+V = \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \, dn = \frac{k_B T}{e} \ln(n) \Big|^{N_D}_\frac{n_i^2}{N_A} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
 $$
 che è quanto stavamo cercando.
 
@@ -392,7 +392,7 @@ Gli estremi di integrazione sono scelti come prima. Abbiamo che finiamo per inte
 \begin{itemize}
 	\item All'estremo $N$ della giunzione si ha che, per il doping di tipo N e la legge massa-azione, la densità di lacuna è:
 		$$
-		n = \frac{n_i^2}{N_D}
+		n = \frac{n_i^2}{N_D
 		$$
 	\item All'estremo $P$ della giunzione si ha che, per il doping di tipo P, la densità di lacuna è semplicemente:
 		$$
@@ -401,7 +401,7 @@ Gli estremi di integrazione sono scelti come prima. Abbiamo che finiamo per inte
 \end{itemize}
 da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
 $$
-V = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \, dp = \frac{k_B T}{e} \ln(p) \Big|^\frac{n_i^2}{N_D}_{N_A} =  \frac{k_B T}{q} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+V = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \, dp = \frac{k_B T}{e} \ln(p) \Big|^\frac{n_i^2}{N_D}_{N_A} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
 $$
 che è nuovamente quanto stavamo cercando.
 
@@ -417,12 +417,12 @@ Notiamo quindi che nel complesso:
 \begin{itemize}
 	\item Una lacuna che vuole spostarsi dalla regione P alla regione N deve vincere il potenziale "built-in" $\Delta V$. Questo perché l'energia potenziale di lacuna è:
 		$$
-			U = q V
+			U = e V
 		$$
 		e spostarsi da sinistra verso destra significa aumentare $V$, quindi aumentare propria energia potenziale;
 	\item Un elettrone libero che vuole spostarsi dalla regione N alla regione P deve vincere sempre lo stesso potenziale "built-in" $\Delta V$. Questo perché l'energia potenziale elettronica è:
 		$$
-			U = -q V
+			U = -e V
 		$$
 		e spostarsi da destra verso sinistra significa diminuire $V$, quindi aumentare la propria energia potenziale;
 \end{itemize}
@@ -500,7 +500,7 @@ Questa densità di corrente sarà quindi dominata dal drift, e sarà \textit{pic
 \noindent
 Notiamo che la \textit{larghezza} della zona di svuotamento dipende dalla $V$ che imponiamo nei bias in \textit{avanti} e all'\textit{indietro}. In particolare, dipende da:
 $$
-w = \sqrt{ \frac{2 \epsilon_0}{q} \left( \frac{1}{N_A} + \frac{1}{N_d} \right) (V_0 - V)}
+w = \sqrt{ \frac{2 \epsilon_0}{e} \left( \frac{1}{N_A} + \frac{1}{N_d} \right) (V_0 - V)}
 $$
 Per cui:
 \begin{itemize}
@@ -525,7 +525,7 @@ $$
 \end{definition}
 dove $I_S$ è la \textit{corrente inversa di saturazione}, $\eta$ è il \textit{fattore di idealità}, e $V_T$ è la tensione termica:
 $$
-V_T = \frac{k_B T}{q}
+V_T = \frac{k_B T}{e}
 $$
 già vista nella legge di Einstein a 4.3, già usata per il calcolo del potenziale "built-in" della giunzione P/N in 5.1.
 
