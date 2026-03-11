@@ -298,7 +298,7 @@ e quindi risolvere le 2 equazioni ottenute per ottenere 2 equazioni (entrambe va
 $$
 \begin{cases}
 	E = -\frac{D_n}{n \mu_n} \frac{dn}{dx} \\ 
-	E = +\frac{D_è}{n \mu_p} \frac{dp}{dx}
+	E = +\frac{D_p}{n \mu_p} \frac{dp}{dx}
 \end{cases}
 $$
 dove ci siamo riportati a scalari prendendo tutti i vettori paralleli. Possiamo quindi prendere la legge di Einstein delle costanti di diffusione vista a 4.3, che in particolare diceva:
@@ -361,7 +361,7 @@ E = -\frac{k_B T}{e} \frac{1}{n} \frac{dn}{dx}
 $$
 dalla definizione del potenziale si ottiene di dover integrare:
 $$
-E = -\frac{dV}{dx} \implies V = - \int^{N_D}_\frac{n_i^2}{N_A} E \, dx =  \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \frac{dn}{\not{dx}} \, \not{dx}
+E = -\frac{dV}{dx} \implies V = - \int^{N_D}_{\frac{n_i^2}{N_A}} E \, dx =  \int^{N_D}_{\frac{n_i^2}{N_A}} \frac{k_B T}{e} \frac{1}{n} \frac{dn}{\not{dx}} \, \not{dx}
 $$
 Soffermiamoci un istante sugli estremi di integrazione. Abbiamo che finiamo per integrare su $dn$, per cui dobbiamo prendere la variazione di $n$ sul percorso dove calcoliamo il potenziale, cioè dall'estremo $N$ all'estremo $P$ della giunzione.
 \begin{itemize}
@@ -376,7 +376,7 @@ Soffermiamoci un istante sugli estremi di integrazione. Abbiamo che finiamo per 
 \end{itemize}
 da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
 $$
-V = \int^{N_D}_\frac{n_i^2}{N_A} \frac{k_B T}{e} \frac{1}{n} \, dn = \frac{k_B T}{e} \ln(n) \Big|^{N_D}_\frac{n_i^2}{N_A} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+V = \int^{N_D}_{\frac{n_i^2}{N_A}} \frac{k_B T}{e} \frac{1}{n} \, dn = \frac{k_B T}{e} \ln(n) \Big|^{N_D}_{\frac{n_i^2}{N_A}} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
 $$
 che è quanto stavamo cercando.
 
@@ -386,13 +386,13 @@ E = +\frac{k_B T}{e} \frac{1}{p} \frac{dp}{dx}
 $$
 e l'integrale è:
 $$
-V = - \int^\frac{n_i^2}{N_D}_{N_A} E \, dx = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \frac{dp}{\not{dx}} \, \not{dx}
+V = - \int^{\frac{n_i^2}{N_D}}_{N_A} E \, dx = - \int^{\frac{n_i^2}{N_D}}_{N_A} \frac{k_B T}{e} \frac{1}{p} \frac{dp}{\not{dx}} \, \not{dx}
 $$
 Gli estremi di integrazione sono scelti come prima. Abbiamo che finiamo per integrare su $dp$, per cui dobbiamo prendere la variazione di $p$ sul percorso dove calcoliamo il potenziale, cioè dall'estremo $N$ all'estremo $P$ della giunzione.
 \begin{itemize}
 	\item All'estremo $N$ della giunzione si ha che, per il doping di tipo N e la legge massa-azione, la densità di lacuna è:
 		$$
-		n = \frac{n_i^2}{N_D
+		n = \frac{n_i^2}{N_D}
 		$$
 	\item All'estremo $P$ della giunzione si ha che, per il doping di tipo P, la densità di lacuna è semplicemente:
 		$$
@@ -401,7 +401,7 @@ Gli estremi di integrazione sono scelti come prima. Abbiamo che finiamo per inte
 \end{itemize}
 da cui gli estremi che vediamo nell'integrale. Risolvendo si ottiene quindi:
 $$
-V = - \int^\frac{n_i^2}{N_D}_{N_A} \frac{k_B T}{e} \frac{1}{p} \, dp = \frac{k_B T}{e} \ln(p) \Big|^\frac{n_i^2}{N_D}_{N_A} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
+V = - \int^{\frac{n_i^2}{N_D}}_{N_A} \frac{k_B T}{e} \frac{1}{p} \, dp = \frac{k_B T}{e} \ln(p) \Big|^{\frac{n_i^2}{N_D}}_{N_A} =  \frac{k_B T}{e} \ln \left( \frac{N_A N_D}{n_i^2} \right)
 $$
 che è nuovamente quanto stavamo cercando.
 
