@@ -540,25 +540,4 @@ Per cui:
 	\item All'inverso, nel caso del bias all'indietro, si ha un \textit{aumento} della larghezza della zona di svuotamento $w$;
 \end{itemize}
 
-\subsubsection{Diodi}
-Le giunzioni P/N come le abbiamo studiate formano quei componenti elettronici noti come \textbf{diodi}, col simbolo del componente circuitale:
-\begin{center}
-	\begin{circuitikz}
-	\draw (0,0) to[D] (3,0);
-	\end{circuitikz}
-\end{center}
-
-I diodi sono governati dalla cosiddetta legge di \textit{Shockley}:
-\begin{definition}{Legge di Shockley}
-La corrente $I_D$ su un diodo sottoposto a tensione $V_D$ dipende da:
-$$
-I_D = I_S \left( e^\frac{V_D}{\eta V_T} - 1 \right)
-$$
-\end{definition}
-dove $I_S$ è la \textit{corrente inversa di saturazione}, $\eta$ è il \textit{fattore di idealità}, e $V_T$ è la tensione termica:
-$$
-V_T = \frac{k_B T}{e}
-$$
-già vista nella legge di Einstein a 4.3, già usata per il calcolo del potenziale "built-in" della giunzione P/N in 5.1.
-
 \end{document}
