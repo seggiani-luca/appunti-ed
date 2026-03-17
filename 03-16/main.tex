@@ -703,7 +703,7 @@ per cui l'ipotesi è verificata.
 \item $t_1 < t < t_2$ \\
 In questo caso notiamo che $D$ si trova in polarizzazione negativa, per cui probabilmente sarà in interdizione. In tal caso sul lato destro del circuito non passera nessuna corrente, e $V_u$ sarà nulla:
 $$
-V_u = 0 \, \mathrm{v}
+V_u = 0 \, \mathrm{V}
 $$
 
 \par\smallskip
@@ -721,11 +721,12 @@ Abbiamo quindi ottenuto che il circuito rettificatore, almeno nel caso ideale, e
 \begin{center}
 	\includegraphics[scale=0.3]{../figures/rect_ideal.png}
 \end{center}
+Questo tipo di rettifica viene detta \textit{single phase rectification}, in quanto l'onda sotto lo 0 di potenziale viene "troncata" completamente.
 
 \subsubsection{Circuito rettificatore a caduta costante}
 Vediamo adesso cosa accade se studiamo il circuito rettificatore sfruttando un modello più accurato del diodo di quello ideale, cioè il modello a \textit{caduta costante}. In tal caso notiamo 2 differenze principali:
 \begin{enumerate}
-\item Innanzitutto, quando entra in conduzione, il diodo presenterà una caduta di potenziale $V_\gamma$ (che modellizziamo con un generatore di tensione):
+\item Innanzitutto, quando entra in conduzione, il diodo presenta una caduta di potenziale $V_\gamma$ (che modellizziamo con un generatore di tensione):
 
 \begin{center}
 \begin{circuitikz}
