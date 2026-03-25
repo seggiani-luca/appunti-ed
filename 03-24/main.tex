@@ -232,7 +232,7 @@ Chiaramente dovremo tenere a mente 2 cose:
 
 \subsection{Transistore bipolare}
 
-Iniziamo a vedere il \textbf{transistore bipolare} (o \textbf{BJT}, \textit{Bipolar Junction Transistor}). Questo è un dispositivo a 2 porte, di cui però colleghiamo i negativi delle porte assieme, formando effettivamente un tripolo.
+Iniziamo a vedere il \textbf{transistore bipolare} (o \textbf{BJT}, \textit{Bipolar Junction Transistor}). Questo è un dispositivo a \textit{2 porte}, di cui però colleghiamo i negativi delle porte assieme, formando effettivamente un \textit{tripolo}.
 
 \begin{center}
 \begin{circuitikz}
@@ -376,7 +376,7 @@ Notiamo quindi una prima particolarità dei transistor: i componenti \textit{att
 
 Questo è il primo caso di utilizzo del transistor, cioè come \textit{amplificatore} di potenza.
 
-\subsubsection{Modello fisico del transistor}
+\subsubsection{Modello fisico del transistore}
 Finora abbiamo trattato il transistor come un componente idealizzato, che si comportava come un \textit{GCCC}, e abbiamo quindi calcolato i valori di guadagno in \textit{corrente}, \textit{tensione} e \textit{potenza}.
 
 Adesso vediamo come, dal punto di vista fisico, si realizza un transistore a giunzione bipolare. Innanzitutto, \textit{bipolare} significa due giunzioni PN poste una di seguito all'altra e orientate in senso inverso.
@@ -391,7 +391,9 @@ Viene formato da una giunzione PN e una giunzione NP:
 Nel transistore PNP abbiamo quindi una regione $\text{P}^+$ fortemente drogata (da cui il $+$ ad apice), una regione N leggermente drogata, e una regione P meno drogata della prima regione $\text{P}^+$.
 
 I poli connessi a sinistra e destra sono detti \textit{emettitore} (\textbf{E}) e \textit{collettore} (\textbf{C}). La regione N è ancorata alla \textit{base} \textbf{B}. Il grafico in basso a destra mostra la direzione della corrente tipica (da emettitore a collettore) del transistore PNP;
-	
+
+\newpage
+
 	\item \textbf{\textsf{Transistore NPN}} \\
 Viene formato da una giunzione NP e una giunzione PN:
 \begin{center}
@@ -414,7 +416,7 @@ Il risultato è che in un transistore PNP una corrente passa fra collettore ed e
 \par\smallskip
 
 \noindent
-\textbf{\textsf{Trattazione nel caso PNP}}
+\textbf{\textsf{Trattazione del caso PNP}}
 
 \noindent
 Continuiamo la trattazione fisica nel dettaglio, prendendo a riferimento il transistore \textit{PNP} (la descrizione del NPN sarà pressapoco analoga). Consideriamo quindi un modello semplificato che prende le due giunzioni (PN ed NP) separatamente. Inoltre, assumiamo che fra base ed emettitore sia imposto un voltaggio positivo (polarizzazione positiva della regione PN), e che fra base e collettore sia imposto un voltaggio negativo (polarizzazione negativa della regione NP).
@@ -427,7 +429,7 @@ A sinistra il transistore PNP si presenta come segue:
 \end{center}
 Abbiamo quindi la giunzione PN che viene messa in polarizzazione \textit{diretta} dal voltaggio applicato fra emettitore e base.
 
-Questa è esattamente la situazione che abbiamo studiato in 5.1, e porta questa parte del transistore a comportarsi come un diodo in conduzione: applicando voltaggio in polarizzazione diretta i conduttori maggioritari della zona P (le lacune) si spostano nella regione N, la barriera di potenziale si abbassa, e si ha quindi conduzione di corrente da E a B (con crescita esponenziale all'aumentare del voltaggio applicato).
+Questa è esattamente la situazione che abbiamo studiato in 5.1, e porta questa parte del transistore a comportarsi come un diodo in conduzione: applicando voltaggio in polarizzazione diretta i conduttori maggioritari della zona P (le lacune) si sposteranno nella regione N, la barriera di potenziale si abbasserà, la zona di svuotamento si restringerà, e si avrà quindi conduzione di corrente da E a B (con crescita esponenziale all'aumentare del voltaggio applicato).
 
 Inoltre, nel PNP si ha che la zona $\text{P}^+$ è molto drogata, cioè:
 $$
@@ -443,45 +445,106 @@ A destra il transistore PNP si presenta come segue:
 \end{center}
 In questo caso abbiamo sempre una giunzione PN, stavolta in polarizzazione inversa fra collettore e base.
 
-% SEI ARRIVATO QUI COGLIONE !!!
-
-% Visto che siamo in conduzione inversa (sempre da 5.1), la barriera di potenziale si alzerà, la zona di svuotamento si allargherà, e si avrà una corrente data dai portatori minoritari, ovvero le lacune (limitata dalla generazione termica ed indipendente dal campo $E$).
+Prendiamo per adesso l'effetto ottenuto trascurando la giunzione PN a sinistra (che sta spingendo portatori di carica nella zona N). Visto che siamo in conduzione inversa (sempre da 5.1), la barriera di potenziale si alzerà, la zona di svuotamento si allargherà, e si avrà una corrente di deriva data dai portatori minoritari, ovvero le lacune, limitata dalla generazione termica ed indipendente dal campo $E$.
+Questa corrente sarà di per sé piccola (saremo praticamente nel caso del diodo in interdizione). 
 
 \end{itemize}
 
-Nel complesso, quindi, il transistore PNP si mostra come segue:
+Vediamo quindi cosa accade se si combinano le 2 giunzioni appena viste nel componente che è il transistore PNP. Nel complesso, questo si mostra come segue:
 \begin{center}
 	\includegraphics[scale=0.22]{../figures/full_pnp.png}
 \end{center}
 
-In \textit{Zona Attiva Direttta} (\textit{ZAD}), quindi, si ha la giunzione BE (cioè la giunzione PN collegata ad emettitore e base) in polarizzazione diretta, e la giunzione BC (cioè la giunzione NP collegata a base e collettore) in polarizzazione inversa. In simboli:
+Il regime di operazione visto finora viene detto \textit{Zona Attiva Direttta} (\textit{ZAD}), cioè si ha la giunzione BE (cioè la giunzione PN collegata ad emettitore e base) in polarizzazione diretta, e la giunzione BC (cioè la giunzione NP collegata a base e collettore) in polarizzazione inversa. In simboli:
 $$
 V_{EB} > 0, \quad V_{CB} < 0
 $$
 
-Questo significherà:
+Da quanto detto prima, questo significherà che:
 \begin{enumerate}
-	\item Grande flusso di lacune $h$ da E e B dato dalla corrente di diffusione (cioè dalla giunzione PN in polarizzazione diretta);
-	\item Una piccola porzione di $h$ che si ricombinano in base, la cui zona nuetra ha un’alta concentrazione di $e$ (in quanto il campo $E$ applicato riporta gli $n$ all'interno della zona N);
-	\item La parte rimanente degli $h$ arriva alla zona di svuotamento BC dove è presente un forte campo elettrico: queste sono le cariche che riforniscono la giunzione BC in inversa.
-\end{enumerate}
+	\item Ci sarà un grande flusso di lacune $h$ spinte (iniettate) da E in B. Questo sarà dato dalla corrente di diffusione (cioè dalla giunzione PN in polarizzazione diretta) dei portatori maggioritari della regione P fortemente drogata;
+	\item Le $h$ si troveranno quindi all'interno della regione N (cioè la base), dove rappresenteranno le portatrici minoritarie. Il loro destino qui sarà duplice:
+	\item Una piccola porzione degli $h$ nella base si ricombineranno nella base, dove si formerà una zona neutra. 
 
-# finisci
-
-\subsubsection{Modello di Ebers-Moll}
-Il modello di \textit{Ebers-Moll} per il transistore bipolare permette di descrivere questo componente ai grandi segnali. Il modello si deriva direttamente dalla rappresentazione fisica del transistore.
-
+		In altre parole, un’alta concentrazione di $e$ (data dal drogaggio $N$ e dal fatto che il campo $E$ applicato riporta gli $n$ all'interno della zona N) nella base porterà all'annularsi di alcune delle lacune $h$ entranti, e quindi renderà la zona complessivamente neutra. Come approfondiremo, questo meccanismo deve essere supplementato da altri elettroni che entrano nella base, attraverso una corrente uscente sulla stessa;
+	\item La parte rimanente degli $h$ arriverà alla zona di svuotamento BC. Qui sarà presente un forte campo elettrico: in particolare, gli atomi accettori rimasti nella zona P di destra formeranno una forte carica negativa oltre la zona di svuotamento della giunzione NP. 
 \begin{center}
-	\includegraphics[scale=0.24]{../figures/ebers.png}
+	\includegraphics[scale=0.4]{../figures/thin_pnp.png}
 \end{center}
 
-Modellizziamo quindi il transistor come una coppia di diodi che pilotano generatori di corrente. Questi sono:
+Questo, unito al fatto che la zona N è molto piccola (come si nota dalla figura, che mostra la realizzazione effettiva del PNP su un substrato di silicio drogato P), porterà la maggior parte delle lacune $h$ a superare completamente la zona N ed arrivare direttamente al collettore. Queste sono le cariche che riforniscono la giunzione BC in inversa.
+
+Notiamo un altro dettaglio riguardo al fatto che la zona N (nel PNP, altrimenti nell'NPN sarebbe la zona P) è molto ristretta: questo, oltre al fatto che permette ai portatori di attraversare la base per raggiungere il collettore, impedisce al transistor di comportarsi semplicemente come 2 diodi accoppiati fra di loro (che è quello che ci aspetteremmo da due giunzioni PN unite fra di loro).
+\end{enumerate}
+
+Abbiamo quindi chiarito come mai i nomi e i funzionamenti delle regioni del transistore:
+\begin{itemize}
+	\item L'\textit{emettitore} (\textbf{E}) si occupa appunto di \textit{emettere} i portatori di carica: fa questo (nel PNP) agendo da giunzione PN polarizzata positivamente, dove naturalmente si forma un flusso di portatori maggioritari verso la regione N.
+	\item Il \textit{collettore} (\textbf{C}) si occupa invece di \textit{raccogliere} i portatori di carica. Questo atto di "raccoglimento" non è altro che l'attrazione dei portatori (nel PNP le lacune) finiti nella regione neutra attraverso la carica disposta sulla zona di svuotamento;
+\end{itemize}
+
+Infine, sulla \textit{base} (\textbf{B}) si potrà \textit{modulare} il passaggio dei portatori di carica fra le zone emettitore e collettore. 
+Questo verrà fatto agendo sulla neutralità della base stessa: la corrente $I_B$ rifornirà i portatori (nel PNP gli elettroni) necessari per mantenere la neutralità di carica nella zona neutra. Se non li rifornisse (cioè nel caso $I_B = 0$), i portatori si accumulerebbero in base generando un potenziale che ostacolerebbe l’ulteriore iniezione di portatori ($I_E = 0$): la zona neutra della base sparirebbe. Sia quindi chiaro che la corrente $I_B$ è di fondamentale importanza per il funzionamento del transistor stesso.
+
+Abbiamo quindi ottenuto una particolare situazione dove la corrente piccola sulla base controlla una corrente elevata fra emettitore e collettore. Quest’ultima è una versione amplificata della corrente di base. In altre parole, abbiamo realizzato il GCCC che ci eravamo prefissati di ottenere.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Trattazione del caso NPN}}
+
+\noindent
+Senza raggiungere lo stesso livello di dettaglio (la trattazione completa fatta sul PNP è più che sufficiente) vediamo in breve il processo, analogo, che si svolge nel transistore NPN. Innanzitutto, abbiamo che in un transistore NPN l'emettitore si trova a valle della corrente (si producono elettroni, che si spostano nella direzione opposta alla corrente). Questo significherà che si dovrà assumere la prima regione NP in polarizzazione negativa, e la successiva regione PN in polarizzazione positiva.
+
+\begin{itemize}
+\item \textbf{\textsf{Giunzione NP}} \\
+Vediamo quindi l'NPN al contrario (dal $-$ della corrente al $+$, partendo dalla giunzione NP.
+Questa giunzione (emettitore-base) è in polarizzazione \textit{diretta}.
+
+Questa è la stessa situazione studiata nei diodi in conduzione: applicando un voltaggio diretto, i portatori maggioritari della regione N (gli elettroni) si spostano verso la regione P, la barriera di potenziale si abbassa, la zona di svuotamento si restringe, e si ha conduzione di corrente da E a B.
+
+Inoltre, nell’NPN si ha che la regione N (emettitore) è fortemente drogata e quindi il flusso di elettroni è molto maggiore del flusso di lacune. L’effetto complessivo è che un grande numero di elettroni vengono \textit{iniettati} nella regione P centrale (la base).
+
+\item \textbf{\textsf{Giunzione PN}} \\
+Questa giunzione (base-collettore) è in polarizzazione \textit{inversa}.
+
+Se consideriamo solo questa giunzione, la barriera di potenziale aumenta, la zona di svuotamento si allarga, e si ha una corrente di deriva dovuta ai portatori minoritari (gli elettroni nella regione P), limitata dalla generazione termica.
+
+Questa corrente è molto piccola (caso di diodo in interdizione).
+\end{itemize}
+
+Combinando le due giunzioni si ottiene il funzionamento del transistore NPN in \textit{Zona Attiva Diretta} (ZAD) (come prima per il PNP). 
+$$
+V_{BE} > 0, \quad V_{BC} < 0
+$$
+\begin{enumerate}
+	\item Ci sarà un grande flusso di elettorni $n$ spinti (iniettate) da E in B. Questo sarà dato dalla corrente di diffusione (cioè dalla giunzione NP in polarizzazione diretta) dei portatori maggioritari della regione N fortemente drogata;
+	\item Gli $n$ si troveranno quindi all'interno della regione P (cioè la base), dove rappresenteranno i portatori minoritarie. Come per il PNP, il loro destino qui sarà duplice:
+	\item Una piccola porzione degli $e$ nella base si ricombineranno nella base, dove si formerà una zona neutra. 
+	\item La parte rimanente degli $e$ arriverà alla zona di svuotamento BC. Qui sarà presente un forte campo elettrico: in particolare, gli atomi donatori rimasti nella zona N di sinistra formeranno una forte carica negativa oltre la zona di svuotamento della giunzione PN. Questo, unito al fatto che la zona P è molto piccola, porterà la maggior parte degli elettroni $e$ a superare completamente la zona P ed arrivare direttamente al collettore. 
+\end{enumerate}
+
+Le regioni (e i loro funzionamenti) saranno quindi analoghi a quelli del transistor PNP (se non invertiti spazialmente).
+
+In questo caso, la corrente di base $I_B$ fornirà le lacune necessarie per compensare la ricombinazione degli elettroni nella base.
+Se $I_B=0$ si accumulerebbero cariche nella base, generando un campo elettrico che ostacolerebbe ulteriori iniezioni. Tuttavia, il transistor può comunque condurre in altre condizioni di polarizzazione: la base corrente non è un “abilitatore”, ma una conseguenza della ricombinazione.
+
+Si ottiene quindi una configurazione in cui una piccola corrente di base controlla una corrente molto maggiore tra emettitore e collettore, realizzando il principio di amplificazione del transistor. Di nuovo, abbiamo realizzato il GCCC che ci eravamo prefissati di ottenere.
+
+\subsubsection{Modello di Ebers-Moll}
+Il modello di \textit{Ebers-Moll} per il transistore bipolare permette di descrivere questo componente ai grandi segnali. Il modello si deriva direttamente dalla rappresentazione fisica del transistore, riportata ad una serie di componenti governati da legge elettriche (e quindi per cui sappiamo scrivere e risolvere equazioni).
+
+\begin{center}
+	\includegraphics[scale=0.22]{../figures/ebers.png}
+\end{center}
+
+Modellizziamo quindi il transistore come una coppia di diodi che pilotano generatori di corrente (per realizzare appunto il GCCC). Questi sono:
 \begin{itemize}
 	\item Rivolti da E a B e da E a C nel caso del transistore PNP;
 	\item Rivolti da B ad E e da B a C nel caso del transistore NPN.
 \end{itemize}
 
-I generatori di correnti chiudono le maglie seguendo le direzioni dei diodi. Le costanti di proporzionalità sono 2, cioè $\alpha_F$ e $\alpha_R$:
+I generatori di corrente chiudono le maglie seguendo le direzioni dei diodi. Le costanti di proporzionalità sono 2, cioè $\alpha_F$ e $\alpha_R$:
 \begin{itemize}
 	\item $\alpha_F$ è la frazione di corrente \textit{diretta}, con:
 $$
@@ -496,10 +559,20 @@ Fra queste costanti, a causa del diverso drogaggio delle regioni P (nel PNP) o N
 $$
 \alpha_F I_{ES} = \alpha_R I_{CS}
 $$
-Dove $I_{ES}$ e $I_{CS}$ sono le correnti di saturazione dei diodi sull'emettitore e sul collettore.
+Dove $I_{ES}$ e $I_{CS}$ sono le correnti di saturazione dei diodi sull'emettitore e sul collettore. Solitamente avremo:
+\begin{itemize}
+	\item In un PNP che $\alpha_F$ (da \textit{Forward}) $>>$ $\alpha_R$ (da \textit{Reverse}), cioè facendo scorrere corrente fra emettitore e base (sul diodo $I_{ED}$) si impone una grande corrente fra emettitore e collettore (generatore di corrente $\alpha_F I_{ED}$);
+	\item In un NPN si ha la stessa cosa, cioè facendo scorrere corrente fra base ed emettitore (sul diodo $I_{ED}$) si impone una grande corrente fra collettore ed emettitore (generatore di corrente $\alpha_F I_{ED}$);
+\end{itemize}
 
-Prendiamo l'esempio specifico del transistore PNP.
-Possiamo discutere questo modello introducendo l'equazione di Shockley per i diodi:
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Trattazione del caso PNP}}
+
+\noindent
+Come per la trattazione fisica, prendiamo ad esempio specifico il transistore PNP.
+Possiamo discutere il modello di Ebers-Moll introducendo l'equazione di Shockley per i diodi:
 $$
 \begin{cases}
 	I_{ED} = I_{ES} \left( e^\frac{V_{EB}}{V_T} - 1 \right) \\
@@ -522,8 +595,6 @@ I_C = I_{CS} \left( e^\frac{V_{CB}}{V_T} - 1 \right) - \alpha_F I_{ES} \left( e^
 \end{cases}
 $$
 
-% trova per npn
-
 Sempre nel PNP, in \textit{zona attiva diretta}, abbiamo:
 $$
 V_{EB} >> V_T, \quad V_{CB} << 0
@@ -540,28 +611,407 @@ $$
 	I_C = -I_{CS} - \alpha_F I_{ES} e^{\frac{V_{EB}}{V_T}}
 \end{cases}
 $$
-e semplificando ancora (gli esponenziali vincono sui termini lineari):
+Semplificando ancora possiamo rimuovere dei termini (in quanto gli esponenziali vincono sui termini lineari):
 $$
 \begin{cases}
 	I_E = I_{ES} e^{\frac{V_{EB}}{V_T}} \\
-	I_C = \alpha_F I_{ES} e^{\frac{V_{EB}}{V_T}}
+	I_C = -\alpha_F I_{ES} e^{\frac{V_{EB}}{V_T}}
 \end{cases}
 $$
-Mettendo a comune la $I_E$:
-$$
-I_E = I_{ES} e^{\frac{V_{EB}}{V_T}}
-$$
-si ottiene:
+A questo punto, mettendo a comune la $I_E$, si ottiene:
 $$
 \begin{cases}
 I_C = - \alpha_F I_E \\
 I_B = -(I_E + I_C) = - (1 - \alpha_F) I_E
-\end{cases}
+\end{cases}, \quad
+I_E = I_{ES} e^{\frac{V_{EB}}{V_T}}
 $$
 
-Ci siamo quindi riportati al modello a \textit{generatore di corrente pilotato in corrente}, dove abbiamo il fattore di proporzionalità fra la corrente applicata alla base e quella misurata al collettore:
+Ci siamo quindi riportati al modello a \textit{generatore di corrente pilotato in corrente}.  Possiamo ricavare un espressione per il \textit{fattore di proporzionalità} fra la corrente applicata alla base e quella misurata al collettore, cioè se vogliamo l'$A_i$ della prima trattazione fatta in 1.1:
 $$
 \beta_F = \frac{I_C}{I_B} = \frac{\alpha_F}{1 - \alpha_F}, \quad I_C = \beta_F I_B
 $$
+
+Abbiamo quindi che, almeno nella ZAD, il BJT si comporta effettivamente da GCCC, con costante di proporzionalità $\beta_f$ per la corrente al collettore rispetto alla corrente impostsa alla base (quella che prendiamo come modulante). 
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Trattazione del caso NPN}}
+
+\noindent
+Trattiamo brevemente anche il transistore PNP.
+Introduciamo quindi l'equazione di Shockley per i diodi:
+$$
+\begin{cases}
+	I_{ED} = I_{ES} \left( e^\frac{V_{BE}}{V_T} - 1 \right) \\
+	I_{CD} = I_{CS} \left( e^\frac{V_{BC}}{V_T} - 1 \right) \\
+\end{cases}
+$$
+e scrivendo le equazioni nodali:
+$$
+\begin{cases}
+I_E = -I_{ED} + \alpha_R I_{CD} \\
+I_C = -I_{CD} + \alpha_F I_{ED} \\
+I_B = -I_E - I_C
+\end{cases}
+$$
+che sostituendo ci dà:
+$$
+\begin{cases}
+I_E = -I_{ES} \left( e^\frac{V_{BE}}{V_T} - 1 \right) + \alpha_R I_{CS} \left( e^\frac{V_{BC}}{V_T} - 1 \right) \\
+I_C = -I_{CS} \left( e^\frac{V_{BC}}{V_T} - 1 \right) + \alpha_F I_{ES} \left( e^\frac{V_{BE}}{V_T} - 1 \right)
+\end{cases}
+$$
+
+\newpage
+
+Sempre nel NPN, in \textit{zona attiva diretta}, abbiamo:
+$$
+V_{BE} >> V_T, \quad V_{BC} << 0
+$$
+cioè regione NP in polarizzazione diretta e regione PN in polarizzazione inversa, per cui possiamo approssimare gli esponenziali:
+$$
+\begin{cases}
+	I_E = -I_{ES} e^{\frac{V_{BE}}{V_T}} + \alpha_R I_{CS} (-1) \\
+	I_C = -I_{CS} (-1) + \alpha_F I_{ES} e^{\frac{V_{BE}}{V_T}}
+\end{cases}
+\implies
+\begin{cases}
+	I_E = -I_{ES} e^{\frac{V_{BE}}{V_T}} - \alpha_R I_{CS} \\
+	I_C = +I_{CS} + \alpha_F I_{ES} e^{\frac{V_{BE}}{V_T}}
+\end{cases}
+$$
+Semplificando ancora possiamo rimuovere dei termini (in quanto gli esponenziali vincono sui termini lineari):
+$$
+\begin{cases}
+	I_E = -I_{ES} e^{\frac{V_{BE}}{V_T}} \\
+	I_C = +\alpha_F I_{ES} e^{\frac{V_{BE}}{V_T}}
+\end{cases}
+$$
+A questo punto, mettendo a comune la $I_E$, si ottiene:
+$$
+\begin{cases}
+I_C = - \alpha_F I_E \\
+I_B = -(I_E + I_C) = - (1 - \alpha_F) I_E
+\end{cases}, \quad
+I_E = -I_{ES} e^{\frac{V_{BE}}{V_T}}
+$$
+
+Che dà lo stesso identico modello a \textit{generatore di corrente pilotato in corrente} del PNP, con \textit{fattore di proporzionalità}:
+$$
+\beta_F = \frac{I_C}{I_B} = \frac{\alpha_F}{1 - \alpha_F}, \quad I_C = \beta_F I_B
+$$
+
+Potrebbe sembrarci strano prendere $I_C$ anziché $I_E$ per il calcolo del fattore di moltiplicazione della corrente, in quanto sappiamo che in un transistore NPN la corrente va da collettore ad emettitore, e non viceversa (l'emettitore emette elettroni $e$ opposti al flusso di corrente). Come vedremo in seguito, però, in fase di utilizzo i transistori vengono solitamente messi ad \textit{emettitore comune}, cioè emettitore E e base B vengono messi a comune e si prende la corrente di carico sul collettore C. Il funzionamento di transistor PNP e NPN sarà quindi identico, se non per la direzione della corrente che viene invertita (il ruolo delle regioni E, B e C resta tale). 
+
+\subsubsection{Regioni di funzionamento del BJT}
+Notiamo innanzitutto qual'è il valore indicativo di questa costante di proporzionalità $\beta_F$ (in diretta) ricavata nella scorsa sezione. 
+
+Avevamo detto che le costanti di proporzionalità del modello di Ebers-Moll erano le seguenti:
+\begin{itemize}
+	\item $\alpha_F$ è la frazione di corrente \textit{diretta}, con:
+$$
+0.98 < \alpha_F < 0.998
+$$
+	\item $\alpha_R$ è la frazione di corrente \textit{inversa}, con:
+$$
+0.4 < \alpha_R < 0.8
+$$
+\end{itemize}
+
+Si ricava allora immediatamente:
+$$
+\beta_F = \frac{\alpha_F}{1 - \alpha_F} \implies 50 < \beta_F < 500
+$$
+
+Iniziamo quindi a vedere le \textit{regioni} di operazione dei BJT. Finora abbiamo visto solo la regione \textit{ZAD} (\textit{Zona Attiva Diretta}), che corrispondeva a polarizzazione EB diretta e polarizzazione CB inversa nel PNP, e polarizzazione BE diretta e polarizzazione BC inversa nel NPN. Abbiamo, in verità, che un transistor può trovarsi in diverse regioni a seconda delle polarizzazioni delle due giunzioni PN. Vediamole nel dettaglio:
+
+\begin{table}[H]
+	\center \rowcolors{2}{white}{black!10}
+	\begin{tabular} { p{3.2cm} | p{2.5cm} || c | c }
+		\bfseries Zona & \bfseries Impiego & \bfseries Polarizzazione PNP & \bfseries Polarizzazione NPN \\
+		\hline 
+		\textit{Zona Attiva Diretta} (\textbf{ZAD}) & Amplificatore efficiente & EB diretta, CB inversa & BE diretta, BC inversa \\
+		\textit{Zona Attiva Inversa} (\textbf{ZAI}) & Amplificatore inefficiente & EB inversa, CB diretta & BE inversa, BC diretta \\
+		\textit{Interdizione} (\textbf{OFF}) & Interruttore aperto & EB inversa, CB inversa & BE inversa, BC inversa \\
+		\textit{Saturazione} (\textbf{ON}) & Interruttore chiuso & EB diretta, CB diretta & BE diretta, BC diretta \\
+	\end{tabular}
+\end{table}
+
+Commentiamo brevemente queste zone. Abbiamo che:
+\begin{itemize}
+	\item Nell'elettronica \textbf{analogica}, dove il transistor deve fare da componente \textit{amplificatore} di corrente, resteremo nella ZAD (per ottenere un amplificatore efficiente, dato che $\alpha_F > \alpha_R$ e l'alternativa zona ZAI sfrutterebbe la costante di proporzionalità minore; notiamo inoltre che la differenza fra $\alpha_F$ ed $\alpha_R$ è voluta e data dei diversi livello di drogaggio delle zone esterne del transistore);
+	\item Nell'elettronica \textbf{digitale}, dove il transistor fa da \textit{interruttore} controllato in corrente, vorremo oscillare fra le zone di interdizione e saturazione.
+\end{itemize}
+
+\subsubsection{Caratteristiche ad emettitore comune}
+
+Vediamo quindi come si studia un circuito che mostra il transistore (PNP o NPN) nel suo caso di applicazione tipico, cioè come amplificatore di potenza per una certa sorgente di segnale.
+
+Innanzitutto, vediamo il circuito che vogliamo studiare sia con transistor NPN che PNP.
+\begin{itemize}
+
+\item Il circuito con transistor NPN si presenta come segue:
+\begin{center}
+\begin{circuitikz}
+	% NPN
+
+	\draw (0,2) to[ american voltage source, l_=$v_S$] (0,0);
+	\draw (0,2) to[ resistor, l=$R_S$] (2,2) to[ short, i=$i_B$] (4,2);
+	\draw (0,0) -- (8,0);
+	\draw (8,2) to[ american voltage source, l=$v_\text{supply}$] (8,0);
+	\draw (4.5,1.5) -- (4.5, 0);
+	\draw (8,2) to[ resistor, l_=$R_L$] (8,4)
+		to[ short, i=$i_C$] (4.5, 4) -- (4.5,2.5);
+
+	\node[npn] at(4.5,2) {};
+
+	\node at(5,3.75) {$+$};
+	\node at(5,2) {$v_{CE}$};
+	\node at(5,0.25) {$-$};
+	
+	\node at(3.5,1.75) {$+$};
+	\node at(3.5,1) {$v_{BE}$};
+	\node at(3.5,0.25) {$-$};
+
+	\node at(4.8, 2.4) {$\scriptstyle C$};
+	\node at(3.8, 2.2) {$\scriptstyle B$};
+	\node at(4.8, 1.6) {$\scriptstyle E$};
+\end{circuitikz}
+\end{center}
+
+Il funzionamento del circuito è il seguente:
+\begin{enumerate}
+	\item Il generatore $v_S$ a sinistra produce un (piccolo) segnale, che passa attraverso la resistenza (che associamo al circuito generatore del segnale) $R_S$ e quindi entra positivo nella base dell'NPN;
+	\item Il generatore $v_\text{supply}$ a destra produce una (grande) differenza di potenziale. Il transistor NPN, quindi, traduce tale differenza di potenziale in una corrente $I_C$ che viene fatta passare sulla resistenza di carico $R_L$. Notiamo che la differenza di potenziale $v_{CE}$ sul transistor dipende anche dalla differenza di potenziale imposta alla base, cioè vale:
+$$
+v_{CE} = v_{BE} + V_{CB} = v_{BE} - V_{BC}
+$$
+\end{enumerate}
+
+Vediamo quindi il componente circuitale del transistore NPN, e la scelta canonica delle regioni C (collettore) ed E (emettitore). In questo caso abbiamo che la corrente $i_C$ entra nel collettore C ed esce dall'emettitore E, messo a comune con la maglia della base B. Era questa la convenzione di corrente che avevamo già mostrato per l'NPN: l'emettitore emette elettroni $e$, che viaggiano verso il collettore, per cui la direzione della corrente convenzionale è opposta.
+
+\item Il circuito con transistor PNP si presenta invece come segue:
+\begin{center}
+\begin{circuitikz}
+	% PNP
+
+	\draw (0,0) to[ american voltage source, l=$v_S$] (0,2);
+	\draw (0,2) to[ resistor, l=$R_S$] (2,2) to[ short, i=$i_B$] (4,2);
+	\draw (0,0) -- (8,0);
+	\draw (8,2) to[ american voltage source, l=$v_\text{supply}$] (8,0);
+	\draw (4.5,1.5) -- (4.5, 0);
+	\draw (8,2) to[ resistor, l_=$R_L$] (8,4)
+		to[ short, i=$i_C$] (4.5, 4) -- (4.5,2.5);
+
+	\node[pnp] at(4.5,2) {};
+
+	\node at(5,3.75) {$+$};
+	\node at(5,2) {$v_{CE}$};
+	\node at(5,0.25) {$-$};
+	
+	\node at(3.5,1.75) {$+$};
+	\node at(3.5,1) {$v_{BE}$};
+	\node at(3.5,0.25) {$-$};
+
+	\node at(4.8, 2.4) {$\scriptstyle E$};
+	\node at(3.8, 2.2) {$\scriptstyle B$};
+	\node at(4.8, 1.6) {$\scriptstyle C$};
+\end{circuitikz}
+\end{center}
+
+Il funzionamento del circuito è analogo al caso con il PNP, con la sola differenza sulla direzione del generatore $v_S$. 
+
+Vediamo quindi il componente circuitale del transistore PNP, e la scelta canonica delle regioni C (collettore) ed E (emettitore). In questo caso abbiamo che la corrente $i_C$ entra nell'emettitore E ed esce dal collettore C, messo a comune con la maglia della base B. Era questa la convenzione di corrente che avevamo già mostrato per il PNP l'emettitore emette lcaune $h$, che viaggiano verso il collettore, per cui la direzione della corrente convenzionale è diretta.
+
+\end{itemize}
+
+Da qui in poi continueremo con l'esempio dell'NPN, in quanto il segno della corrente $i_B$ è più immediato (è positivo, cioè corrente entra nel transistor).
+
+Il tipo di modellizzazione che vorremo ottenere è quindi quello della \textit{caratteristica di ingresso}, cioè la relazione della corrente $i_B$ ai voltaggi imposti $V_{BE}$ e $V_{CE}$, e della \textit{caratteristica di uscita}, cioè la relazione della corrente $i_C$ al voltaggio imposto $V_{CE}$ e alla corrente $i_B$ che riusciamo ad ottenere alla base.
+
+Notiamo che questo è in accordo con quanto detto in generale riguardo al transistor come componente GCCC (generatore di corrente controllato in corrente): agendo sulla corrente $i_B$ si varia la neutralità della zona centrale del transistor (per l'NPN, la zona P), e quindi si modula la corrente $i_C$ che passa fra emettitore e colletitore (nell'NPN in senso negativo).
+
+Notiamo che questo è in accordo anche con il cosiddetto \textit{principio di accoppiamento}:
+\begin{definition}{Principio di accoppiamento}
+In un dispositivo a tre terminali (quadripolo), lo stato elettrico di una porta è intrinsecamente dipendente da una variabile della porta opposta, definendo così l’effetto di controllo o amplificazione.
+\end{definition}
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Caratteristica di ingresso}}
+
+\noindent
+Vediamo la caratteristica di ingresso. Questa sarà, come abbiamo detto, la relazione della corrente $i_B$ ai voltaggi imposti $V_{BE}$ e $V_{CE}$. In simboli:
+$$
+I_B = f(V_{BE}, V_{CE})
+$$
+Cioè la corrente sarà funzione dei voltaggi imposti a base e emettitore-collettore. Possiamo ricavare la relazione esplicita riprendendo la discussione fatta per l'NPN in 10.1.2, cioè sfruttando il modello di \textit{Ebers-Moll}. 
+
+In tal caso abbiamo:
+$$
+I_B = -(1 - \alpha_F)I_E, \quad I_E = -I_{ES} e^\frac{V_{BE}}{V_T}
+$$
+visto che ci interessiamo alle risposte, e sappiamo che la corrente è uscente dal transistor in $I_E$ (opposta alla direzione in cui la prendiamo, rivolta verso il transistor), passiamo ai valori assoluti:
+$$
+I_B = (1 - \alpha_F) |I_E| = I_B I_{ES} e^\frac{V_{BE}}{V_T}
+$$
+Avremo tra l'altro che questa è anche la curva di risposta del PNP.
+
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/npn_in_char.png}
+\end{center}
+
+Vediamo quindi che questa è analoga alla caratteristica del diodo, cioè presenta una crescita esponenziale legata al voltaggio applicato. 
+Per semplicità, poi, consideriamo di trovarci in ZAD per $V_{BE}$ imposta $> 0.7 \, \mathrm{V}$, cioè circa $V_\gamma$. In ZAD, quindi semplifichiamo dicendo:
+$$
+I_B = f(V_{BE})
+$$
+cioè trascurando la dipendenza da $V_{CE}$. Vedremo più avanti che in realtà questa è una semplificazione, valida per la ZAD, ma non per altre zone (sopratutto vedremo come si passa dalla regione ZAD alla regione di saturazione).
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Caratteristica di uscita}}
+
+\noindent
+Veniamo quindi alla caratteristica di uscita. Questa sarà, come abbiamo detto, la relazione della corrente $i_C$ al voltaggio imposto $V_{CE}$ e alla corrente $i_B$ che riusciamo ad ottenere alla base. In simboli:
+$$
+I_C = f(I_B, V_{CE})
+$$
+Cioè la corrente sarà funzione della corrente $i_B$ che otteniamo, e del voltaggio emettitore-collettore. Possiamo ricavare la relazione esplicita riprendendo sempre il modello di \textit{Ebers-Moll}. 
+
+In tal caso abbiamo:
+$$
+I_C = \beta_F I_B, \quad \beta_F = \frac{\alpha_F}{1 - \alpha_F}
+$$
+totalmente lineare, che era ciò che volevamo ottenere per avere un transistor ideale più vicino possibile ad un GCCC. 
+Anche qui, visto che ci interessiamo alle risposte, e sappiamo che la corrente è entrante nel transistor in $I_B$ (concorde alla direzione in cui la prendiamo, rivolta verso il transistor), passiamo ai valori assoluti:
+$$
+I_B = \beta_F |I_B| = \beta_F I_B
+$$
+
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/npn_out_char.png}
+\end{center}
+
+Vediamo come questa curva è accurata solo per valori sufficientemente grandi di $V_{CE}$. Per valori sufficientemente bassi notiamo che $I_C$ collassa a zero, secondo un fenomeno detto \textit{piegamento delle curve}. Chiamiamo il valore di $V_{CE}$ dove il piegamento inizia ad essere consistente $V_{CE, \text{ sat}}$, cioè il punto di saturazione dove il transistor inizia a passare dalla regione ZAD alla regione di saturazione.
+
+Riassumendo, vediamo che in ZAD la dipendenza da $V_{CE}$ è scomparsa, ma come abbiamo anticipato questa è una semplificazione. Al di sotto della $V_{CE, \text{ sat}}$, infatti, entriamo in zona di saturazione, dove la $I_C$ crolla a zero.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Zona di saturazione}}
+
+\noindent
+Vediamo nel dettaglio come si entra nella zona di saturazione. Abbiamo detto che i nostri valori in uscita dipendono dal voltaggio $V_{CE}$, e che nella regione ZAD questa dipendenza poteva essere trascurata prendendo la dipendenza lineare da $I_B$ (abbiamo detto che in verità $I_B$ dipende leggermente da $V_{CE}$, sopratutto fuori dalla ZAD, per cui la dipendenzea non è totalmente lineare). In altre parole, in regime ZAD (sopra gli $0.7 \, \mathrm{V}$ circa) il collettore "raccoglie" tutti i portatori che arrivano dalla base, e il BJT si comporta come un generatore di corrente ideale.
+
+Specifichiamo quindi $V_{CE}$ nell'esattezza:
+$$
+V_{CE} = V_{BE} - V_{BC}
+$$
+per cui la stessa tensione che applichiamo al collettore-emettitore del transistor dipende dalla tensione in BC e quindi dalla caduta data dalla corrente $I_B$. Ciò che succede a livello generale è riducendo la $V_{CE}$ la giunzione BC (la giunzione PN del NPN) passa dall'essere in polarizzazione \textit{inversa} alla polarizzazione \textit{diretta}. Possiamo darci una spiegazione fisica di questo fenomeno dicendo che la giunzione BC diretta inietta portatori opposti a quelli dell’emettitore. Come risultato, la corrente risultante $I_C$ diminuisce drasticamente.
+
+Vediamo i range di tensione nello specifico.
+\begin{itemize}
+	\item Vediamo che il fenomeno di piegamento delle curve inizia verso la tensione di conduzione del diodo, cioè:
+$$
+V_\gamma \approx 0.7 \, \mathrm{V}
+$$
+\item Il punto di saturazione vero e proprio è invece raggiunto nella $V_{CE, \text{ sat}}$, che è leggermente minore:
+$$
+V_{CE, \text{ sat}} \approx 0.1 - 0.3 \, \mathrm{V}
+$$
+
+Potremmo chiederci come mai tale valore non è pari a zero. In saturazione, si ha che:
+$$
+V_{CE, \text{ sat}} = V_{BE} - V_{BC}
+$$
+Essendo la giunzione BC meno drogata, la sua caduta (di circa $0.4 \, \mathrm{V}$) è inferiore alla BE ($0.7 \, \mathrm{V}$, situazione che lascia un residuo positivo.
+\end{itemize}
+
+\subsubsection{Effetto Early}
+Il modello di Ebers-Moll, e quindi tutti gli ulteriori che abbiamo fatto su transistor PNP ed NPN ad emettitore comune, trascurano un effetto che notiamo sulle caratteristiche sia di ingresso che di uscita dipendente dal voltaggio $V_{CE}$ (come anticipato più volte nelle scorse sezioni). Questa è una generale dipedendenza direttamente proporzionale delle correnti a $V_{CE}$, che chiamamo effetto di \textit{Early}.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Caratteristica di ingresso}}
+
+\noindent
+Riprendiamo la caratterstica di ingresso. Questa era la relazione della corrente $i_B$ ai voltaggi imposti $V_{BE}$ e $V_{CE}$. In simboli:
+$$
+I_B = f(V_{BE}, V_{CE})
+$$
+Avevamo detto che la dipendenza da $V_{CE}$ era trascurabile in ZAD, e quindi la risposta era paragonabile a quella del diodo per $V_{CE} > V_\gamma \approx 0.7 \, \mathrm{V}$. 
+
+Vediamo in verità che si nota una riduzione di $I_B$ all’aumentare di $V_{CE}$ (cosa che porta anche alla nonlinearità delle $I_B$ ottenute a diverse tensioni $V_{BE}$). Comunque, ricordiamo che questo è un effetto poco evidente, e secondario rispetto al prossimo che vedremo.
+
+\par\smallskip
+
+\noindent
+\textbf{\textsf{Caratteristica di uscita}}
+
+\noindent
+L'effetto di Early più consistente si ha sulla caratteristica di uscita. Questa era la relazione della corrente $i_C$ al voltaggio imposto $V_{CE}$ e alla corrente $i_B$ che riusciamo ad ottenere alla base. In simboli:
+$$
+I_C = f(I_B, V_{CE})
+$$
+Di questa avevamo detto che la dipendenza da $V_{CE}$ era visibile solamente per $V_{CE} < V_\gamma$, e in particolare nel punto di saturazione $V_{CE, \text{ sat}}$ dove la giunzione BC passava in polarizzazione diretta e si entrava quindi nel regime di saturazione del transistor.
+
+Vediamo che esiste un ulteriore dipendenza in $V_{CE}$, non mostrata dal modello di Ebers-Moll. Prolungando le caratteristiche di uscita in $I_C$ si ottiene un punto di convergenza sull’asse della $V_{CE}$:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/early.png}
+\end{center}
+
+Questo punto viene detto \textit{tensione di Early} $V_A$ (o $-V_A$, a seconda di come scegliamo la convenzione di segno). Vediamo come le correnti $I_C$, che seguono la convergenza a alla tensione di Early, mostrano una dipendenza lineare alla tensione $V_{CE}$.
+
+\par\smallskip
+
+Possiamo darci una spiegazione fisica dell'effetto di Early considerando la larghezza della zona di svuotamento all'interno di una giunzione PN, vista per la prima volta in 5.1:
+$$
+w = \sqrt{ \frac{2 \epsilon_0}{e} \left( \frac{1}{N_A} + \frac{1}{N_d} \right) (V_0 - V_{BC})}
+$$
+dove notiamo che abbiamo scelto come la nostra tensione di bias la $V_{BC}$ imposta alla base del transistore.
+
+Ricordiamo quindi che:
+$$
+V_{BC} = - V_{CB}, \quad V_{CB} = V_{CE} - V_{BE}
+$$
+da quanto detto in 10.1.4 riguardo ai circuiti ad emettitore comune. Quindi, ricordiamo che in ZAD si ha che $V_{BE}$ è circa costante, in particolare $\sim V_\gamma$ come dal diodo.
+
+L'effetto sarà che all'aumentare di $V_{CE}$, con $V_{BE}$ fissata, non può che aumentare $V_{CB}$. Se $V_{CB}$ aumenta, aumenta la larghezza delle zona di svuotamento ai margini della regione centrale del transistor $w$. Diminuirà quindi anche la larghezza della regione neutra del transistore (che viene "mangiata" dalle zone di svuotamento che vanno ad allargarsi).
+In questa situazione i portatori maggioritari hanno minore probabilità di ricombinarsi, e quindi una parte maggiore di loro raggiungerà il collettore, contribuendo alla corrente $I_C$.
+
+Possiamo vedere un grafico che mostra questo esempio su un NPN:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/early_phys.png}
+\end{center}
+
+Riassumendo, abbiamo che al ridursi della lunghezza della porzione di base neutra ($L_B$), diminuisce la probabilità di ricombinazione in base ($I_B$, effetto Early sulla caratteristica in entrata), e quindi più lacune (almeno nel NPN) emesse raggiungono il collettore ($I_C$, effetto Early sulla caratteristica in uscita).
+
+
+\par\smallskip
+
+Dal punto di vista pratico, l'effetto di Early sulla caratteristica di uscita significa che esiste una resistenza in uscita finita in un transistor BJT. Il risultato è che la regione attiva (la ZAD) non è perfettamente costante in $V_{CE}$, ma presenta una piccola resistenza:
+$$
+r = \frac{V_A}{I_C}
+$$
+
+Vorremo quindi tenere conto di tale resistenza nella progettazione di circuiti che sfruttano i transistor, ad esempio gli amplificatori. Questo perché la resistenza può introdurre \textit{distorsione} nel segnale in uscita (dato dal fatto che la caratteristica in uscita non è costantemente proporzionale alla $I_B$, e quindi non lo è neanche il guadagno). Per ovviare a questo problema abbiamo 2 opzioni:
+\begin{itemize}
+	\item Scegliere transistor con grande tensione di \textit{Early} $V_A$: questo ha un effetto negativo sul guadagno (aumenta la resistenza) ma rende anche la risposta in uscita più lineare con l'ingresso $I_B$, riducendo la distorsione;
+	\item Mantenere la $I_C$ bassa, tenendo a sua volta bassa la $I_B$ di modulazione, dato che ricordiamo:
+$$
+I_C = \beta_F I_B
+$$
+
+Questo, come per la soluzione precedente, ha un effetto negativo sul guadagno (aumentiamo la resistenza e inoltre inviamo una corrente minore alla base del transistore). Sempre come prima, però, riduciamo la distorsione data dall'effetto di Early e quindi otteniamo dal transistor un amplificazione di qualità migliore.
+\end{itemize}
+
+Abbiamo quindi visto come entrambe le soluzioni proposte presentano un pro (diminuire la distorsione da effetto Early) ed un contro (ridurre il guadagno in corrente $A_i$ dell'amplificatore). Questo è un classico esempio di \textit{tradeoff} ingegneristico nella progettazoine di un circuito elettronico: avere una buona qualità significa avere minore guadagno, e viceversa.
 
 \end{document}
