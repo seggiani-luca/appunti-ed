@@ -286,7 +286,7 @@ Su un transistor prendiamo la corrente $i_1$ come la $I_B$ entrante alla base,, 
 	\includegraphics[scale=0.2]{../figures/bjt_hybrid.png}
 \end{center}
 
-% dubbio su h_{oe}
+
 
 Le componenti di $\overline{h}$ si ricavano quindi come:
 $$
@@ -336,7 +336,7 @@ Il circuito equivalente che possiamo formare da una rappresentazione a parametri
 		\draw (6.6, 0) node[anchor=east] {$V_2$};
 		\draw (6.6, -1) node[anchor=east] {$-$};
 		
-		\draw (4, 1) to [ european resistor, l=$\overline{h_{22}}$] (4, -1);
+		\draw (4, 1) to [ european resistor, l=$\frac{1}{\overline{h_{22}}}$] (4, -1);
 
 		\node[rectangle, draw, minimum width = 8.5cm, minimum height = 4cm] (a) at (1,0) {};
 	\end{circuitikz}
@@ -351,21 +351,38 @@ da cui l'impedenza $\overline{h_{11}}$ e l'ammettenza $\overline{h_{22}}$ vengon
 \noindent
 Approfondiamo qual'è il significato dal punto di vista fisico dei parametri ibridi appena calcolati sul BJT.
 \begin{itemize}
-\item \textbf{\textsf{impedenza di ingresso}} $h_{ie} = \overline{h_{11}}$ \\
+\item \textbf{\textsf{Impedenza di ingresso}} $h_{ie} = \overline{h_{11}}$ \\
+Questo parametro corrisponde al rapporto fra la tensione $V_{BE}$ alla base e la corrente $I_B$ che riusciamo a far scorrere. In questo, è una misura diretta della pendenza della curva di risposta della caratteristica in ingresso:
+\begin{center}
+	\includegraphics[scale=0.3]{../figures/trans_h_ie.png}
+\end{center}
+Risulta analoga alla resistenza differenziale del diodo (con la giunzione BE in ZAD).
 
-% fermaposto
+\item \textbf{\textsf{Guadagno di tensione inverso}} $h_{re} = \overline{h_{12}}$ \\
+	Questo parametro rappresenta il guadagno di tensione che abbiamo sulla porta di ingresso (la base-emettitore). In questo modellizza il risultato dell'effetto Early sulla caratteristica di ingresso, cioè la dipendenza dal voltaggio $V_{CE}$ alla porta di uscita.
+\begin{center}
+	\includegraphics[scale=0.3]{../figures/trans_h_re.png}
+\end{center}
 
-\item \textbf{\textsf{guadagno di tensione inverso}} $h_{re} = \overline{h_{12}}$ \\
+\item \textbf{\textsf{Guadagno di corrente diretto}} $h_{fe} = \overline{h_{21}}$ \\
+Questa è la costante che lega la corrente in entrata alla porta di ingresso (la base) alla corrente in $I_C$. In questa è direttamente legata al fattore di guadagno in corrente $\beta_F$:
+$$
+I_C = \beta_F I_B
+$$
+anche se notiamo che nel parametro $h_{fe}$ reale, ottenuto linearizzando il transistore su un punto di riposo $Q$, $h_{fe}$ è leggermente superiore a $\beta_F$.
+\begin{center}
+	\includegraphics[scale=0.3]{../figures/trans_h_fe.png}
+\end{center}
 
-% fermaposto
+\item \textbf{\textsf{Ammettenza di uscita}} $h_{oe} = \overline{h_{22}}$ \\
+Infine, questo parametro (o meglio il suo opposto) rappresenta l'impedenza sulla porta di uscita, quindi la piccola resistenza che vi associavamo per causa dell'effetto di Early. 
 
-\item \textbf{\textsf{guadagno di corrente diretto}} $h_{fe} = \overline{h_{21}}$ \\
+\newpage
 
-% fermaposto
-
-\item \textbf{\textsf{ammettenza di uscita}} $h_{oe} = \overline{h_{22}}$ \\
-
-% fermaposto
+In termini grafici, è legato alla pendneza della curva della caratteristica di uscita nel punto di linearizzazione:
+\begin{center}
+	\includegraphics[scale=0.3]{../figures/trans_h_oe.png}
+\end{center}
 
 \end{itemize}
 
@@ -373,8 +390,6 @@ Abbiamo quindi trovato un altro modello per il transistor BJT, che possiamo affi
 
 \subsection{Accoppiamento AC}
 Riprendiamo l'amplificatore a 4 resistori visto in 11.2.1, e vediamo cosa accade se si collega il segnale direttamente alla base del BJT, e il carico direttamente al collettore. Chiamiamo questo accoppiamento anche \textit{accoppiamento DC}.
-
-% circuito da 11.2.1
 
 \begin{center}
 \begin{circuitikz}
