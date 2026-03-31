@@ -508,13 +508,57 @@ A_V = - \beta_F \frac{R_C}{R_B}
 $$
 Notiamo che un difetto di questo circuito è che l’amplificazione può variare fortemente con i parametri del transistore e la temperatura. Per questo avremo bisogno di realizzare reti amplificatrici migliori.
 
+\subsubsection{Note sugli amplificatori}
+Facciamo quindi una trattazione dettagliata di cos'è un \textit{amplificatore} in primo luogo. Di base, un amplificatore sarà un dispositivo elettronico formato da due porte:
+\begin{itemize}
+	\item Una porta sarà rivolta verso un generatore di \textit{segnale} $V_s$, con la sua resistenza $R_s$. Solitamente il generatore di segnale è piccolo (rappresenta il segnale che vogliamo amplificare). Chiamiamo le grandezze su questa porta $V_i$ e $i_i$;
+	\item L'altra portà sara rivolta verso un \textit{carico}, rappresentato dall'impedenza di carico $R_L$. Questa vorrà vedere una versione amplificata del segnale erogato da $V_s$. Esistono diversi tipi di amplificazione, fra cui amplificazione di \textit{tensione} e amplificazione di \textit{corrente}. In generale, comunque, vogliamo avere un amplificazione della \textit{potenza} al carico, da:
+$$
+P = VI = \frac{V^2}{R} = I^2 R
+$$
+Chiamiamo le grandezze su questa porta $V_o$ e $i_o$;
+\end{itemize}
+
+Ci deve essere chiaro che un amplificatore è sempre un componente \textit{attivo}, cioè oltre alle porte di ingresso e di uscita di cui abbiamo parlato, dovra essere connesso all'alimentazione con $V_{CC}$ e $V_{EE}$. 
+
+Definiamo diversi parametri riguardo agli amplificatori, fra cui:
+\begin{itemize}
+\item \textbf{\textsf{Guadagno di tensione}} $A_V$ \\
+Questa equivarrà all'aumento di tensione che vediamo sul carico rispetto al segnale, cioè:
+$$
+A_V = \frac{V_o}{V_i} \Big|_{R_L \rightarrow +\infty}
+$$
+Il limite della resistenza ad infinito significa che sostanzialmente prendiamo la tensione imposta alla porta di uscita quasi fosse un aperto;
+
+\item \textbf{\textsf{Guadagno di corrente}} $A_i$ \\
+Allo stesso modo, possiamo definire l'aumento di corrente che vediamo sul carico rispetto al segnale, cioè:
+$$
+A_i = \frac{i_o}{i_i} 
+$$
+
+\item \textbf{\textsf{Impedenza di ingresso}} $R_i$ \\
+Questa sarà la resistenza (generalizzata ad impedenza per segnali non DC) vista all'ingresso dell'amplificatore, e cioè:
+$$
+R_i = \frac{V_i}{i_i}
+$$
+
+\item \textbf{\textsf{Impedenza di uscita}} $R_o$ \\
+Infine, questa sarà la resistenza (generalizzata ad impedenza per segnali non DC) vista all'uscita dell'amplificatore, e cioè:
+$$
+R_o = \frac{V_o}{i_o} \Big|_{V_s = 0}
+$$
+Notiamo che proviamo questa impedenza staccando il generatore di segnale alla porta di ingresso.
+
+\end{itemize}
+
 \subsubsection{Rete a 4 resistori}
 Abbiamo quindi detto che è necessario fissare una corrente continua costante di collettore o di emettitore che sia poco sensibile alle variazioni della temperatura e dei parametri del transistor.
 
-Consideriamo allora la seguente rete (a 4 restistori):
-\begin{center}
+Consideriamo allora la seguente rete (a 4 resistori):
+
 \begin{circuitikz}
-	\draw
+% Left circuit: voltage divider bias
+\draw
 (0,0) node[ground]{} to[R=$R_2$] (0,3)
 to[R=$R_1$] (0,6) node[vcc]{};
 
@@ -528,8 +572,29 @@ to[R=$R_1$] (0,6) node[vcc]{};
 \draw[->] (1.2,3.3) -- (1.8,3.3) node[midway, above]{$I_B$};
 \draw[->] (Q1.C) ++(0.3,0.5) -- ++(0,-1) node[midway, right]{$I_C$};
 \draw[->] (Q1.E) ++(0.3,0) -- ++(0,-.8) node[midway, right]{$I_E$};
+
+% Right circuit: single resistor bias
+\begin{scope}[xshift=10cm]
+\draw
+(0,0) node[ground]{} to[voltage source, V=$V_{BB}$] (0,3)
+to[R=$R_B$] (2,3);
+
+\draw (2,3) node[npn, anchor=B] (Q2) {};
+
+\draw (Q2.C) to[R=$R_C$] ++(0,3) node[vcc]{};
+\draw (Q2.E) to[R=$R_E$] ++(0,-3) node[ground]{};
+
+\draw[->] (1.4,3.3) -- (2,3.3) node[midway, above]{$I_B$};
+\draw[->] (Q2.C) ++(0.3,0.5) -- ++(0,-1) node[midway, right]{$I_C$};
+\draw[->] (Q2.E) ++(0.3,0) -- ++(0,-.8) node[midway, right]{$I_E$};
+\end{scope}
+
 \end{circuitikz}
-\end{center}
+
+Questo circuito è il primo tipo di amplificatore che vedremo, basato sul transistor di tipo BJT ad \textit{emettitore comune} (che avevamo iniziato a vedere in 10.1.4).
+
+Il segnale si va ad immettere sul nodo centrale alle due resistenze $R_1$ ed $R_2$, cioè alla base del BJT. Solitamente, si usa l'accoppiamento in AC (anziché in DC, in quanto ci permette di non modificare il punto di riposo): vedremo in 12.2 cosa si intende di preciso.
+L'idea del partitore formato da $R_1$ e $R_2$ è quello di stabilire un \textit{bias}, cioè uno scostamento fisso della tensione alla base del transistor che determina il punto di riposo o \textit{quiescenza} $Q$ del circuito. A questo sommeremo un \textit{piccolo} voltaggio di segnale $V_s$ che verrà effettivamente amplificato.
 
 Ciò che facciamo innanzitutto riportarci all'equivalente di Thevenin del partitore di tensione a sinistra, ricordando che:
 $$
@@ -537,22 +602,7 @@ V_{BB} = \frac{R_2}{R_1 + R_2} V_{CC} \implies
 R_{B} = \frac{R_1 R_2}{R_1 + R_2}
 $$
 
-\begin{center}
-\begin{circuitikz}
-\draw
-(8,0) node[ground]{} to[V=$V_{BB}$] (8,3)
-to[R=$R_B$] (10,3);
-
-\draw (10,3) node[npn, anchor=B] (Q2) {};
-
-\draw (Q2.C) to[R=$R_C$] ++(0,3) node[vcc]{};
-\draw (Q2.E) to[R=$R_E$] ++(0,-3) node[ground]{};
-
-\draw[->] (9.4,3.3) -- (10,3.3) node[midway, above]{$I_B$};
-\draw[->] (Q2.C) ++(0.3,0.5) -- ++(0,-1) node[midway, right]{$I_C$};
-\draw[->] (Q2.E) ++(0.3,0) -- ++(0,-.8) node[midway, right]{$I_E$};
-\end{circuitikz}
-\end{center}
+Questo ci darà la topologia a destra, stabilita la resistenza vista $R_B$ e la tensione $V_{BB}$ all'ammissione dell'amplificatore (il cosiddetto bias che stavamo cercando).
 
 Quindi facciamo l'ipotesi di funzionamento in ZAD (che era la stessa ipotesi dell'amplificatore di prima), imponendo il modello ideale e quindi ricavando:
 \[
@@ -568,7 +618,7 @@ Risolvendo tale sistema si ottiene:
 $$
 I_E = (\beta_f + 1)I_B = \frac{ V_{BB} - V_\gamma }{ \frac{R_B}{\beta_F + 1} + R_E }
 $$
-che se:
+che sotto determinate ipotesi ci dà il risultato:
 $$
 \begin{cases}
 	V_{BB} >> V_\gamma \\

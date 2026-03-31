@@ -244,6 +244,8 @@ $$
 
 \par\smallskip
 
+\newpage
+
 \noindent
 \textbf{\textsf{Parametri ibridi}}
 
@@ -354,14 +356,14 @@ Approfondiamo qual'è il significato dal punto di vista fisico dei parametri ibr
 \item \textbf{\textsf{Impedenza di ingresso}} $h_{ie} = \overline{h_{11}}$ \\
 Questo parametro corrisponde al rapporto fra la tensione $V_{BE}$ alla base e la corrente $I_B$ che riusciamo a far scorrere. In questo, è una misura diretta della pendenza della curva di risposta della caratteristica in ingresso:
 \begin{center}
-	\includegraphics[scale=0.3]{../figures/trans_h_ie.png}
+	\includegraphics[scale=0.2]{../figures/trans_h_ie.png}
 \end{center}
 Risulta analoga alla resistenza differenziale del diodo (con la giunzione BE in ZAD).
 
 \item \textbf{\textsf{Guadagno di tensione inverso}} $h_{re} = \overline{h_{12}}$ \\
 	Questo parametro rappresenta il guadagno di tensione che abbiamo sulla porta di ingresso (la base-emettitore). In questo modellizza il risultato dell'effetto Early sulla caratteristica di ingresso, cioè la dipendenza dal voltaggio $V_{CE}$ alla porta di uscita.
 \begin{center}
-	\includegraphics[scale=0.3]{../figures/trans_h_re.png}
+	\includegraphics[scale=0.2]{../figures/trans_h_re.png}
 \end{center}
 
 \item \textbf{\textsf{Guadagno di corrente diretto}} $h_{fe} = \overline{h_{21}}$ \\
@@ -371,22 +373,22 @@ I_C = \beta_F I_B
 $$
 anche se notiamo che nel parametro $h_{fe}$ reale, ottenuto linearizzando il transistore su un punto di riposo $Q$, $h_{fe}$ è leggermente superiore a $\beta_F$.
 \begin{center}
-	\includegraphics[scale=0.3]{../figures/trans_h_fe.png}
+	\includegraphics[scale=0.2]{../figures/trans_h_fe.png}
 \end{center}
 
 \item \textbf{\textsf{Ammettenza di uscita}} $h_{oe} = \overline{h_{22}}$ \\
 Infine, questo parametro (o meglio il suo opposto) rappresenta l'impedenza sulla porta di uscita, quindi la piccola resistenza che vi associavamo per causa dell'effetto di Early. 
 
-\newpage
-
 In termini grafici, è legato alla pendneza della curva della caratteristica di uscita nel punto di linearizzazione:
 \begin{center}
-	\includegraphics[scale=0.3]{../figures/trans_h_oe.png}
+	\includegraphics[scale=0.2]{../figures/trans_h_oe.png}
 \end{center}
 
 \end{itemize}
 
 Abbiamo quindi trovato un altro modello per il transistor BJT, che possiamo affiancare ad i modelli già trovati per i BJT PNP e NPN. Notiamo che il modello è equivalente per entrambi i tipi di transistor, ovvero sia il PNP che l'NPN collassano allo stesso modello (e quindi pressappoco lo stesso comportamento) ai piccoli segnali. 
+
+\newpage
 
 \subsection{Accoppiamento AC}
 Riprendiamo l'amplificatore a 4 resistori visto in 11.2.1, e vediamo cosa accade se si collega il segnale direttamente alla base del BJT, e il carico direttamente al collettore. Chiamiamo questo accoppiamento anche \textit{accoppiamento DC}.
@@ -495,7 +497,9 @@ Abbiamo quindi risolto il problema. Vediamo però che le frequenze per cui i con
 $$
 \omega_{z,X} = \frac{1}{R_X C_X}
 $$
-È possibile calcolare $R_X$ dal circuito: quindi decidere $\omega_{z,X}$ sarà fatto dimensionando opportunamente la capacità (selezionando $C_X$). 
+È possibile calcolare $R_X$ dal circuito: quindi decidere $\omega_{z,X}$ sarà fatto dimensionando opportunamente la capacità (selezionando $C_X$).
+
+Questa è in verità una semplificazione: la visione di insieme pone che l'effetto collettivo di tutte le capacità nel circuito (anche quelle intrinseche ai componenti) sia equivalente a quello di un cortocircuito per i segnali alla frequenza di operazione del circuito. In questo modo, quando si studia ad esempio l'amplificatore (o comunque qualsiasi circuito che elabora segnali) si possono trascurare le capacità ed assumerle cortocircuiti. 
 
 \subsection{Riassunto sull'analisi dei circuiti non lineari}
 Facciamo quindi un riassunto su come gestire i circuiti non lineari, in DC e in AC:
