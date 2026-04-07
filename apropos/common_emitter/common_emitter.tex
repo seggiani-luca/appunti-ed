@@ -1,0 +1,818 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper, margin=8em]{geometry}
+
+% usa i pacchetti per la scrittura in italiano
+\usepackage[french,italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\frenchspacing 
+
+% usa i pacchetti per la formattazione matematica
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+
+% usa altri pacchetti
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{standalone}
+
+% imposta il titolo
+\title{Transistor ad emettitore comune}
+\author{Luca Seggiani}
+\date{2026}
+
+% imposta lo stile
+% usa helvetica
+\usepackage[scaled]{helvet}
+% usa palatino
+\usepackage{palatino}
+% usa un font monospazio guardabile
+\usepackage{lmodern}
+
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\ttdefault}{lmtt}
+
+% disponi il titolo
+\makeatletter
+\renewcommand{\maketitle} {
+	\begin{center} 
+		\begin{minipage}[t]{.8\textwidth}
+			\textsf{\LARGE\bfseries \@title} 
+		\end{minipage}%
+		\begin{minipage}[t]{.2\textwidth}
+			\raggedleft \vspace{-1.65em}
+			\textsf{\small \@author} \vfill
+			\textsf{\small \@date}
+		\end{minipage}
+		\par
+	\end{center}
+
+	\thispagestyle{empty}
+	\pagestyle{fancy}
+}
+\makeatother
+
+% disponi teoremi
+\usepackage{tcolorbox}
+\newtcolorbox[auto counter, number within=section]{theorem}[2][]{%
+	colback=blue!10, 
+	colframe=blue!40!black, 
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries, 
+	title=~\thetcbcounter: #2, 
+	#1
+}
+
+% disponi definizioni
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{%
+	colback=red!10,
+	colframe=red!40!black,
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries,
+	title=~\thetcbcounter: #2,
+	#1
+}
+
+% U.D.M
+\newcommand{\amp}{\ensuremath{\mathrm{A}}}
+\newcommand{\volt}{\ensuremath{\mathrm{V}}}
+\newcommand{\meter}{\ensuremath{\mathrm{m}}}
+\newcommand{\second}{\ensuremath{\mathrm{s}}}
+\newcommand{\farad}{\ensuremath{\mathrm{F}}}
+\newcommand{\henry}{\ensuremath{\mathrm{H}}}
+\newcommand{\siemens}{\ensuremath{\mathrm{S}}}
+
+% circuiti
+\usepackage{circuitikz}
+\usetikzlibrary{babel}
+
+% disegni
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+% disponi codice
+\usepackage{listings}
+\usepackage[table]{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{codestyle}{
+		backgroundcolor=\color{black!5}, 
+		commentstyle=\color{codegreen},
+		keywordstyle=\bfseries\color{magenta},
+		numberstyle=\sffamily\tiny\color{black!60},
+		stringstyle=\color{green!50!black},
+		basicstyle=\ttfamily\footnotesize,
+		breakatwhitespace=false,         
+		breaklines=true,                 
+		captionpos=b,                    
+		keepspaces=true,                 
+		numbers=left,                    
+		numbersep=5pt,                  
+		showspaces=false,                
+		showstringspaces=false,
+		showtabs=false,                  
+		tabsize=2
+}
+
+\lstdefinestyle{shellstyle}{
+		backgroundcolor=\color{black!5}, 
+		basicstyle=\ttfamily\footnotesize\color{black}, 
+		commentstyle=\color{black}, 
+		keywordstyle=\color{black},
+		numberstyle=\color{black!5},
+		stringstyle=\color{black}, 
+		showspaces=false,
+		showstringspaces=false, 
+		showtabs=false, 
+		tabsize=2, 
+		numbers=none, 
+		breaklines=true
+}
+
+\lstdefinelanguage{javascript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% disponi sezioni
+\usepackage{titlesec}
+
+\titleformat{\section}
+	{\sffamily\Large\bfseries} 
+	{\thesection}{1em}{} 
+\titleformat{\subsection}
+	{\sffamily\large\bfseries}   
+	{\thesubsection}{1em}{} 
+\titleformat{\subsubsection}
+	{\sffamily\normalsize\bfseries} 
+	{\thesubsubsection}{1em}{}
+
+% disponi alberi
+\usepackage{forest}
+
+\forestset{
+	rectstyle/.style={
+		for tree={rectangle,draw,font=\large\sffamily}
+	},
+	roundstyle/.style={
+		for tree={circle,draw,font=\large}
+	}
+}
+
+% disponi algoritmi
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmo}
+\makeatother
+
+% disponi numeri di pagina
+\usepackage{fancyhdr}
+\fancyhf{} 
+\fancyfoot[L]{\sffamily{\thepage}}
+
+\makeatletter
+\fancyhead[L]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@title \ \@date}}} 
+\fancyhead[R]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@author}}}
+\makeatother
+
+\begin{document}
+
+\pagestyle{fancy}
+\thispagestyle{empty}
+\renewcommand{\thispagestyle}[1]{}
+
+\maketitle
+
+Negli appunti di elettronica si è visto un modello \textit{analitico semplificato generale} per il \textbf{transitor} ad \textbf{emettitore comune}. Questo significa che il metodo forniva risultati approssimati (sfruttando le già note approssimazioni sul diodo e sulle caratteristiche di ingresso e di uscita del transistor), per transistor NPN o PNP, in ogni regime:
+\begin{enumerate}
+	\item \textit{Interdizione};
+	\item \textit{Zona Attiva Diretta} (ZAD);
+	\item \textit{Saturazione}.
+\end{enumerate}
+
+\subsection{Modello}
+Il modello che andiamo ad utilizzare è quello delle caratteristiche di ingresso e di uscita del transistor ricavate dal modello di Ebers-Moll:
+\begin{itemize}
+\item La \textbf{caratteristica di ingresso} rappresenta la dipendenza della corrente alla base dalla tensione applicata ad essa, cioè:
+$$
+I_B = f(V_{BE}, V_{CE}) \ \textit{(NPN)}
+, \quad
+I_B = f(V_{EB}, V_{EC}) \ \textit{(PNP)}
+$$
+e in particolare:
+$$
+I_B = (1 - \alpha_F) I_{ES} e^{\frac{V_{BE}}{V_T}} \ \textit{(NPN)}
+, \quad
+I_B = -(1 - \alpha_F) I_{ES} e^{\frac{V_{EB}}{V_T}} \ \textit{(PNP)}
+$$
+dove la dipendenza da $V_{CE}$ è minima e data da effetti secondari (fra cui l'effetto Early), per cui non la consideriamo;
+\item La \textbf{caratteristica di uscita} rappresenta invece la dipendenza della corrente al collettore dalla corrente alla base e la tensione fra collettore ed emettitore, cioè:
+$$
+I_C = f(I_B, V_{CE}) \ \textit{(NPN)}
+, \quad
+I_C = f(I_B, V_{EC}) \ \textit{(PNP)}
+$$
+e in particolare in ZAD:
+$$
+I_C = \beta_F I_B,  \ \textit{(NPN e PNP)}
+$$
+dove la dipendenza da $V_{CE}$ è considerevole, anche dall'effetto Early, ma sopratutto dal fatto che se:
+$$
+V_{CE} \leq V_{CE, \mathrm{sat}} \ \textit{(NPN)}
+, \quad
+V_{EC} \leq V_{EC, \mathrm{sat}} \ \textit{(PNP)}
+$$
+si va nella regione di \textit{saturazione}, dove il transistor smette di amplificare linearmente.
+\end{itemize}
+
+Facciamo un ulteriore semplificazione per quanto riguarda la $I_B$, prendendo la caratteristica di ingresso come equivalente al comportamento del diodo, per cui si può adottare un modello a \textbf{caduta costante} di potenziale con $V_\gamma$:
+$$
+V_\gamma \approx 0.7 \, \mathrm{V}
+$$
+dalle caratteristiche del diodo.
+
+Questo significherà che ad ogni diodo associeremo 2 grandezze:
+\begin{itemize}
+	\item La $V_\gamma$ imposta alla base, relativa alla $V_{BE}$ (quindi sul lato segnale del circuito);
+	\item La $V_{CE, \mathrm{sat}}$ imposta fra collettore ed emettitore, relativa alla $V_{CE}$ (quindi sul lato di amplificazione del circuito).
+\end{itemize}
+
+\newpage
+
+\section{Transistor NPN}
+Il circuito che andiamo a studiare è il classico circuito del transistor ad emettitore comune: 
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\node[npn, tr circle] at (4, 2.02){};
+	\draw (3, 4.02) -- (3.16, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v<=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1.02) -| (0, 0.02) -- (4, 0.02) -- (8, 0.02) -| (8, 1.02);
+	\draw (4, 1.25) -| (4, 0.02);
+	\draw (4, 2.79) -| (4, 4.79);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.91, 2.02){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.91, 2.02){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (4.25, 2.79){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (4.25, 2.79){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (4.25, 1.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (4.25, 1.25){\tiny $E$};
+	\draw (8, 6) to[short, i^>=$I_C$] (4, 6);
+	\draw (3.16, 4.02) to[short, i^>=$I_B$] (3.16, 2.02);
+	\draw (4, 4.79) -| (4, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (3, 1.75) to[open, v=$V_{BE}$, voltage/bump b=0.25, voltage=american] (3, 0.25);
+	\draw (5, 2.75) to[open, v=$V_{CE}$, voltage/bump b=0.25, voltage=american] (5, 1.25);
+\end{tikzpicture}
+\end{center}
+
+Sul lato sinistro del circuito abbiamo il generatore di segnale $V_{signal}$, on resistenza associata $R_S$. Sarà questo a fornire la tensione $V_{BE}$ alla base del transistor, che quindi modulerà la $I_B$ secondo la caratteristica di ingresso. Sul lato destro intendiamo amplificare questo segnale sfruttando l'alimentazione offerta da $V_{supply}$, per generare una corrente $I_C$ che scorra sulla resistenza di carico $R_L$.
+
+
+\subsection{Zona Attiva Diretta NPN}
+Il circuito con l'NPN adottando il modello per la ZAD si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v<=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, 0) -- (4, 0) -- (8, 0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.75, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.75, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 3){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 3){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 1){\tiny $E$};
+	\draw (8, 6) to[short, i^>=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (2, 1.75) to[open, v=$V_{BE}$, voltage/bump b=0.25, voltage=american] (2, 0.25);
+	\draw (6, 2.75) to[open, v=$V_{CE}$, voltage/bump b=0.25, voltage=american] (6, 1.25);
+	\draw (3, 4.02) to[short, i^>=$I_B$] (3, 2);
+	\draw (3, 2) to[battery1, l={$V_\gamma$}] (3, -0);
+	\draw (5, 4) to[american controlled current source, l_={$\beta_F I_B$}] (5, -0);
+	\draw (5, 6) -| (5, 4);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{BE} = V_\gamma \\
+	I_B = \frac{V_{signal} - V_\gamma}{R_S} \\
+	V_{CE} = V_{supply} - R_L \beta_F I_B \\
+	I_C = \beta_F I_B \\
+	V_L = R_L \beta_F I_B
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	I_B > 0 \\
+	V_{CE} > V_{CE,\mathrm{sat}}
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. Per la $I_B$, che sarà parametro di controllo per la corrente sulla resistenza di carico, sfruttiamo il fatto che la caduta alla base è fissa dal modello a caduta costante (a $V_\gamma$) per dire:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S}
+$$
+La corrente $I_C$ sulla resistenza sarà quindi immediata:
+$$
+I_C = \beta_F I_B
+$$
+come lo sarà la tensione che riusciamo ad imporre sulla resistenza di carico $R_L$ (in polarizzazione inversa):
+$$
+V_L = R_L I_C = R_L \beta_F I_B
+$$
+La tensione $V_{CE}$ su collettore ed emettitore del transistor sarà invece:
+$$
+V_{CE} = V_{supply} - R_L \beta_F I_B
+$$
+cioè andrà a diminuire all'aumentare della tensione $V_L$ che imponiamo al carico. Notiamo che era questa ($V_{CE}$) la grandezza che volevamo mantenere maggior di un certo valore $V_{CE,\mathrm{sat}}$ in maniera da evitare il fenomeno della saturazione.
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo che la corrente ammessa alla base del transistor non sia nulla, cioè:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S} > 0
+$$
+e che la tensione fra collettore ed emettitore sia maggiore al valore di saturazione, cioè:
+$$
+V_{CE} = V_{supply} - R_L \beta_F I_B > V_{CE,\mathrm{sat}}
+$$
+
+\subsection{Saturazione NPN}
+Il circuito con l'NPN adottando il modello per la saturazione si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v<=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, 0) -- (4, 0) -- (8, 0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.75, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.75, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 3){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 3){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 1){\tiny $E$};
+	\draw (8, 6) to[short, i^>=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (2, 1.75) to[open, v=$V_{BE}$, voltage/bump b=0.25, voltage=american] (2, 0.25);
+	\draw (6, 2.75) to[open, v=$V_{CE}$, voltage/bump b=0.25, voltage=american] (6, 1.25);
+	\draw (3, 4.02) to[short, i^>=$I_B$] (3, 2);
+	\draw (3, 2) to[battery1, l={$V_\gamma$}] (3, -0);
+	\draw (5, 6) -| (5, 4);
+	\draw (5, 4) to[battery1, l_={$V_{CE,\mathrm{sat}}$}] (5, -0);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{BE} = V_\gamma \\
+	I_B = \frac{V_{signal} - V_\gamma}{R_S} \\
+	V_{CE} = V_{CE,\mathrm{sat}} \\
+	I_C = \frac{V_{supply} - V_{CE,\mathrm{sat}}}{R_L} \\
+	V_L = V_{supply} - V_{CE,\mathrm{sat}}
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	I_B > 0 \\
+	I_C < \beta_F I_B
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. Per la $I_B$ non cambia niente rispetto al caso in ZAD, cioè si ha sempre:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S}
+$$
+La $I_C$ sarà invece influenzata dal fatto che il transistor è in saturazione, e quindi impone un certo voltaggio minimo fra collettore ed emettitore. Questa sarà infatti:
+$$
+I_C = \frac{V_{supply} - V_{CE,\mathrm{sat}}}{R_L}
+$$
+Allo stesso modo, la $V_L$ riflette il fatto che abbiamo imposto al carico il voltaggio massimo che il transistor era in grado di erogare, ovvero:
+$$
+V_L = V_{supply} - V_{CE,\mathrm{sat}}
+$$
+Abbiamo quindi diminuito la $V_{CE}$ (aumentando la tensione al carico $V_L$) fino al punto massimo di saturazione del transistor: adesso la $V_{CE}$ ha toccato il punto di saturazione, e non si può ottenere ulteriore potenza.
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo, come nel caso in ZAD, che la corrente ammessa alla base del transistor non sia nulla, cioè:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S} > 0
+$$
+e che la corrente al collettore non superi il valore della ZAD (altrimenti ci troveremmo proprio in ZAD):
+$$
+I_C = \frac{V_{supply} - V_{CE,\mathrm{sat}}}{R_L} < \beta_F I_B
+$$
+
+\subsection{Interdizione NPN}
+Il circuito con l'NPN adottando il modello per l'interdizione si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v<=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, 0) -- (4, 0) -- (8, 0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.625, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.625, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 4){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 4){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 0.25){\tiny $E$};
+	\draw (8, 6) to[short, i^>=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (3, 4.02) to[short, i^>=$I_B$] (3, 2);
+	\draw (5, 6) -| (5, 4);
+	\draw (3, 2) to[open, o-o, v=$V_{CE}$, voltage=american] (3, -0);
+	\draw (5, 4) to[open, o-o, v=$V_{CE}$, voltage=american] (5, -0);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{BE} = V_{signal} \\
+	I_B = 0 \\
+	V_{CE} = V_{supply} \\
+	I_C = 0 \\
+	V_L = 0 
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	V_{BE} < V_\gamma \\
+	V_{BC} < V_\gamma - V_{CE,\mathrm{sat}}
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. In questo caso la situazione è banale in quanto non c'è conduzione di corrente in alcun punto del circuito:
+$$
+I_B = 0, \quad I_C = 0
+$$
+per cui le differenze di potenziale del transistor sono imposte direttamente dai generatori:
+$$
+V_{BE} = V_{signal}, \quad V_{CE} = V_{supply}
+$$
+La tensione imposta al carico $V_L$ sarà anch'essa nulla, in quanto tutto il ramo sopra la $V_{supply}$ sarà allo stesso potenziale:
+$$
+V_L = 0
+$$
+Questo significherà che non stiamo svolgendo alcun lavoro sul carico, e il circuito effettivamente non sta amplificando nulla. 
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo condizioni ai voltaggi. Innanzitutto vorremo che la tensione alla base del transistor sia minore al valore $V_\gamma$. Non fosse stato questo il caso, il transistor sarebbe entrato in conduzione di $I_B$ alla base (per il modello a caduta costante) e avremmo avuto il voltaggio imposto $V_\gamma$. Quindi si ha:
+$$
+V_{BE} < V_\gamma
+$$
+Dovremmo anche imporre la condizione al collettore:
+$$
+V_{BC} < V_\gamma - V_{CE,\mathrm{sat}}
+$$
+Questa potrebbe sembrare arbitraria, ma deriva semplicemente dal fatto che in interdizione entrambe le giunzioni PN del transistor si trovano in polarizzazione negativa. Imporre la polarizzazione negativa alla giunzione PN BC del transistor NPN equivale ad imporre esattamente questa condizione.
+
+\newpage
+
+\section{Transistor PNP}
+Studiamo adesso la versione a PNP del classico circuito del transistor ad emettitore comune: 
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3) to[american voltage source, invert, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (3, 4.02) -- (3.16, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v>=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, invert, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1.02) -| (0, 0.02) -- (4, 0.02) -- (8, 0.02) -| (8, 1.02);
+	\draw (4, 1.25) -| (4, 0.02);
+	\draw (4, 2.79) -| (4, 4.79);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.91, 2.02){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.91, 2.02){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (4.25, 2.79){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (4.25, 2.79){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (4.25, 1.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (4.25, 1.25){\tiny $E$};
+	\draw (8, 6) to[short, i^<=$I_C$] (4, 6);
+	\draw (3.16, 4.02) to[short, i^<=$I_B$] (3.16, 2.02);
+	\draw (4, 4.79) -| (4, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (3, 1.75) to[open, v<=$V_{EB}$, voltage/bump b=0.25, voltage=american] (3, 0.25);
+	\draw (5, 2.75) to[open, v<=$V_{EC}$, voltage/bump b=0.25, voltage=american] (5, 1.25);
+	\node[pnp, tr circle, yscale=-1] at (4, 2.02){};
+\end{tikzpicture}
+\end{center}
+
+Il circuito è esattamente analogo a prima, con i generatori opportunamente invertiti (notiamo che per non modificare la topologia del circuito, il componente circuitale del PNP stesso è stato invertito).
+Sul lato sinistro del circuito abbiamo il generatore di segnale $V_{signal}$, on resistenza associata $R_S$. Sarà questo a fornire la tensione $V_{EB}$ alla base del transistor (dove stavolta vogliamo l'emettitore a voltaggio più alto della base). Questa quindi modulerà la $I_B$ secondo la caratteristica di ingresso. Sul lato destro intendiamo amplificare questo segnale sfruttando l'alimentazione offerta da $V_{supply}$, per generare una corrente $I_C$ che scorra sulla resistenza di carico $R_L$.
+
+\subsection{Zona Attiva Diretta PNP}
+Il circuito con il PNP adottando il modello per la ZAD si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, invert, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v>=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, invert, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, -0) -- (4, -0) -- (8, -0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.75, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.75, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 3){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 3){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 1){\tiny $E$};
+	\draw (8, 6) to[short, i^<=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (2, 1.75) to[open, v<=$V_{EB}$, voltage/bump b=0.25, voltage=american] (2, 0.25);
+	\draw (6, 2.75) to[open, v<=$V_{EC}$, voltage/bump b=0.25, voltage=american] (6, 1.25);
+	\draw (3, 4.02) to[short, i^<=$I_B$] (3, 2);
+	\draw (3, 2) to[battery1, invert, l={$V_\gamma$}] (3, -0);
+	\draw (5, 4) to[american controlled current source, invert, l_={$\beta_F I_B$}] (5, -0);
+	\draw (5, 6) -| (5, 4);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{EB} = V_\gamma \\
+	I_B = \frac{V_{signal} - V_\gamma}{R_S} \\
+	V_{EC} = V_{supply} - R_L \beta_F I_B \\
+	I_C = \beta_F I_B \\
+	V_L = R_L \beta_F I_B
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	I_B > 0 \\
+	V_{EC} > V_{EC,\mathrm{sat}}
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. Per la $I_B$, che sarà parametro di controllo per la corrente sulla resistenza di carico, sfruttiamo il fatto che la caduta alla base è fissa dal modello a caduta costante (a $V_\gamma$) per dire:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S}
+$$
+in direzione inversa al caso NPN.
+La corrente $I_C$ sulla resistenza sarà quindi immediata:
+$$
+I_C = \beta_F I_B, \quad (I_B < 0)
+$$
+come lo sarà la tensione che riusciamo ad imporre sulla resistenza di carico $R_L$:
+$$
+V_L = R_L I_C = R_L \beta_F I_B
+$$
+La tensione $V_{EC}$ su emettitore e collettore del transistor sarà invece:
+$$
+V_{EC} = V_{supply} - R_L \beta_F I_B
+$$
+cioè andrà a diminuire all'aumentare della tensione $V_L$ che imponiamo al carico. Notiamo che era questa ($V_{EC}$) la grandezza che volevamo mantenere maggior di un certo valore $V_{EC,\mathrm{sat}}$ in maniera da evitare il fenomeno della saturazione.
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo che la corrente ammessa alla base del transistor non sia nulla, cioè:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S} > 0
+$$
+e che la tensione fra emettitore e collettore sia maggiore al valore di saturazione, cioè:
+$$
+V_{EC} = V_{supply} - R_L \beta_F I_B > V_{EC,\mathrm{sat}}
+$$
+
+\subsection{Saturazione PNP}
+Il circuito con il PNP adottando il modello per la saturazione si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, invert, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v>=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, invert, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, -0) -- (4, -0) -- (8, -0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.75, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.75, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 3){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 3){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 1){\tiny $E$};
+	\draw (8, 6) to[short, i^<=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (2, 1.75) to[open, v<=$V_{EB}$, voltage/bump b=0.25, voltage=american] (2, 0.25);
+	\draw (6, 2.75) to[open, v<=$V_{EC}$, voltage/bump b=0.25, voltage=american] (6, 1.25);
+	\draw (3, 4.02) to[short, i^<=$I_B$] (3, 2);
+	\draw (3, 2) to[battery1, invert, l={$V_\gamma$}] (3, -0);
+	\draw (5, 6) -| (5, 4);
+	\draw (5, 4) to[battery1, invert, l_={$V_{EC,\mathrm{sat}}$}] (5, -0);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{EB} = V_\gamma \\
+	I_B = \frac{V_{signal} - V_\gamma}{R_S} \\
+	V_{EC} = V_{EC,\mathrm{sat}} \\
+	I_C = \frac{V_{supply} - V_{EC,\mathrm{sat}}}{R_L} \\
+	V_L = V_{supply} - V_{EC,\mathrm{sat}}
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	I_B > 0 \\
+	I_C < \beta_F I_B
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. Per la $I_B$ non cambia niente rispetto al caso in ZAD, cioè si ha sempre:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S}
+$$
+La $I_C$ sarà invece influenzata dal fatto che il transistor è in saturazione, e quindi impone un certo voltaggio minimo fra emettitore e collettore. Questa sarà infatti:
+$$
+I_C = \frac{V_{supply} - V_{EC,\mathrm{sat}}}{R_L}
+$$
+Allo stesso modo, la $V_L$ riflette il fatto che abbiamo imposto al carico il voltaggio massimo che il transistor era in grado di erogare, ovvero:
+$$
+V_L = V_{supply} - V_{EC,\mathrm{sat}}
+$$
+Abbiamo quindi diminuito la $V_{EC}$ (aumentando la tensione al carico $V_L$) fino al punto massimo di saturazione del transistor: adesso la $V_{EC}$ ha toccato il punto di saturazione, e non si può ottenere ulteriore potenza.
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo, come nel caso in ZAD, che la corrente ammessa alla base del transistor non sia nulla, cioè:
+$$
+I_B = \frac{V_{signal} - V_\gamma}{R_S} > 0
+$$
+e che la corrente al collettore non superi il valore della ZAD (altrimenti ci troveremmo proprio in ZAD):
+$$
+I_C = \frac{V_{supply} - V_{CE,\mathrm{sat}}}{R_L} < \beta_F I_B
+$$
+
+\subsection{Interdizione PNP}
+Il circuito con il PNP adottando il modello per l'interdizione si presenta come segue:
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.8\textwidth}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (0, 3.02) to[american voltage source, invert, l_={$V_{signal}$}] (0, 1.02);
+	\draw (1, 4.02) to[american resistor, l={$R_S$}] (3, 4.02);
+	\draw (0, 3.02) -| (0, 4.02) -- (1, 4.02);
+	\draw (8, 5.02) to[american resistor, l={$R_L$}, v>=$V_L$, voltage=american] (8, 3.02);
+	\draw (8, 3.02) to[american voltage source, invert, l={$V_{supply}$}] (8, 1.02);
+	\draw (0, 1) -| (0, -0) -- (4, -0) -- (8, -0) -| (8, 1);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.485cm] at (2.75, 2){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.75, 2){\tiny $B$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 4){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 4){\tiny $C$};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (5.25, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (5.25, 0.25){\tiny $E$};
+	\draw (8, 6) to[short, i^<=$I_C$] (5, 6);
+	\draw (8, 6) -- (8, 5.02);
+	\draw (3, 4.02) to[short, i^<=$I_B$] (3, 2);
+	\draw (5, 6) -| (5, 4);
+	\draw (2.989, 2) to[open, o-o, v<=$V_{EB}$, voltage=american] (2.989, -0);
+	\draw (5, 4) to[open, o-o, v<=$V_{EC}$, voltage=american] (5, -0);
+\end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.2\textwidth}
+\noindent
+\textbf{\textsf{Soluzione}} \\
+\noindent
+$$
+\begin{cases}
+	V_{EB} = V_{signal} \\
+	I_B = 0 \\
+	V_{EC} = V_{supply} \\
+	I_C = 0 \\
+	V_L = 0 
+\end{cases}
+$$
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+$$
+\begin{cases}
+	V_{EB} < V_\gamma \\
+	V_{CB} < V_\gamma - V_{EC,\mathrm{sat}}
+\end{cases}
+$$
+\end{minipage}
+\end{figure}
+
+Calcoliamo le grandezze di riferimento. In questo caso la situazione è banale in quanto non c'è conduzione di corrente in alcun punto del circuito:
+$$
+I_B = 0, \quad I_C = 0
+$$
+per cui le differenze di potenziale del transistor sono imposte direttamente dai generatori:
+$$
+V_{EB} = V_{signal}, \quad V_{EC} = V_{supply}
+$$
+La tensione imposta al carico $V_L$ sarà anch'essa nulla, in quanto tutto il ramo sopra la $V_{supply}$ sarà allo stesso potenziale:
+$$
+V_L = 0
+$$
+Questo significherà che non stiamo svolgendo alcun lavoro sul carico, e il circuito effettivamente non sta amplificando nulla. 
+
+\par\smallskip
+\noindent
+\textbf{\textsf{Verifica}} \\
+\noindent
+La verifica di quanto trovato si fa imponendo condizioni ai voltaggi. Innanzitutto vorremo che la tensione alla base del transistor sia minore al valore $V_\gamma$. Non fosse stato questo il caso, il transistor sarebbe entrato in conduzione di $I_B$ alla base (per il modello a caduta costante) e avremmo avuto il voltaggio imposto $V_\gamma$. Quindi si ha:
+$$
+V_{EB} < V_\gamma
+$$
+Dovremmo anche imporre la condizione al collettore:
+$$
+V_{EC} < V_\gamma - V_{EC,\mathrm{sat}}
+$$
+Questa significa ancora imporre l'interdizione, cioè che entrambe le giunzioni PN del transistor si trovano in polarizzazione negativa.
+
+\end{document}
