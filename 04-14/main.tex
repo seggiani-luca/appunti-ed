@@ -254,9 +254,9 @@ Vediamo anche qui le suddivisioni:
 
 Abbiamo che la tensione lungo il canale di conduzione può essere rappresentata da una funzione $\phi(x)$ campionata da $0$ (al limite del source) a $L$ (al limite del drain) con $L$ larghezza del canale stesso:
 $$
-\phi(x) = \frac{\phi\left(L-x\right)+V_{D}x}{L}, \quad \left\{0\le x\le L\right\}
+\phi(x) = \frac{V_{D}x}{L}, \quad \left\{0\le x\le L\right\}
 $$
-Sarà che $\phi(x)$ attorno al source (cioè $\phi(0)$) varrà un certo valore di $\phi > 0$, mentre $\phi(x)$ attorno al drain (cioè $\phi(L)$) rispetterà il valore imposto $V_G$. 
+Sarà che $\phi(x)$ attorno al source (cioè $\phi(0)$) varrà 0, mentre $\phi(x)$ attorno al drain (cioè $\phi(L)$) rispetterà il valore imposto $V_G$. 
 
 Ora, per un qualsiasi punto $x_i$ lungo il canale, essere effettivamente in inversione significa assumere:
 $$
@@ -272,7 +272,7 @@ Vicino al source, questa $V_{Gx_i}$ sarà circa la tensione di gate:
 $$
 x_i = 0 \implies V_{G x_i} = V_G
 $$
-mentre vicino al dain questa diminuirà fino ad un certo valore:
+mentre vicino al drain questa diminuirà fino ad un certo valore:
 $$
 x_i = L \implies V_{G x_i} = V_G - V_D
 $$
@@ -291,7 +291,7 @@ Questo punto viene detto di \textit{pinchoff}, e porta il MOSFET in una zona di 
 
 Per una $V_D$ al di sopra del punto di pinchoff qualsiasi, in particolare, vale che il canale si chiude all'ascissa:
 $$
-x_p = \frac{\left(V_{G}-V_{T}\right)L-\phi L}{\left(V_{D}-\phi\right)}
+x_p = \frac{\left(V_{G}-V_{T}\right)L}{V_{D}}
 $$
 Se questo non fosse immediato dalle formule, una visualizzazione di questa situazione si può trovare qui: \url{https://www.desmos.com/calculator/qhnrqn8kcq}.
 
@@ -344,7 +344,7 @@ Vediamo quale può essere una modellizzazione del MOSFET che ci permette di trat
 	\item \textbf{\textsf{Regione di saturazione}} \\
 	Per il modello in saturazione, dove abbiamo detto la corrente diventa costante, si usa l'approssimazione:
 	$$
-	i_{ds} = \mu_n C_{ox} \frac{W}{L} \frac{ (V_{GS} - V_T)^2 }{2} = K (V_{GS} - V_T)^2
+	i_{ds} = \mu_n C_{ox} \frac{W}{L} \frac{ (V_{GS} - V_T)^2 }{2} = K \frac{(V_{GS} - V_T)^2}{2}
 	$$
 	che vediamo appunto è costane fissata $V_G$ e calcolata $K$ dagli stessi parametri della regione ohmica.
 \end{enumerate}
