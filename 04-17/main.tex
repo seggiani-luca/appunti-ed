@@ -215,22 +215,65 @@ Possiamo modellizzare questo effetto introducendo un termine dipendente da $V_{D
 $$
 i_{ds} = \mu_n C_{ox} \frac{W}{L} \frac{ (V_{GS} - V_T)^2 }{2} = K (V_{GS} - V_T)^2 (1 + \lambda v_{DS})
 $$
+
+Possiamo quindi estendere il nostro modello includendo l'effetto della modulazione di canale, e tracciare l'andamento della corrente fra drain e source in funzione della tensione applicata fra tali morsetti:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/channel_mod.png}
+\end{center}
+
 Notiamo quindi che, per $\Delta L >> L$ larghezza del canale, le caratteristiche di uscita formano un fascio di rette che passano per l'ascissa $-\frac{1}{\lambda}$, come avevamo visto per l'effetto di Early.
 
 In ogni caso, come avevamo fatto nei BJT, trascureremo l'effetto modulazione di campo nei MOSFET (a volte detto \textit{effetto Early dei MOSFET}) nei circuiti che studieremo.
 
 \subsubsection{Curva transcaratteristica}
+Nei grafici tracciati finora notiamo che la linea di separazione fra zona triodo e zona di saturazione non è stata una retta (come era per il BJT fra la ZAD e la zona di saturazione), bensì una parabola. Questo potrebbe sembrare arbitrario, ma deriva invece dalle caratteristiche proprie del MOSFET.
+
+Quello che vorremo fare per evidenziare la curva di transizione (detta anche \textit{curva transcaratteristica}) è imporre la condizione di pinchoff, già vista alla scorsa lezione, usata appunto per determinare quando ci trovavamo in zona triodo o in saturazione:
+$$
+V_{GS} - V_{DS} = V_T \implies V_{DS} = V_{GS} - V_T
+$$
+dove abbiamo già ricavato un espressione chiusa per la $V_{DS}$.
+Basterà quindi imporre tale $V_{DS}$ nella funzione per la corrente $I_{DS}$, per ogni $V_{GS}$ arbitraria data, cioè individuare il punto:
+$$
+T^* = \left(V_{GS}-V_{T},\ i_{DS}\left(V_{GS},V_{GS}-V_{T}\right)\right)
+$$
+come il punto di transizione sul grafico tensione $V_{DS}$ corrente $I_{DS}$.
+Questo è coerente in quanto:
+\begin{itemize}
+	\item L'ascissa è banalmente la tensione $V_{DS} = V_{GS} - V_T$ come calcolata sopra;
+	\item L'ordinata sarà la corrente che passa a quel punto, calcolata dalla funzione di corrente $i_{DS}$ (non ci importa sapere se usiamo quella in triodo o in saturazione in quanto a questo punto saranno uguali), con $V_{GS}$ dato e $V_{DS} = V_{GS} - V_T$ come sopra.
+\end{itemize}
+
+Per trovare una forma chiusa dell'equazione transcaratteristica, poniamo che la variabile $x$ sia uguale a $V_{DS}$ e calcoliamoci in funzione l'altro parametro $V_{GS}$:
+$$
+V_{GS} = V_{DS} + V_T
+$$
+per trovare la curva $t(x)$:
+$$
+t(x) = i_{DS}\left(x+V_{T},x\right)\ \left\{x>0\right\}
+$$
+
+Sostituiamo in $i_{DS}$ usando la formula della saturazione (abbiamo detto è uguale in quanto le due zone hanno qui uguale valore, ma la saturazione è più semplice). Abbiamo quindi:
+$$
+i_{DS} = K\frac{\left(V_{GS}+V_{T}\right)^{2}}{2} \implies t(x) = K\frac{x^{2}}{2}
+$$
+cioè una semplice parabola passante per l'origine, che è ciò che abbiamo visto finora.
+
+Per concludere, evidenziamo su un grafico l'andamento di tale curva:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/trans_curve.png}
+\end{center}
 
 \subsubsection{MOSFET a canale P}
-Finora abbiamo visto il MOSFET a canale N. Ne esiste un duale, che è il mosfet a \textbf{canale P}. Questo è disposto esattamente al contrario del MOSFET di tipo N, cioè è realizzato su un substrato di tipo N, e ha nodi source, e drain di tipo P.
+Finora abbiamo visto il MOSFET a canale N. Ne esiste un duale, che è il MOSFET a \textbf{canale P}. Questo è disposto esattamente al contrario del MOSFET di tipo N, cioè è realizzato su un substrato di tipo N, e ha i "serbatoi" di source e drain di tipo P.
+
+L'idea è di imporre una tensione stavolta \textit{negativa} al gate, in maniera da attrarre i conduttori minoritari dello strato N, cioè le lacune (fornite anche dai serbatoi di tipo P) e creare un canale di conduzione fra source e drain. Come vedremo, conseguenza del fatto che la tensione imposta è \textit{negativa} anziché positiva, e che i portatori sono \textit{lacune} anziché elettroni, è che tutte le grandezze del MOSFET di tipo P (detto anche \textit{PMOS} (\textit{Positive Metal Oxide Semiconductor})) sono uguali ma opposte in segno rispetto al NMOS (\textit{Negative Metal Oxide Semiconductor}).
 
 \begin{center}
 	\includegraphics[scale=1]{../figures/mosfet_p.png}
 \end{center}
 
-L'idea è di creare un canale di conduttori P fra source e drain, imponendo una tensione negativa al gate. 
-
-Come era stato fra NPN e PNP, il MOSFET a canale P (\textit{PMOS}) è l'esatto duale del MOSFET a canale N, per cui si hanno tutti gli stessi valori, ma cambiati di segno.
+Quindi, come era stato fra NPN e PNP, il PMOS è l'esatto duale del MOSFET a canale N, per cui si hanno tutti gli stessi valori, ma cambiati di segno.
 Ad esempio:
 \begin{itemize}
 	\item La $V_T$ del PMOS, che chiamiamo $V_{TP}$, sarà negativa in quanto il gate dovrà attirare verso l'alto le lacune nel substrato N. Avremo quindi:
@@ -248,13 +291,85 @@ La caratteristica di saturazione del PMOS sarà quindi analoga, ma con segno inv
 $$
 i_{SD} = \mu_P C_{ox} \frac{W}{L} \frac{(V_{GS} - V_{TP})^2}{2}
 $$
-con alcune differenze che però vanno notate:
+dove possiamo prendere $V_{GS} - V_{TP}$ in quanto tutto viene elevato al quadrato (e quindi diventa positivo). Stiamo per ottenti al fatto che sia $V_{GS}$ che $V_{TP}$ sono quantità negative, per cui ciò che intendiamo effettivamente considerare è:
+$$
+V_{SG} - |V_{TP}| = - V_{GS} - V_{TP} \rightarrow \text{equivalenti al quadrato}
+$$
+
+La caratteristica di regione ohmica verrà invertita in maniera simile:
+$$
+i_{SD} = \mu_P C_{ox} \frac{W}{L} \frac{\left(V_{GS}-V_{TP}\right)^{2}}{2} 
+$$
+
+Notiamo che spesso si preferisce usare come variabili di riferimento per il PMOS, $V_{SD}$ e $i_{SD}$ anziché $V_{DS}$ e $i_{DS}$ (come abbiamo fatto), e talvolta $V_{SG}$ anzichè $V_{SG}$ (oppure si fa l'accorgimento col segno visto prima).
+
+\newpage
+
+Viste le caratteristiche in regione ohmica e di saturazione, vediamo che complessivamente l'andamento del PMOS sarà quello riportato in grafico:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/pmos_char.png}
+\end{center}
+
+Vediamo poi altre differenze che vanno notate fra il PMOS e il CMOS che abbiamo finora trascurato:
 \begin{enumerate}
 	\item Innanzitutto consideriamo $\mu_P$ anziché $\mu_N$, che abbiamo detto più volte è più piccola (le lacune sono in genere meno mobili degli elettroni);
 \item C'è anche una differenza, in generale, fra le tensioni di threshold $V_{TN}$ e $V_{TP}$. 
-
-	Esistono dei processi (che abbiamo già anticipati) detti \textbf{CMOS} (\textit{Complementary Metal Oxide Semiconductor}). Nei processi CMOS si usano paia complementari di PMOS e NMOS per effettuare funzioni logiche. In questo contesto dobbiamo avere MOSFET di entrambi i tipi che siano \textit{effettivamente} complementari, cioè abbiano caratteristiche invertite ma uguali in modulo. 
 \end{enumerate}
+
+Esistono dei processi (che abbiamo già anticipati) detti \textbf{CMOS} (\textit{Complementary Metal Oxide Semiconductor}). Nei processi CMOS si usano paia complementari di PMOS e NMOS per effettuare funzioni logiche. In questo contesto dobbiamo avere MOSFET di entrambi i tipi che siano \textit{effettivamente} complementari, cioè abbiano caratteristiche invertite ma uguali in modulo. 
+
+\subsubsection{Riassunto sulle caratteristiche del MOSFET}
+Dopo aver visto in rassegna le tipologie di MOSFET (NMOS e PMOS) e le loro caratteristiche, facciamo un breve riassunto.
+
+Innanzitutto abbiamo che entrambi questi dispositivi operano in due regioni principali: \textit{triodo} (o ohmica) e \textit{saturazione}:
+\begin{itemize}
+\item La regione \textit{triodo} (o ohmica) del \textbf{NMOS} si raggiunge equivalentemente quando:
+$$
+V_{GS} - V_{DS} > V_{TN}, \quad V_{DS} < V_{GS} - V_{TN}
+$$
+mentre la regione di \textit{saturazione} del \textbf{NMOS} si raggiunge quando:
+$$
+V_{GS} - V_{DS} \leq V_{TN}, \quad V_{DS} \geq V_{GS} - V_{TN}
+$$
+
+\item La regione \textit{triodo} (o ohmica) del \textbf{PMOS} si raggiunge equivalentemente quando:
+$$
+V_{GS} - V_{SD} < V_{TP}, \quad V_{SD} > V_{GS} - V_{TP}
+$$
+mentre la regione di \textit{saturazione} del \textbf{PMOS} si raggiunge quando:
+$$
+V_{GS} - V_{SD} \geq V_{TP}, \quad V_{SD} \leq V_{GS} - V_{TP}
+$$
+\end{itemize}
+
+Quindi, raggiunte tali regioni, riportiamo le equazioni che modellano l'andamento della corrente in funzione dei parametri fondamentali, cioè la tensione al gate e la tensione fra source e drain:
+\begin{itemize}
+\item La regione \textit{triodo} (o ohmica) del \textbf{NMOS} si modellizza come:
+$$
+i_{DS, \, \text{ohm}}\left(V_{GS},V_{DS}\right)=K_{n}\left(\left(V_{GS}-V_{TN}\right)V_{DS}-\frac{V_{DS}^{2}}{2}\right)\left(1+\lambda V_{DS}\right)
+$$
+mentre la regione di \textit{saturazione} del \textbf{NMOS} si modellizza come:
+$$
+i_{DS, \, \text{sat}}\left(V_{GS},V_{DS}\right)=K_{n}\frac{\left(V_{GS}-V_{TN}\right)^{2}}{2}\left(1+\lambda V_{DS}\right)
+$$
+	
+\item La regione \textit{triodo} (o ohmica) del \textbf{PMOS} si modellizza come:
+$$
+i_{SD, \, \text{ohm}}\left(V_{GS},V_{SD}\right)=K_{p}\left(\left(V_{GS}-V_{TP}\right)V_{SD}-\frac{V_{SD}^{2}}{2}\right)\left(1-\lambda V_{SD}\right)
+$$
+mentre la regione di \textit{saturazione} del \textbf{PMOS} si modellizza come:
+$$
+i_{SD, \, \text{sat}}\left(V_{GS},V_{SD}\right)=K_{p}\frac{\left(V_{GS}-V_{TP}\right)^{2}}{2}\left(1-\lambda V_{SD}\right)
+$$
+\end{itemize}
+Notiamo come nelle precedenti equazioni abbiamo riportato il termine dato dall'effetto di modulazione di canale, sia nelle equazioni per la regione triodo che per la regione di saturazione (altrimenti sarebbe violata la continuità nella zona di transizione).
+
+L'andamento complessivo di entrambi i componenti viene riportato nel seguente grafico, dove alle ascisse abbiamo la $V_{DS}$. Passando a $V_{DS}$ negativa abbiamo $V_{SD}$ positiva, per cui riportiamo sul primo quadrante l'andamento del NMOS e sul terzo quadrante l'andamento del PMOS:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/pmos_nmos.png}
+\end{center}
+
+Questo grafico (e i precedenti) sono stati generati a partire dal Desmos al link \url{https://www.desmos.com/calculator/dmd1wdksol}, dove vengono tracciate tutte le equazioni viste in questo riassunto, le curve transcaratteristiche e l'effetto di modulazione di canale. 
 
 \subsubsection{Simboli circuitali del MOSFET}
 Viste le varie tipologie, e la vasta gamma di applicazione, dei MOSFET, si ha una serie di simboli che vengono usati per rappresentarli nei circuiti.
@@ -281,43 +396,105 @@ Iniziamo quindi a vedere i modelli che usiamo per approssimare il comportamento 
 $$
 I_{DS} = K\frac{(V_{GS} - V_T)^2}{2}
 $$
+cambiati i parametri in $DS$ ai parametri in $SD$ per il PMOS.
 La resistenza fra gate e source viene posta ad infinito, e quindi il gate si comporta come un polo isolato.
 
-Vediamo il circuito per un NMOS, dove la corrente va da source a drain:
-% circuito
+Vediamo il circuito per un NMOS, dove la corrente va da drain a source:
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-2, -0) to[open, o-o] (-0, -0);
+	\draw (-0, -0) to[american controlled current source, l={$K\frac{(V_{GS} - V_T)^2}{2}$}] (-0, -2);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-0, 0.25){D};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, -2.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-0, -2.25){S};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-2, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-2, 0.25){G};
+	\draw (-2, -0) to[short] (-4, -0);
+	\draw (4, -0) to[short] (0, -0);
+	\draw (4, -2) to[short] (0, -2);
+	\draw (0, -2) to[short] (-4, -2);
+	\draw (-4, -0) to[open, v=$V_{GS}$, voltage=american] (-4, -2);
+	\draw (4, -0) to[open, v=$V_{DS}$, voltage=american] (4, -2);
+\end{tikzpicture}
+\end{center}
 
-Il PMOS è equivalente, ma con la corrente che va da drain a source:
-% circuito
+Il PMOS è equivalente, ma con la corrente che va da source a drain: 
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-2, -0) to[open, o-o] (-0, -0);
+	\draw (0, -2) to[american controlled current source, l_={$K\frac{(V_{GS} - V_T)^2}{2}$}] (0, -0);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-0, 0.25){D};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, -2.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-0, -2.25){S};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-2, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-2, 0.25){G};
+	\draw (-2, -0) to[short] (-4, -0);
+	\draw (4, -0) to[short] (0, -0);
+	\draw (4, -2) to[short] (0, -2);
+	\draw (0, -2) to[short] (-4, -2);
+	\draw (-4, -0) to[open, v=$V_{GS}$, voltage=american] (-4, -2);
+	\draw (4, -0) to[open, v<=$V_{SD}$, voltage=american] (4, -2);
+\end{tikzpicture}
+\end{center}
 
 La \textit{verifica} in questo caso si fa ponendo di trovarsi in zona di saturazione, cioè che sia rispettata:
 $$
-V_{DS} \geq (V_{GS} - V_T)
+V_{DS} \geq V_{GS} - V_T
 $$
 nel NMOS, e:
 $$
-V_{DS} \leq (V_{GS} - V_T)
+V_{SD} \leq V_{GS} - V_T
 $$
 nel PMOS (con tutti i parametri $< 0$).
 
 \item Per l'ipotesi di regione \textbf{ohmica}, abbiamo che il MOSFET si comporta ancora da generatore di corrente controllato in tensione che obbedisce a:
 $$
-I_{DS} = K\frac{(V_{GS} - V_T)^2}{2}
+I_{DS} = K \left( (V_{GS} - V_T) V_{DS} - \frac{V_{DS}^2}{2} \right)
 $$
+cambiati i parametri in $DS$ ai parametri in $SD$ per il PMOS.
 La resistenza fra gate e source viene posta ad infinito, e quindi il gate si comporta ancora come un polo isolato.
 
 Vediamo il circuito per un NMOS, dove la corrente va da source a drain:
-% circuito
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-2, -0) to[open, o-o] (-0, -0);
+	\draw (0, -0) to[american controlled current source, l={$K \left( (V_{GS} - V_T) V_{DS} - \frac{V_{DS}^2}{2} \right)$}] (0, -2);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, 0.25){D};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, -2.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, -2.25){S};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-2, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-2, 0.25){G};
+	\draw (-2, -0) to[short] (-4, -0);
+	\draw (6, -0) to[short] (0, -0);
+	\draw (6, -2) to[short] (0, -2);
+	\draw (0, -2) to[short] (-4, -2);
+	\draw (-4, -0) to[open, v=$V_{GS}$, voltage=american] (-4, -2);
+	\draw (6, -0) to[open, v=$V_{DS}$, voltage=american] (6, -2);
+\end{tikzpicture}
+\end{center}
 
 Il PMOS è equivalente, ma con la corrente che va da drain a source:
-% circuito
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-2, -0) to[open, o-o] (-0, -0);
+	\draw (0, -2) to[american controlled current source, l_={$K \left( (V_{GS} - V_T) V_{SD} - \frac{V_{SD}^2}{2} \right)$}] (0, -0);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, 0.25){D};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, -2.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, -2.25){S};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-2, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-2, 0.25){G};
+	\draw (-2, -0) to[short] (-4, -0);
+	\draw (6, -0) to[short] (0, -0);
+	\draw (6, -2) to[short] (0, -2);
+	\draw (0, -2) to[short] (-4, -2);
+	\draw (-4, -0) to[open, v=$V_{GS}$, voltage=american] (-4, -2);
+	\draw (6, -0) to[open, v<=$V_{SD}$, voltage=american] (6, -2);
+\end{tikzpicture}
+\end{center}
 
 La \textit{verifica} in questo caso si fa ponendo di trovarsi in zona ohmica, cioè che sia rispettata:
 $$
-V_{DS} < (V_{GS} - V_T)
+V_{DS} < V_{GS} - V_T
 $$
 nel NMOS, e:
 $$
-V_{DS} < (V_{GS} - V_T)
+V_{SD} > V_{GS} - V_T
 $$
 nel PMOS (con tutti i parametri $< 0$).
 
@@ -354,7 +531,7 @@ to[R=$R_1$] (0,6) node[vcc]{};
 \end{circuitikz}
 \end{center}
 
-In questo circuito la rete a sinistra (formata da $R_1$ e $R_2$) fa da partitore di tensione se la corrente $I_G = 0$ è nulla. In tal caso vale:
+In questo circuito la rete a sinistra (formata da $R_1$ e $R_2$) fa da partitore di tensione quando la corrente $I_G = 0$ è nulla (ipotesi di saturazione). In tal caso vale:
 $$
 V_G = V_{cc} \frac{R_2}{R_1 + R_2} = V_{GS}
 $$
@@ -380,13 +557,21 @@ I_D = K \frac{(V_{GS} - V_T)^2}{2}
 \end{cases}
 $$
 
+Da qui possiamo procedere graficamente, sovrapponendo la retta di carico alla caratteristica del MOSFET alla tensione $V_{GS}$ data, e quindi trovando corrente e tensione fra gate e source (questo chiaramente finché siamo in saturazione).
+
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/mosfet_sys_1.png}
+\end{center}
+
+Un problema di questo approccio è, però, che siamo fortemente dipendenti dalla caratteristica del MOSFET stesso (fra cui $K$), che è altamente variabile di modello in modello. 
+
 \par\smallskip
 
 \noindent
 \textbf{\textsf{Rete a 4 resistori}}
 
 \noindent
-Una problematica della scorsa rete è che, al variare delle caratteristiche del MOSFET, si possono avere delle varazioni della caratteristica e quindi diverse intersezioni sulla retta di calcolo. Un modo per stabilizzare questa situazione è quello di introdurre una resistenza al source, quindi realizzare una rete a 4 resistori.
+Abbiamo detto che una problematica della scorsa rete è che, al variare delle caratteristiche del MOSFET, si possono avere delle varazioni della caratteristica e quindi diverse intersezioni sulla retta di calcolo. Un modo per stabilizzare questa situazione è quello di introdurre una resistenza al source, quindi realizzare una rete a 4 resistori.
 \begin{center}
 \begin{circuitikz}
 \ctikzset{tripoles/mos style/arrows}
@@ -421,21 +606,32 @@ $$
 V_{GS} = V_G - V_S = V_{cc}\frac{R_2}{R_1 + R_2} - R_S I_D
 $$
 
-Notiamo quindi di aver ottenuto una retta per la tensione fra gate e source $V_{GS}$ che dipende da un certo parametro $\alpha$:
+Notiamo quindi di aver ottenuto una retta per la corrente $I_D$ in funzione della tensione fra gate e source $V_{GS}$ che dipende da un certo parametro $\alpha$:
 $$
-V_{GS} = \alpha - R_S I_D, \quad \alpha = V_{cc}\frac{R_2}{R_1 + R_2}
+V_{GS} = \alpha - R_S I_D \implies I_D = \frac{\alpha - V_{GS}}{R_S}, \quad \alpha = V_{cc}\frac{R_2}{R_1 + R_2}
 $$
-notiamo che questa interseca la corrente nulla in $\alpha$, e la tensione nulla in $\frac{\alpha}{R_S}$, per cui variando $R_S$ possiamo stabilizzare il punto di quiescenza della $V_S$ e il regime di operazione del MOSFET, anche al variare delle sue caratteristiche.
 
-Continuando a risolvere il circuito, possiamo scrivere come prima $V_{cc}$ in funzione per trovare la retta di carico:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/mosfet_sys_2.png}
+\end{center}
+
+Questa retta è a (piccola) pendenza negativa, e incrocia la caratteristica del MOSFET per $I_D$. In questo modo, variando $R_S$ possiamo stabilizzare il punto di quiescenza della $V_S$ e il regime di operazione del MOSFET, anche al variare delle sue caratteristiche. Sostituendo l'equazione per la $V_{GS}$ trovata nella caratteristica del MOSFET, otteniamo la tipica equazione quadratica:
+$$
+I_D = K \frac{(\alpha - R_S I_D - V_T)^2}{2}
+$$
+
+Un'interpretazione alternativa di questa situazione è che abbiamo creato un ciclo di feedback negativo, dove aumentando $I_D$, diminuisce $V_{GS}$, per cui nuovamente $I_D$ è costretta a diminuire. In questo modo non controlliamo più direttamente $V_{GS}$ (controlliamo $\alpha$, che equivale a $V_G$), ma d'altro canto siamo in una situazione in cui la caratteristica del MOSFET non influisce più sulla $I_D$ (che è invece determinata da $\alpha$ e $R_S$). La quadratica che abbiamo riportato sopra non è altro che la rappresentazione matematica di questo fenomeno.
+
+Continuiamo allora a risolvere il circuito. Possiamo scrivere come prima $V_{cc}$ in funzione delle altre tensioni: 
 $$
 V_{cc} = R_D I_D + V_{DS} + R_S I_D = (R_D + R_S) I_D + V_{DS}
 $$
-Abbiamo allora anche qui una retta di lavoro sul grafico tensione corrente:
+individuando anche qui una retta di lavoro sul grafico tensione corrente:
 $$
 I_D = \frac{V_{cc}}{R_D + R_S} - \frac{V_{DS}}{R_D + R_S}
 $$
-Mettiamo quindi la retta di lavoro a sistema con la caratteristica del MOSFET, dove possiamo sostituire l'equazione per la $V_{GS}$ trovata prima:
+
+Mettiamo quindi la retta di carico a sistema con la caratteristica del MOSFET, dove possiamo sostituire l'equazione per la $V_{GS}$ trovata prima per riprendere l'equazione quadratica:
 $$
 \begin{cases}
 	I_D = \frac{V_{cc}}{R_D + R_S} - \frac{V_{DS}}{R_D + R_S} \\
@@ -447,5 +643,6 @@ $$
 	I_D = K \frac{(\alpha - R_S I_D - V_T)^2}{2}
 \end{cases}
 $$
+Questo sistema può essere risolto a partire dalla seconda equazione (la quadratica) per trovare $I_D$ al punto stabile (come prima, solo che la $I_D$ non era stabile rispetto al MOSFET). Quindi, da questa si può risalire a tutti gli altri valori del circuito (fra cui ad esempio la $V_{DS}$ dalla prima equazione).
 
 \end{document}

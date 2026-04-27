@@ -256,7 +256,7 @@ Abbiamo che la tensione lungo il canale di conduzione può essere rappresentata 
 $$
 \phi(x) = \frac{V_{D}x}{L}, \quad \left\{0\le x\le L\right\}
 $$
-Sarà che $\phi(x)$ attorno al source (cioè $\phi(0)$) varrà 0, mentre $\phi(x)$ attorno al drain (cioè $\phi(L)$) rispetterà il valore imposto $V_G$. 
+Sarà che $\phi(x)$ attorno al source (cioè $\phi(0)$) varrà 0, mentre $\phi(x)$ attorno al drain (cioè $\phi(L)$) rispetterà il valore imposto $V_D$. 
 
 Ora, per un qualsiasi punto $x_i$ lungo il canale, essere effettivamente in inversione significa assumere:
 $$
@@ -314,7 +314,7 @@ Quindi descriviamo 3 variabili che restano costanti:
 \end{itemize}
 Da questo deriva il fatto che le caratteristiche della giunzione formata restano costanti al variare di $x_p$ (e quindi di $V_D$ oltre il punto di pinchoff), e quindi lo resta anche la corrente che passa sul MOSFET dal drain al source. Per questo motivo chiamiamo questa zona, di \textbf{saturazione}. 
 
-Notiamo che la saturazione nel MOSFET ha effettivamente un comportamento macroscopico simile a quella del BJT, ma viene provocata da fenomeni completamente diversi all'interno della struttura del transistore
+Infine, notiamo come la saturazione nel MOSFET ha effettivamente un comportamento macroscopico simile a quella del BJT, ma viene provocata da fenomeni completamente diversi all'interno della struttura del transistore.
 
 \end{itemize}
 
@@ -346,7 +346,7 @@ Vediamo quale può essere una modellizzazione del MOSFET che ci permette di trat
 	$$
 	i_{ds} = \mu_n C_{ox} \frac{W}{L} \frac{ (V_{GS} - V_T)^2 }{2} = K \frac{(V_{GS} - V_T)^2}{2}
 	$$
-	che vediamo appunto è costane fissata $V_G$ e calcolata $K$ dagli stessi parametri della regione ohmica.
+	che vediamo appunto è costane fissata $V_G$ e calcolata $K$ dagli stessi parametri della regione ohmica. Notiamo che per $K$ esistono due convenzioni: uno che la prende come già inclusiva del termine $\frac{1}{2}$, e una che lo lascia fuori. In questi appunti è stata combattuta una battaglia fra me (preferisco lasciare il $\frac{1}{2}$ fuori) e il mio professore (spesso include il $\frac{1}{2}$), per cui la convenzione usata potrebbe cambiare a seconda del contesto. 
 \end{enumerate}
 
 Per determinare la zona di \textit{transizione} fra regione ohmica e di saturazione, poniamo la condizione di pinchoff:
@@ -354,9 +354,11 @@ $$
 V_{GS} - V_{DS} = V_T \implies V_{DS} = V_{GS} - V_T
 $$
 
+\newpage
+
 Tracciando l'andamento sul grafico, al variare della $V_{GS}$, si ha:
 	\begin{center}
-		\includegraphics[scale=0.3]{../figures/mosfet_char.png}
+		\includegraphics[scale=0.28]{../figures/mosfet_char.png}
 	\end{center}
 dove si nota la separazione fra regione ohmica (lineare) e di saturazione.
 

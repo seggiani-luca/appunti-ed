@@ -203,14 +203,14 @@
 Abbiamo visto la rete di polarizzazione del MOSFET NMOS a 4 resistori, e come questa ci permetteva di stabilizzare il comportamento del componente riconducendolo alle resistenze esterne. 
 
 Ci resta quindi da vedere il modello per i \textit{piccoli segnali}.
-In tal caso adottiamo il modello ai piccoli segnali del MOSFET:
+In tal caso prendiamo il modello generale del MOSFET in saturazione:
 $$
 i_D = \mu_n C_{ox} \frac{W}{L} \frac{(V_{GS} - V_T)^2}{2} (1 + \lambda V_{DS})
 $$
 dove abbiamo incluso il termine di \textit{modulazione di canale} (visto in 16.0.1).
 
 \subsubsection{Conduttanza e resistenza differenziale}
-Il modello ai piccoli segnali del MOSFET, come abbiamo visto in 16.1, è sempre un circuito con gate e source isolati (conta solo la tensione fra questi), edove se consideriamo il termine di modulazione di canale abbiamo fra drain e source 2 componenti (in parallelo):
+Il modello ai piccoli segnali del MOSFET, come abbiamo visto in 16.1, è sempre un circuito con gate e source isolati (conta solo la tensione fra questi), e dove se consideriamo il termine di modulazione di canale abbiamo fra drain e source 2 componenti (in parallelo):
 \begin{enumerate}
 	\item Un generatore di corrente pilotato in tensione:
 		$$
@@ -224,41 +224,92 @@ Il modello ai piccoli segnali del MOSFET, come abbiamo visto in 16.1, è sempre 
 		dove la $r_d$ viene detta appunto \textit{resistenza differenziale}.
 \end{enumerate}
 
-% circuito
+\newpage
+
+Il circuito si presenta quindi come segue:
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (4, 6) to[open, o-o] (6, 6);
+	\draw (4, 6) |- (2, 6);
+	\draw (6, 6) -- (10, 6);
+	\draw (2, 4) -- (10, 4);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (4, 6.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (4, 6.25){G};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (6, 6.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (6, 6.25){D};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (6, 3.75){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (6, 3.75){S};
+	\draw (2, 6) to[open, v=$v_{gs}$, voltage=american] (2, 4);
+	\draw (10, 6) to[open, v=$v_{ds}$, voltage=american] (10, 4);
+	\draw (6, 6) to[american controlled current source, l={$g_m v_{gs}$}] (6, 4);
+	\draw (8, 6) to[american resistor, l={$r_d$}] (8, 4);
+\end{tikzpicture}
+\end{center}
 
 Conduttanza e resistenza differenziale si calcolano come linearizzazione del modello del MOSFET, rispettivamente su $V_{GS}$ e $V_{DS}$:
 $$
 g_m = \frac{\partial i_D}{\partial V_{GS}} \Big|_Q, \quad
-r_d = \frac{\partial v_{DS}}{\partial i_{D}} = \left( \frac{\partial i_{D}}{\partial v_{DS}} \right)^{-1}
+r_d = \frac{\partial V_{DS}}{\partial i_{D}} = \left( \frac{\partial i_{D}}{\partial V_{DS}} \right)^{-1}
 $$
 dove $Q$ è il punto di quiescenza, secondo un procedimento analogo alla linearizzazione del diodo (9.1) o del transistore bipolare (sezione 12.1).
 Svogliamo i calcoli:
 \begin{itemize}
 \item Per $g_m$ abbiamo la derivata del modello su $V_{GS}$, per cui:
 $$
-g_m = \frac{\partial i_D}{\partial V_{GS}} \Big|_Q = \left(\mu_n C_{ox} \frac{W}{L}\right) \frac{1}{2} 2 (V_{GS} - V_T) (1 + \lambda V_{DS}) = \frac{2 I_D}{V_{GS} - V_T}
+g_m = \frac{\partial i_D}{\partial V_{GS}} \Big|_Q = \left(\mu_n C_{ox} \frac{W}{L}\right) \frac{1}{2} 2 (V_{GS} - V_T) (1 + \lambda V_{DS}) \approx \frac{2 I_D}{V_{GS} - V_T} = K(V_{GS} - V_T)
 $$
-con i valori in maiuscolo relativi al punto di quiescenza;
-\item Per $r_m$ abbiamo l'inverso della derivata del modello su $V_{DS}$, per cui:
-% didnt do it
-
-Solitamente, poi, notiamo che $r_m$ viene trascurata nei casi reali (in quanto è solitamente molto grande, la assumiamo $\rightarrow \infty$). Questa è un approssimazione valida per i componenti discreti, ma notiamo che non lo è per i circuiti integrati (dove diventa abbastanza bassa da dover essere considerata). 
+dove notiamo l'approssimazione che trascura l'effetto di modulazione di canale.
+Ricordiamo anche che i valori in maiuscolo relativi al punto di quiescenza;
+\item Per $r_d$ abbiamo l'inverso della derivata del modello su $V_{DS}$, per cui:
+$$
+r_d = \left( \frac{\partial i_D}{\partial V_{DS}}  \Big|_Q \right)^{-1}
+= \left( K \frac{(V_{GS} - V_T)^2}{2} \lambda \right)^{-1} = \frac{1 + \lambda V_{DS}}{\lambda I_D} \approx \frac{1}{\lambda I_D}
+$$
+dove notiamo l'approssimazione se $\lambda V_{DS} << 1$.
+Solitamente, poi, notiamo che $r_d$ viene trascurata nei casi reali (in quanto è solitamente molto grande, la assumiamo $\rightarrow \infty$). Questa è un approssimazione valida per i componenti discreti, ma notiamo che non lo è per i circuiti integrati (dove diventa abbastanza bassa da dover essere considerata). 
 \end{itemize}
 
 \par\smallskip
 
 Finora abbiamo visto il caso NMOS. Ci potremmo chiedere se il modello per il PMOS si comporta in maniera equivalente. Ad esempio, avevamo che per il punto di riposo del PMOS si aveva il senso delle correnti invertito (si considerava $I_{SD}$ anziché $I_{DS}$).
 
-Per i piccoli segnali, invece, il generatore di corrente ha lo stesso identico segno e il modello non cambia. 
+Per i piccoli segnali, invece, il generatore di corrente ha lo stesso identico segno e il modello non cambia (i cambiamenti di segno sono inclusi nelle equazioni, col fatto che la $V_{GS}$ e la $V_{DS}$ saranno negative). 
 
 \subsubsection{Caratteristiche a source comune}
 Iniziamo a vedere le configurazioni standard del MOSFET, esattamente nello stesso modo in cui le avevamo viste per il BJT.
 
-% circuito source comune
+\begin{center}
+\begin{circuitikz}
+	\draw
+(0,0) node[ground]{} to[R=$R_2$] (0,3)
+to[R=$R_1$] (0,6) node[vcc]{};
+
+\draw (0,3) -- (2,3);
+
+\draw (2,3) node[nmos, anchor=B] (Q1) {};
+
+\draw (Q1.C) to[R=$R_D$] ++(0,3) node[vcc]{};
+\draw (Q1.E) to[R=$R_S$] ++(0,-3) node[ground]{};
+
+\draw[->] (1.2,3.3) -- (1.8,3.3) node[midway, above]{$I_G$};
+\draw[->] (Q1.C) ++(0.3,0.5) -- ++(0,-1) node[midway, right]{$I_D$};
+\draw[->] (Q1.E) ++(0.3,0) -- ++(0,-.8) node[midway, right]{$I_S$};
+
+\node[ground] at(-4, 0) {};
+\draw (-4, 0) to [ voltage source, v=$V_i$] (-4,3)
+	to [resistor, l=$R_s$] (-2, 3)
+	to [capacitor, l=$C_s$] (0, 3);
+
+\node[ground] at(6, 0) {};
+\draw(3, 4.5) to[ capacitor, l=$C_L$] (6, 4.5)
+	to[resistor, l=$R_L$] (6, 0);
+
+\end{circuitikz}
+\end{center}
 
 Assumiamo di aver già considerato il punto di quiescenza e passiamo direttamente alla risposta ai piccoli segnali. In tal caso le capacità di accoppiamento AC sono trascurate, e prendiamo a sinistra le resistenze di polarizzazione in parallelo al ground. Per il MOSFET prendiamo il modello ai piccoli segnali, e notiamo che tutto il lato "segnale" del circuito (fino al gate) viene effettivamente separato dal lato di destra.
-
-% circuito equivalente
+Il circuito (cortesia della collega Imane) ai piccoli segnali si presenta allora come segue:
+\begin{center}
+	\includegraphics[scale=0.15]{../figures/mosfet_source_imane.png}
+\end{center}
 
 Calcoliamo quindi i parametri caratteristici:
 \begin{itemize}
@@ -316,7 +367,7 @@ e quindi il generatore pilotato non è spento è la corrente è nulla. Da questo
 $$
 R_o \rightarrow \infty
 $$
-Chiaramente, un eventuale carico $R_L$ vedrà la resistena data dal parallelo $R_D || R_L$. 
+Chiaramente, un eventuale carico $R_L$ vedrà la resistenza data dal parallelo $R_D || R_L$. 
 
 \item \textbf{\textsf{Impedenza in ingresso}} $R_i$ \\
 Questa è banale in quanto il gate è separato dal resto del MOSFET, per cui da questo si vedrà impedenza infinita:
@@ -329,11 +380,39 @@ Chiaramente, anche qui, il generatore $V_i$ vedrà invece il solo parallelo $R_1
 \subsubsection{Caratteristiche a drain comune}
 Vediamo anche le caratteristiche a drain comune, dove preleviamo il segnale di uscita dal source anziché dal drain.
 
-% circuito drain comune
+\begin{center}
+\begin{circuitikz}
+	\draw
+(0,0) node[ground]{} to[R=$R_2$] (0,3)
+to[R=$R_1$] (0,6) node[vcc]{};
 
-Anche in questo caso assumiamo di aver già considerato il punto di quiescenza e passiamo direttamente alla risposta ai piccoli segnali. In tal caso le capacità di accoppiamento AC sono trascurate, e lo stage di entrata (fino al gate) resta completamente uguale al caso a soucre comune. A destra vediamo che non abbiamo resistena al drain $R_S$, e $R_S$ e $R_L$ sono in parallelo al ground. 
+\draw (0,3) -- (2,3);
 
-% circuito equivalente
+\draw (2,3) node[nmos, anchor=B] (Q1) {};
+
+\draw (Q1.C) to[short] ++(0,3) node[vcc]{};
+\draw (Q1.E) to[R=$R_S$] ++(0,-3) node[ground]{};
+
+\draw[->] (1.2,3.3) -- (1.8,3.3) node[midway, above]{$I_G$};
+\draw[->] (Q1.C) ++(0.3,0.5) -- ++(0,-1) node[midway, right]{$I_D$};
+\draw[->] (Q1.E) ++(0.3,0) -- ++(0,-.8) node[midway, right]{$I_S$};
+
+\node[ground] at(-4, 0) {};
+\draw (-4, 0) to [ voltage source, v=$V_i$] (-4,3)
+	to [resistor, l=$R_s$] (-2, 3)
+	to [capacitor, l=$C_s$] (0, 3);
+
+\node[ground] at(6, 0) {};
+\draw(3, 2.5) to[ capacitor, l=$C_L$] (6, 2.5)
+	to[resistor, l=$R_L$] (6, 0);
+\end{circuitikz}
+\end{center}
+
+Anche in questo caso assumiamo di aver già considerato il punto di quiescenza e passiamo direttamente alla risposta ai piccoli segnali. In tal caso le capacità di accoppiamento AC sono trascurate, e lo stage di entrata (fino al gate) resta completamente uguale al caso a source comune. A destra vediamo che non abbiamo resistenza al drain $R_S$, e $R_S$ e $R_L$ sono in parallelo al ground.
+Il circuito ai piccoli segnali si presenta allora come segue:
+\begin{center}
+	\includegraphics[scale=0.15]{../figures/mosfet_drain_imane.png}
+\end{center}
 
 Calcoliamo anche qui i parametri caratteristici:
 \begin{itemize}
@@ -414,7 +493,21 @@ Poniamo di avere ad esempio un amplificatore a 2 stadi:
 \end{enumerate}
 Il circuito con gli stadi in cascata sarà ad esempio il seguente:
 
-% circuito multistadio
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm] at (3, 5){} node[anchor=center, align=center, text width=1.577cm, inner sep=6pt] at (3, 5){\footnotesize Amp. 1\\$R_{i1}$ $R_{o1}$ $A_{v1}$};
+	\draw (0, 4) -- (2, 4);
+	\draw (4, 6) -- (6, 6);
+	\draw (4, 4) -- (6, 4);
+	\draw (8, 6) -- (10, 6);
+	\draw (8, 4) -- (10, 4);
+	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm] at (7, 5){} node[anchor=center, align=center, text width=1.577cm, inner sep=6pt] at (7, 5){\footnotesize Amp. 2\\$R_{i2}$ $R_{o2}$ $A_{v2}$};
+	\draw (10, 6) to[american resistor, l_={$R_L$}, v^=$V_u$, voltage=american] (10, 4);
+	\draw (0, 6) to[american resistor, l={$R_s$}] (2, 6);
+	\draw (0, 4) to[european voltage source, l={$V_i$}] (0, 6);
+\end{tikzpicture}
+\end{center}
 
 La domanda che ci poniamo è chiaramente come si combinano i parametri di amplificazione, e in particolare il guadagno di tensione $A_v$ complessivo, che è ciò che ci interessa da un amplificatore.
 
@@ -424,9 +517,39 @@ A_v = \frac{V_o}{V_i} = A_{v1} A_{v2}
 $$
 cioè generalmente il guadagno non è dato dal guadagno sulla seconda rete della prima rete.
 
-Dobiamo quindi usare la rappresentazione a parametri equivalenti dei 2 stadi per avere una risposta più accurata.
+Dobbiamo quindi usare la rappresentazione a parametri equivalenti dei 2 stadi per avere una risposta più accurata.
 
-% circuito ad equivalenti
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-0, 4) -- (2, 4);
+	\draw (6, 6) -- (8, 6);
+	\draw (6, 4) -- (8, 4);
+	\draw (12, 6) -| (13, 6);
+	\draw (12, 4) -- (13, 4);
+	\draw (13, 6) to[american resistor, l_={$R_L$}, v^=$V_u$, voltage=american] (13, 4);
+	\draw (-0, 6) to[american resistor, l={$R_s$}] (2, 6);
+	\draw (-0, 4) to[european voltage source, l={$V_i$}] (-0, 6);
+	\draw (2.5, 6) to[american resistor, l={$R_{i1}$}] (2.5, 4);
+	\draw (4, 6) to[american resistor, l={$R_{o1}$}] (6, 6);
+	\draw (4, 6) to[american controlled voltage source, l={$A_{v1}v_1$}] (4, 4);
+	\draw (2, 6) -- (2.5, 6);
+	\draw (2, 4) -- (2.5, 4);
+	\draw (4, 4) -- (6, 4);
+	\draw (8.5, 6) to[american resistor, l={$R_{i2}$}] (8.5, 4);
+	\draw (10, 6) to[american resistor, l={$R_{o2}$}] (12, 6);
+	\draw (10, 6) to[american controlled voltage source, l={$A_{v2}v_2$}] (10, 4);
+	\draw (8, 6) -- (8.5, 6);
+	\draw (8, 4) -- (8.5, 4);
+	\draw (10, 4) -- (12, 4);
+	\draw (2, 6) to[open, v=$v_1$, voltage=american] (2, 4);
+	\draw (7, 6) to[open, v=$v_1$, voltage=american] (7, 4);
+	\node[shape=rectangle, draw, line width=0.5pt, dash pattern={on 2pt off 2pt}, minimum width=3.982cm, minimum height=3.982cm] at (4, 5){};
+	\node[shape=rectangle, draw, line width=0.5pt, dash pattern={on 2pt off 2pt}, minimum width=3.982cm, minimum height=3.982cm] at (10, 5){};
+	\node[shape=rectangle, minimum width=3.965cm, minimum height=0.465cm] at (4, 7.25){} node[anchor=center, align=center, text width=3.577cm, inner sep=6pt] at (4, 7.25){Amp. 1};
+	\node[shape=rectangle, minimum width=3.965cm, minimum height=0.465cm] at (10, 7.25){} node[anchor=center, align=center, text width=3.577cm, inner sep=6pt] at (10, 7.25){Amp. 1};
+\end{tikzpicture}
+\end{center}
 
 Calcoliamo quindi il guadagno in tensione complessivo come il rapporto fra la tensione in uscita a valle di entrambi gli stadi, e la tensione fornita in ingresso:
 $$
