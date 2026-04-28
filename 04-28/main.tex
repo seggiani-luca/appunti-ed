@@ -424,6 +424,8 @@ Il vantaggio principale dei regolatori a commutazione è dato dal fatto che ques
 	\item Aperto, cioè rappresenta un circuito aperto e ugualmente non dissipa potenza.
 \end{itemize}
 
+\newpage
+
 Consideriamo il semplice circuito composto da una sorgente costante $E$, fatta passare attraverso un interruttore su un carico $R_L$.
 \begin{center}
 \begin{tikzpicture}[transform shape]
@@ -442,6 +444,11 @@ Alternando la tensione su $R_L$, attraverso l'interruttore, fra $0$ e il picco a
 $$
 D = \frac{T_{ON}}{T_S}
 $$
+
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/switched_pwm.png}
+\end{center}
+
 Si scopre che il valore medio della $V_u$ in uscita sarà modulato proprio dal duty cycle, cioè varrà:
 $$
 \bar{V}_u = \frac{1}{T_S} \int_0^{T_S} V_u(t) \, dt = \frac{1}{T_S} E T_{ON} = ED
@@ -449,6 +456,9 @@ $$
 
 La problematica a questo punto sarà che l'uscita $V_u$ dallo switch sarà altamente rumorosa (per le componenti ad alta frequenza date dalla commutazione continua in tensione). Dovremmo quindi mettere a valle del circuito un filtro passa basso, che isoli la componente DC e rimuova le componeGnte ad alta frequenza.
 Il solito design del filtro passa basso passivo (cioè la rete RC) non è però adatto ai nostri scopi, in quanto nuovamente introdurremo una resistenza $R$ sulla maglia in potenza, quindi dissipando potenza e violando la specifica che ci eravamo imposti dall'inizio. 
+
+\newpage
+
 La soluzione consisterà nell'usare un filtro passa basso composto da solo condensatori ed induttanze anziché resistenze, cioè un filtro passa basso del \textit{secondo ordine}:
 \begin{center}
 \begin{tikzpicture}[transform shape]
@@ -521,6 +531,9 @@ sul periodo $T_S$, e di conseguenza:
 $$
 E T_{ON} - V_u T_{ON} - V_u T_S + V_u T_{ON} = 0 \implies V_u = E\frac{T_{ON}}{T_S} = ED
 $$
-notando che $T_{OFF} = T_S - T_{ON}$, cioè otteniamo la caratteristica che avevamo detto dall'inizio. Conseguenza diretta è che l'integrale della tensione sull'induttore in fase $T_{ON}$ equivale all'integrale della tensione sulla fase $T_{OFF}$.
+notando che $T_{OFF} = T_S - T_{ON}$, cioè otteniamo la caratteristica che avevamo detto dall'inizio. Conseguenza diretta è che l'integrale della tensione sull'induttore in fase $T_{ON}$ equivale all'integrale della tensione sulla fase $T_{OFF}$. Vediamola su un grafico:
+\begin{center}
+	\includegraphics[scale=0.28]{../figures/inductor_pwm.png}
+\end{center}
 
 \end{document}
