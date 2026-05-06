@@ -255,7 +255,7 @@ $$
 
 Sostituiamo in $i_{DS}$ usando la formula della saturazione (abbiamo detto è uguale in quanto le due zone hanno qui uguale valore, ma la saturazione è più semplice). Abbiamo quindi:
 $$
-i_{DS} = K\frac{\left(V_{GS}+V_{T}\right)^{2}}{2} \implies t(x) = K\frac{x^{2}}{2}
+i_{DS} = K\frac{\left(V_{GS}-V_{T}\right)^{2}}{2} \implies t(x) = K\frac{x^{2}}{2}
 $$
 cioè una semplice parabola passante per l'origine, che è ciò che abbiamo visto finora.
 
@@ -287,7 +287,7 @@ $$
 \item Anche la tensione fra source e drain sarà invertita ($V_{DS} < 0$), in quanto i portatori di carica saranno le lacune, e quindi lo spostamento delle cariche sarà concorde alla direzione della corrente convenzionale.
 \end{itemize}
 
-La caratteristica di saturazione del PMOS sarà quindi analoga, ma con segno invertito, a quella del NMOS:
+iLa caratteristica di saturazione del PMOS sarà quindi analoga, ma con segno invertito, a quella del NMOS:
 $$
 i_{SD} = \mu_P C_{ox} \frac{W}{L} \frac{(V_{GS} - V_{TP})^2}{2}
 $$
@@ -298,7 +298,7 @@ $$
 
 La caratteristica di regione ohmica verrà invertita in maniera simile:
 $$
-i_{SD} = \mu_P C_{ox} \frac{W}{L} \frac{\left(V_{GS}-V_{TP}\right)^{2}}{2} 
+i_{SD} = \mu_P C_{ox} \frac{W}{L} \left(-\left(V_{GS}-V_{TP}\right)V_{SD}-\frac{V_{SD}^{2}}{2}\right) 
 $$
 
 Notiamo che spesso si preferisce usare come variabili di riferimento per il PMOS, $V_{SD}$ e $i_{SD}$ anziché $V_{DS}$ e $i_{DS}$ (come abbiamo fatto), e talvolta $V_{SG}$ anzichè $V_{SG}$ (oppure si fa l'accorgimento col segno visto prima).
@@ -334,11 +334,11 @@ $$
 
 \item La regione \textit{triodo} (o ohmica) del \textbf{PMOS} si raggiunge equivalentemente quando:
 $$
-V_{GS} - V_{SD} < V_{TP}, \quad V_{SD} > V_{GS} - V_{TP}
+V_{GS} + V_{SD} < V_{TP}, \quad V_{SD} < -V_{GS} + V_{TP}
 $$
 mentre la regione di \textit{saturazione} del \textbf{PMOS} si raggiunge quando:
 $$
-V_{GS} - V_{SD} \geq V_{TP}, \quad V_{SD} \leq V_{GS} - V_{TP}
+V_{GS} + V_{SD} \leq V_{TP}, \quad V_{SD} \leq -V_{GS} + V_{TP}
 $$
 \end{itemize}
 
@@ -355,11 +355,11 @@ $$
 	
 \item La regione \textit{triodo} (o ohmica) del \textbf{PMOS} si modellizza come:
 $$
-i_{SD, \, \text{ohm}}\left(V_{GS},V_{SD}\right)=K_{p}\left(\left(V_{GS}-V_{TP}\right)V_{SD}-\frac{V_{SD}^{2}}{2}\right)\left(1-\lambda V_{SD}\right)
+i_{SD, \, \text{ohm}}\left(-V_{GS},V_{SD}\right)=K_{p}\left(-\left(V_{GS}-V_{TP}\right)V_{SD}-\frac{V_{SD}^{2}}{2}\right)\left(1+\lambda V_{SD}\right)
 $$
 mentre la regione di \textit{saturazione} del \textbf{PMOS} si modellizza come:
 $$
-i_{SD, \, \text{sat}}\left(V_{GS},V_{SD}\right)=K_{p}\frac{\left(V_{GS}-V_{TP}\right)^{2}}{2}\left(1-\lambda V_{SD}\right)
+i_{SD, \, \text{sat}}\left(V_{GS},V_{SD}\right)=K_{p}\frac{\left(V_{GS}-V_{TP}\right)^{2}}{2}\left(1+\lambda V_{SD}\right)
 $$
 \end{itemize}
 Notiamo come nelle precedenti equazioni abbiamo riportato il termine dato dall'effetto di modulazione di canale, sia nelle equazioni per la regione triodo che per la regione di saturazione (altrimenti sarebbe violata la continuità nella zona di transizione).
@@ -437,11 +437,11 @@ Il PMOS è equivalente, ma con la corrente che va da source a drain:
 
 La \textit{verifica} in questo caso si fa ponendo di trovarsi in zona di saturazione, cioè che sia rispettata:
 $$
-V_{DS} \geq V_{GS} - V_T
+V_{DS} \geq V_{GS} - V_{TN}
 $$
 nel NMOS, e:
 $$
-V_{SD} \leq V_{GS} - V_T
+V_{SD} \geq -V_{GS} + V_{TP}
 $$
 nel PMOS (con tutti i parametri $< 0$).
 
@@ -475,7 +475,7 @@ Il PMOS è equivalente, ma con la corrente che va da drain a source:
 \begin{tikzpicture}[transform shape]
 	% Paths, nodes and wires:
 	\draw (-2, -0) to[open, o-o] (-0, -0);
-	\draw (0, -2) to[american controlled current source, l_={$K \left( (V_{GS} - V_T) V_{SD} - \frac{V_{SD}^2}{2} \right)$}] (0, -0);
+	\draw (0, -2) to[american controlled current source, l_={$K \left(-(V_{GS} - V_T) V_{SD} - \frac{V_{SD}^2}{2} \right)$}] (0, -0);
 	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, 0.25){D};
 	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-0, -2.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (0, -2.25){S};
 	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-2, 0.25){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-2, 0.25){G};
@@ -490,11 +490,11 @@ Il PMOS è equivalente, ma con la corrente che va da drain a source:
 
 La \textit{verifica} in questo caso si fa ponendo di trovarsi in zona ohmica, cioè che sia rispettata:
 $$
-V_{DS} < V_{GS} - V_T
+V_{DS} < V_{GS} - V_{TN}
 $$
 nel NMOS, e:
 $$
-V_{SD} > V_{GS} - V_T
+V_{SD} < -V_{GS} + V_{TP}
 $$
 nel PMOS (con tutti i parametri $< 0$).
 
