@@ -1,0 +1,408 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper, margin=8em]{geometry}
+
+% usa i pacchetti per la scrittura in italiano
+\usepackage[french,italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\frenchspacing 
+
+% usa i pacchetti per la formattazione matematica
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+
+% usa altri pacchetti
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{standalone}
+
+% imposta il titolo
+\title{Appunti Elettronica Digitale}
+\author{Luca Seggiani}
+\date{2026}
+
+% imposta lo stile
+% usa helvetica
+\usepackage[scaled]{helvet}
+% usa palatino
+\usepackage{palatino}
+% usa un font monospazio guardabile
+\usepackage{lmodern}
+
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\ttdefault}{lmtt}
+
+% disponi il titolo
+\makeatletter
+\renewcommand{\maketitle} {
+	\begin{center} 
+		\begin{minipage}[t]{.8\textwidth}
+			\textsf{\huge\bfseries \@title} 
+		\end{minipage}%
+		\begin{minipage}[t]{.2\textwidth}
+			\raggedleft \vspace{-1.65em}
+			\textsf{\small \@author} \vfill
+			\textsf{\small \@date}
+		\end{minipage}
+		\par
+	\end{center}
+
+	\thispagestyle{empty}
+	\pagestyle{fancy}
+}
+\makeatother
+
+% disponi teoremi
+\usepackage{tcolorbox}
+\newtcolorbox[auto counter, number within=section]{theorem}[2][]{%
+	colback=blue!10, 
+	colframe=blue!40!black, 
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries, 
+	title=~\thetcbcounter: #2, 
+	#1
+}
+
+% disponi definizioni
+\newtcolorbox[auto counter, number within=section]{definition}[2][]{%
+	colback=red!10,
+	colframe=red!40!black,
+	sharp corners=northwest,
+	fonttitle=\sffamily\bfseries,
+	title=~\thetcbcounter: #2,
+	#1
+}
+
+% U.D.M
+\newcommand{\amp}{\ensuremath{\mathrm{A}}}
+\newcommand{\volt}{\ensuremath{\mathrm{V}}}
+\newcommand{\meter}{\ensuremath{\mathrm{m}}}
+\newcommand{\second}{\ensuremath{\mathrm{s}}}
+\newcommand{\farad}{\ensuremath{\mathrm{F}}}
+\newcommand{\henry}{\ensuremath{\mathrm{H}}}
+\newcommand{\siemens}{\ensuremath{\mathrm{S}}}
+
+% circuiti
+\usepackage{circuitikz}
+\usetikzlibrary{babel}
+
+% disegni
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+% disponi codice
+\usepackage{listings}
+\usepackage[table]{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{codestyle}{
+		backgroundcolor=\color{black!5}, 
+		commentstyle=\color{codegreen},
+		keywordstyle=\bfseries\color{magenta},
+		numberstyle=\sffamily\tiny\color{black!60},
+		stringstyle=\color{green!50!black},
+		basicstyle=\ttfamily\footnotesize,
+		breakatwhitespace=false,         
+		breaklines=true,                 
+		captionpos=b,                    
+		keepspaces=true,                 
+		numbers=left,                    
+		numbersep=5pt,                  
+		showspaces=false,                
+		showstringspaces=false,
+		showtabs=false,                  
+		tabsize=2
+}
+
+\lstdefinestyle{shellstyle}{
+		backgroundcolor=\color{black!5}, 
+		basicstyle=\ttfamily\footnotesize\color{black}, 
+		commentstyle=\color{black}, 
+		keywordstyle=\color{black},
+		numberstyle=\color{black!5},
+		stringstyle=\color{black}, 
+		showspaces=false,
+		showstringspaces=false, 
+		showtabs=false, 
+		tabsize=2, 
+		numbers=none, 
+		breaklines=true
+}
+
+\lstdefinelanguage{javascript}{
+	keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywords={class, export, boolean, throw, implements, import, this},
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% disponi sezioni
+\usepackage{titlesec}
+
+\titleformat{\section}
+	{\sffamily\Large\bfseries} 
+	{\thesection}{1em}{} 
+\titleformat{\subsection}
+	{\sffamily\large\bfseries}   
+	{\thesubsection}{1em}{} 
+\titleformat{\subsubsection}
+	{\sffamily\normalsize\bfseries} 
+	{\thesubsubsection}{1em}{}
+
+% disponi alberi
+\usepackage{forest}
+
+\forestset{
+	rectstyle/.style={
+		for tree={rectangle,draw,font=\large\sffamily}
+	},
+	roundstyle/.style={
+		for tree={circle,draw,font=\large}
+	}
+}
+
+% disponi algoritmi
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmo}
+\makeatother
+
+% disponi numeri di pagina
+\usepackage{fancyhdr}
+\fancyhf{} 
+\fancyfoot[L]{\sffamily{\thepage}}
+
+\makeatletter
+\fancyhead[L]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@title \ \@date}}} 
+\fancyhead[R]{\raisebox{1ex}[0pt][0pt]{\sffamily{\@author}}}
+\makeatother
+
+\begin{document}
+% sezione (data)
+\section{Lezione del 12-05-26}
+
+% stili pagina
+\thispagestyle{empty}
+\pagestyle{fancy}
+
+% testo
+\subsection{Logica a pass transistor}
+Vediamo adesso una categoria di famiglie logiche spesso associate alle porte MOS complementari, in particolare per realizzare funzioni come i \textit{multiplexer}. Alla base della logica pass transistor è l'uso degli interruttori (cioè i transistor) come elementi di passo.
+
+Vediamo ad esempio la seguente configurazion:
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-4, 1) -- (-2, 1);
+	\draw (-4, -1) -- (-2, -1);
+	\draw (-4, 1) to[open, v={$V_A=A$}, voltage=american] (-4, -1);
+	\draw (-2, 1) to[switch, l={$B$}] (-1, 1);
+	\draw (-0.995, 1) to[switch, l={$C$}] (0.005, 1);
+	\draw (2, 1) to[american resistor, l={$R$}] (2, -1);
+	\draw (2, -1) |- (-2, -1);
+	\draw (0.005, 1) -- (2, 1);
+	\draw (2, -1) -- (4, -1);
+	\draw (2, 1) -- (4, 1);
+	\draw (4, 1) to[open, v={$V_y=Y$}, voltage=american] (4, -1);
+\end{tikzpicture}
+\end{center}
+
+In questo caso, i due interruttori ($B$ e $C$) in serie possono essere considerate come i due valori di una porta AND, con la $A$ che fa da terzo. Allo stesso modo, se avessimo messo $B$ e $C$ in parallelo, avremmo ottenuto una porta OR (con la $A$ sempre ad AND in quanto pilota l'intero circuito). 
+
+La cosa importante in questi tipi di circuiti è di assicurare che il nodo di uscita $y$ non sia lasciato flottante, cioè non sia lasciato senza percorsi a ground o a $V_{DD}$.
+
+\par\smallskip
+
+Il problema a questo punto sarà come implementare l'interruttore.
+\begin{itemize}
+\item L'opzione più semplice è quella di usare un \textbf{NMOS}. Per verificare che un NMOS si comporti effettivamente come interruttore, inseriamolo in un circuito dove questo alimenta una capacità $C$.
+
+\par\smallskip
+\textit{(Carica con NMOS)}
+\begin{enumerate}
+	\item 
+Poniamo la carica di $C$ come nulla a $t = 0$, e l'alimentazione come $V_{DD}$. Ora, in un circuito integrato (dove il drain non viene fissato a body), drain e source di un MOSFET sono completamente interscambiabili, per cui non ci interessa distinguere fra i due.
+
+Applicando una tensione $V_{DD}$ al gate del MOSFET, avremo che la $V_{GS}$ si potrà calcolare come:
+$$
+V_{GS} = V_G - V_S = V_{DD} - V_{C} \implies V_{GS} = V_{DD} > V_T
+$$
+visto che il source è il nodo collegato al condensatore (è scarico, la corrente passa da lui a ground). All'inizio del ciclo di carica, $V_C = 0$ per cui $V_{DD} > V_T$ ed il transistor conduce. La $V_{DS}$ sarà ugualmente:
+$$
+V_{DS} = V_D - V_S = V_{DD} \geq V_{DD} - V_T \ \text{(saturo)}
+$$
+cioè saremo nella regione di saturazione del NMOS. Il risultato è che il condensatore viene caricato come se fosse collegato ad una sorgente di tensione $V_{DD}$;
+	\item 
+Questa situazione non può chiaramente continuare per sempre. Infatti, l'NMOS \textit{conduce} se viene rispettata la condizione:
+$$
+V_{GS} \geq V_T \ \text{(conduzione)}
+$$
+mentre è \textit{saturo} se viene rispettata la condizione:
+$$
+V_{DS} \geq V_{GS} - V_T \ \text{(saturazione)}
+$$
+
+Per la prima condizione (di conduzione) si ha che:
+$$
+V_G - V_S \geq V_T, \quad V_{DD} - V_C \geq V_T \implies V_C \leq V_{DD} - V_T
+$$
+Per la seconda (di saturazione), si ha invece che:
+$$
+V_D - V_S \geq V_G - V_S - V_T, \quad V_D \geq V_G - V_T, \quad V_{DD} \geq V_{DD} - V_T 
+$$
+cioè l'NMOS è sempre in saturazione. 
+
+La corrente $i_D$ sarà quindi data da:
+$$
+i_D = K \left( V_{DS} - V_T \right)^2
+$$
+in quanto $V_{DS} = V_{GS}$, dove:
+$$
+V_{DS} = V_D - V_S = V_{DD} - V_C \geq V_T
+$$
+
+\end{enumerate}
+
+Abbiamo quindi che il MOSFET si comporta effettivamente da interruttore, seppur non ideale (conduce per $V_C = 0$, ma non riesce a portare la $V_C$ fino a $V_{DD}$, cioè lascia un offset di $V_T$ oltre la quale non riesce più a condurre).
+Risulta quindi asimmetrico in quanto riesce a chiudere perfettamente per scaricare a $0 \, \mathrm{V}$, ma non per caricare a $V_{DD}$. 
+
+\par\smallskip
+\textit{(Scarica con NMOS)}
+\begin{enumerate}
+	\item 
+Possiamo confermare questa asimmetria vedendo situazione duale, dove la $V_C = V_{DD}$ (la capacità è gia carica) e vogliamo usare il MOSFET per scaricarla a ground. 
+In questo caso, posta sempre $V_G = V_{DD}$, si ha:
+$$
+V_{GS} = V_G - V_S = V_{DD} - 0 \geq V_T 
+$$
+in quanto $V_S$ è sempre nulla (stiamo conducendo la scarica del condensatore verso ground), e il MOSFET è sempre in conduzione.
+
+Per quanto riguarda la saturazione, abbiamo che la $V_{DS}$ è:
+$$
+V_{DS} = V_D - V_S = V_C > V_T
+$$
+e quindi siamo in saturazione per $V_C > V_T$, regime ohmico altrimenti.
+
+Riassumiamo quanto detto: siamo sempre in conduzione, e la $V_{GS}$ non cambia in quanto la $V_S$ è fissa a 0. Questo significherà che seguiamo sempre la stessa caratteristica fino a $V_{DS} = 0 \, \mathrm{V}$, cioè fino alla scarica completa della capacità. 
+
+\end{enumerate}
+
+\item Vediamo cosa succede se si usa un \textbf{PMOS} nella stessa situazione. Anche qui, verifichiamo inserendo il PMOS nel circuito di carica di una capacità.
+
+\par\smallskip
+\textit{(Carica con PMOS)}
+\begin{enumerate}
+	\item
+Poniamo la carica di $C$ come nulla a $t = 0$, e l'alimentazione a $V_{DD}$, come nel caso precedente.
+
+Perchè il MOSFET conduca bisognamo di $V_G$ a $0 \, \mathrm{V}$, in quanto la $V_S$ (sul PMOS dalla parte dell'alimentazione) sarà $V_{DD}$, e quindi:
+$$
+V_{GS} = V_G - V_S = 0 - V_{DD} = -V_{DD} \leq V_T
+$$
+e siamo sempre in conduzione. Il fatto che siamo sempre in conduzione a $V_{GS}$ costante ci mette nella situazione in cui seguiamo un unica caratteristica, finche $V_{DS}$ non è nulla (quando $V_C$ è carico). 
+\end{enumerate}
+
+Il PMOS è quindi ideale nella situazione opposta all'NMOS: riesce a traspostare l'\textit{"uno pieno"}, cioè a caricare completamente fino a $V_{DD}$. Intuitivamente, il PMOS sarà duale all'NMOS anche nella scarica, e quindi si comporterà in maniera meno ideale:
+
+\par\smallskip
+\textit{(Carica con PMOS)}
+\begin{enumerate}
+	\item 
+Iniziamo con la $V_C = V_{DD}$ e il PMOS collegato a massa al drain (chiamiamo il nodo drain tale solo perché è a massa, in quanto come l'NMOS il PMOS integrato è simmetrico). Segue che la $V_{GS}$ è:
+$$
+V_{GS} = V_G - V_S = 0 - V_C
+$$
+Quindi la $V_{GS}$ non è più costante nel tempo, ma anzi passa da $V_{DD}$ (carica iniziale della $C$) a $0 \, \mathrm{V}$. 
+
+Perché ci sia conduzione sul transistor, ricordiamo che serve:
+$$
+V_{GS} \leq V_T \implies V_C \geq -V_T
+$$
+e riguardo alla saturazione:
+$$
+V_{DS} = V_D - V_S = V_{GS} = V_G - V_S 
+$$
+cioè il PMOS è sempre in saturazione.
+
+	\item
+Questa situazione non può chiaramente continuare all'infinito, per cui arriveremo ad un punto dove:
+$$
+V_{GS} = 0 - V_C > V_T \implies V_C < -V_T
+$$
+In questo punto il transistor non è più in conduzione, e la capacità non scaricherà oltre. Questo significherà che abbiamo trasmesso gli $0 \, \mathrm{V}$ fino a $- V_T$ e non oltre, trovandoci nella stessa situazione (ma duale) dell'NMOS in carica.
+\end{enumerate}
+
+\end{itemize}
+
+Riassumendo, abbiamo ottenuto che:
+\begin{itemize}
+	\item L'NMOS è un ottimo interruttore per la transizione da $V_{DD}$ $\rightarrow$ $0 \, \mathrm{V}$;
+	\item Il PMOS è un ottimo interruttore per la transizione da $0 \, \mathrm{V}$ $\rightarrow$ $V_{DD}$ ;
+\end{itemize}
+
+La soluzione per realizzare un interruttore ideale attraverso i transistori MOSFET sarà allora quella di usarne due, uno di tipo NMOS e uno di tipo PMOS, in parallelo. L'NMOS sarà pilotato dalla variabile di controllo dello switch (diciamo $B$), mentre il PMOS sarà pilotato dalla $\overline{B}$: questo perchè ricordiamo l'NMOS risponde a $V_G > V_T$ e il PMOS viceversa.
+
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[pmos, rotate=90] at (0, -0.5){};
+	\node[nmos, rotate=-90] at (0, 0.5){};
+	\draw (-0.77, -0.5) -- (-0.77, 0.5);
+	\draw (0.77, 0.5) |- (0.75, -0.5);
+	\draw (-2, -0) -| (-0.79, -0.003);
+	\draw (0.79, 0.003) -| (2, -0);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (0, 1.75){} node[anchor=south, align=center, text width=0.077cm, inner sep=6pt] at (0, 1.5){B};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (0, -1.75){} node[anchor=north, align=center, text width=0.077cm, inner sep=6pt] at (0, -1.5){$\overline{\text{B}}$};
+\end{tikzpicture}
+\end{center}
+
+Questo componente viene anche detto \textit{pass gate}.
+
+\subsubsection{Multiplexer 2:1 a pass gate}
+Il circuito di esempio che portiamo per un multiplexer è il seguente:
+\begin{center}
+\begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\draw (-1, 1) to[switch, l={$C$}] (1, 1);
+	\draw (-0.995, -1) to[switch, l={$\overline{\text{C}}$}] (1.005, -1);
+	\draw (1, 1) -| (1, -0) -- (2, -0);
+	\draw (1.005, -1) |- (1, -0);
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-1.25, 1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-1.25, 1){A};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (-1.25, -1){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (-1.25, -1){B};
+	\node[shape=rectangle, minimum width=0.465cm, minimum height=0.465cm] at (2.25, -0){} node[anchor=center, align=center, text width=0.077cm, inner sep=6pt] at (2.25, -0){$y$};
+\end{tikzpicture}
+\end{center}
+
+Vediamo chiaramente come pilotare i due interruttori, uno con $C$ e l'altro con $\overline{C}$, porta al comportamento di "isolamento" di una delle due entrate dei multiplexer.
+
+Implementando ogni interruttore come un pass gate, otteniamo che il circuito si realizza con $4$ transistori, più $2$ per l'inverter della $C$, per cui $6$. Di contro, scegliendo di usare la tecnologia complementare, avremmo avuto da implementare la funzione:
+$$
+y = AC + B \overline{C}
+$$
+Questa è una funzione realizzata con due AND e una OR, per cui $4 \cdot 2 = 8$ MOS solo le per la circuiteria logica (sia PMOS che CMOS). Inoltre, abbiamo tutte le porte sia negate che non, per cui abbiamo bisogno di $3$ inverter, quindi $14$ transistor in totale. L'implementazione a pass gate è molto più conservativa in termini di transistori usati! 
+
+\subsubsection{XOR a 2 ingressi a pass gate}
+Vediamo come si può realizzare anche una XOR in maniera simile. Questa era infatti data dalla formula logica:
+$$
+y = A \overline{B} + \overline{A} B
+$$
+che si implementa in pass gate in maniera esattamente uguale alla precedente.
+
+In questo caso usiamo $4$ transistor per i pass gate, più $2$ inverter, da cui $4 + 2 \cdot 2 = 8$ transistor. Come avevamo visto in 25.0.1, la stessa cosa fatta in tecnologia complementare usava $12$ transistor.
+
+
+\end{document}
